@@ -42,6 +42,14 @@ terminal = guess_terminal()
 # Get home path
 home = str(Path.home())
 
+# A function for hide/show all the windows in a group
+@lazy.function
+def minimize_all(qtile):
+    for win in qtile.current_group.windows:
+        if hasattr(win, "toggle_minimize"):
+            win.toggle_minimize()
+
+
 keys = [
     # A list of available commands that can be bound to keys can be found
     # at https://docs.qtile.org/en/latest/manual/config/lazy.html
@@ -91,7 +99,7 @@ keys = [
 
     # Apps
     Key([mod, "shift"], "w", lazy.spawn("bash -x '~/scripts/wallpaper.sh'"), desc="Update Theme and Wallpaper"),
-
+    Key([mod, "shift"], "m", minimize_all(), desc="Toggle hide/show all windows on current group"),
 ]
 
 # --------------------------------------------------------
