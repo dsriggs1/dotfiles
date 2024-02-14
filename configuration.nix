@@ -11,6 +11,48 @@
       <home-manager/nixos>
     ];
 
+  home-manager.users.sean = { pkgs, ... }: {
+    home.packages = [ pkgs.atool pkgs.httpie ];
+    programs.git = {
+      enable = true;
+      userName = "dsriggs1";
+      userEmail = "dsriggs1@gmail.com";
+      aliases =
+        {
+          a = "add";
+          c = "commit";
+          ca = "commit --amend";
+          can = "commit --amend --no-edit";
+          cl = "clone";
+          cm = "commit -m";
+          co = "checkout";
+          cp = "cherry-pick";
+          cpx = "cherry-pick -x";
+          d = "diff";
+          f = "fetch";
+          fo = "fetch origin";
+          fu = "fetch upstream";
+          gds = "diff --staged";
+          lol = "log --graph --decorate --pretty=oneline --abbrev-commit";
+          lola = "log --graph --decorate --pretty=oneline --abbrev-commit --all";
+          pl = "pull";
+          pr = "pull -r";
+          ps = "push";
+          psf = "push -f";
+          rb = "rebase";
+          rbi = "rebase -i";
+          r = "remote";
+          ra = "remote add";
+          rr = "remote rm";
+          rv = "remote -v";
+          rs = "remote show";
+          st = "status";
+      };
+    };
+    
+    home.stateVersion = "23.11";
+  };
+
 
   # Bootloader.
   boot.loader.grub.enable = true;
@@ -158,6 +200,8 @@
    jellyfin-web
    jellyfin-ffmpeg
   ];
+
+
   
 
   # Some programs need SUID wrappers, can be configured further or are
