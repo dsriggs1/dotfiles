@@ -46,19 +46,6 @@ alias Qtile='startx'
 # Hyprland with Hyprland
 
 # -----------------------------------------------------
-# GIT
-# -----------------------------------------------------
-
-alias gs="git status"
-alias ga="git add"
-alias gc="git commit -m"
-alias gp="git push"
-alias gpl="git pull"
-alias gst="git stash"
-alias gsp="git stash; git pull"
-alias gcheck="git checkout"
-
-# -----------------------------------------------------
 # SCRIPTS
 # -----------------------------------------------------
 
@@ -84,7 +71,7 @@ alias confq='$EDITOR ~/.config/qtile/config.py'
 alias confql='$EDITOR ~/.local/share/qtile/qtile.log'
 alias confp='$EDITOR ~/dotfiles/picom/picom.conf'
 alias confb='$EDITOR ~/.bashrc'
-alias confn='$EDITOR /etc/nixos/configuration.nix'
+alias confn='$EDITOR ~/Downloads/dotfiles/configuration.nix'
 
 # -----------------------------------------------------
 # EDIT NOTES
