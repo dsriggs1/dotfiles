@@ -12,6 +12,9 @@
     ];
 
   home-manager.users.sean = { pkgs, ... }: {
+    nixpkgs.config = {
+      allowUnfree = true;
+    }; 
     home.packages = [ pkgs.atool pkgs.httpie ];
     programs.git = {
       enable = true;
@@ -49,7 +52,13 @@
           st = "status";
       };
     };
-    
+
+    programs.vscode = {
+      enable = true;
+      extensions = with pkgs.vscode-extensions; [
+        github.copilot
+      ];
+    };    
     home.stateVersion = "23.11";
   };
 
@@ -149,6 +158,7 @@
    vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
    wget
    vscode
+   vscode-extensions.github.copilot
    qtile
    lightdm
    firefox
