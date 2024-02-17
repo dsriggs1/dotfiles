@@ -209,6 +209,7 @@
    jellyfin
    jellyfin-web
    jellyfin-ffmpeg
+   qbittorrent
   ];
 
 
