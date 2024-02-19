@@ -11,6 +11,13 @@
       <home-manager/nixos>
     ];
 
+   nix = {
+    package = pkgs.nixFlakes;
+    extraOptions = ''
+      experimental-features = nix-command flakes
+    '';
+  };
+
   home-manager.users.sean = { pkgs, ... }: {
     nixpkgs.config = {
       allowUnfree = true;
