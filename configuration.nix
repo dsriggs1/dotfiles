@@ -124,7 +124,7 @@
       lightdm = {
         enable = true;
         
-        # Slick greeter configuration
+        #Slick greeter configuration
         greeters.slick = {
           enable = true;
           #background = "~/wallpapers/default.jpg"; 
@@ -133,6 +133,12 @@
       };
     };
   
+  };
+
+  programs.hyprland= {
+    enable = true;
+    xwayland.enable = true;
+    nvidiaPatches = true;
   };
 
 #   services.xserver.windowManager.qtile = {
@@ -217,6 +223,7 @@
    jellyfin-web
    jellyfin-ffmpeg
    qbittorrent
+   kitty
   ];
 
 
