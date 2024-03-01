@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, ... }:
+{ config, pkgs, pkgs-unstable, ... }:
 
 {
   imports =
@@ -165,6 +165,11 @@
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
+
+  # environment.systemPackages = with pkgs-unstable; [
+  #   pywalfox-native
+  # ];
+
   environment.systemPackages = with pkgs; [
    xorg.xorgserver
    xorg.xinit
@@ -224,10 +229,8 @@
    jellyfin-ffmpeg
    qbittorrent
    kitty
-  ];
-
-
-  
+   pkgs-unstable.pywalfox-native
+  ];  
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
