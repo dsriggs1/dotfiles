@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, inputs, ... }:
 
 {
     home.username = "sean";
@@ -8,9 +8,11 @@
 #     nixpkgs.config = {
 #       allowUnfree = true;
 #     }; 
+
     home.packages = with pkgs; [
         git
         vscode
+        firefox
     ];
 
     programs.git = {
@@ -56,7 +58,30 @@
         github.copilot
       ];
     };
+
+ 
+    programs.firefox = {
+      enable = true;
+      profiles = {
+        default = {
+          extensions = with inputs.firefox-addons.packages.${pkgs.system}; [
+          pywalfox 
+          ublock-origin
+          #Dracula        
+          ];
+          bookmarks = [
+            {
+              name = "wikipedia";
+              tags = [ "wiki" ];
+              keyword = "wiki";
+              url = "https://en.wikipedia.org/wiki/Main_Page";
+            }
+          ];  
+        };               
+      };
+    };
+  #};
         
     home.stateVersion = "23.11";
     programs.home-manager.enable = true;
-  }
+}
