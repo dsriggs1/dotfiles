@@ -110,12 +110,12 @@
     xkbVariant = "";
     windowManager.qtile = {
       enable = true;
-      # extraPackages =
-      # python3Packages: with
-      # python3Packages; [
-      #    (qtile-extras.overridePythonAttrs(old: { disabledTestPaths = [ "test/widget/test_strava.py" ]; }))
-      #   # qtile-extras
-      # ];
+      extraPackages =
+      python3Packages: with
+      python3Packages; [
+         #(qtile-extras.overridePythonAttrs(old: { disabledTestPaths = [ "test/widget/test_strava.py" ]; }))
+         qtile-extras
+      ];
       
    };
    #desktopManager.xfce.enable = true;
@@ -138,7 +138,7 @@
   programs.hyprland= {
     enable = true;
     xwayland.enable = true;
-    nvidiaPatches = true;
+    # nvidiaPatches = true;
   };
 
 #   services.xserver.windowManager.qtile = {
