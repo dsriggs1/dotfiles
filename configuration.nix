@@ -178,6 +178,7 @@
    vscode
    vscode-extensions.github.copilot
    qtile
+   python3Packages.qtile-extras
    lightdm
    firefox
    git
@@ -186,7 +187,7 @@
    alacritty
    eza
    starship
-   rofi
+  #  rofi
    pywal
    dunst
    xfce.xfce4-power-manager
@@ -194,12 +195,12 @@
    expressvpn
    nil
    R
-   rstudio
+  #  rstudio
    btop
-   python311Packages.pytorch-metric-learning
-   python311Packages.psutil
-   python311Packages.rich
-   python311Packages.click
+  #  python311Packages.pytorch-metric-learning
+  #  python311Packages.psutil
+  #  python311Packages.rich
+  #  python311Packages.click
    figlet
    bluez
    neovim
@@ -207,9 +208,6 @@
    mpv
    freerdp
    xfce.mousepad
-   noto-fonts
-   fira
-   fira-code
    vlc
    pavucontrol
    xfce.tumbler
@@ -231,6 +229,10 @@
    kitty
    pkgs-unstable.pywalfox-native
   ];  
+
+  fonts.packages = with pkgs; [
+    font-awesome
+  ];
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
