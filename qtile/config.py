@@ -24,6 +24,8 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+# Icons: https://fontawesome.com/search?o=r&m=free
+
 import os
 import json
 import subprocess
@@ -33,8 +35,26 @@ from libqtile.lazy import lazy
 from libqtile.utils import guess_terminal
 from pathlib import Path
 from libqtile import qtile
+from typing import List  
+from libqtile import bar, layout, widget
+from libqtile.config import Click, Drag, Group, Key, Match, Screen, ScratchPad, DropDown, KeyChord
+from libqtile.lazy import lazy
+from libqtile.utils import guess_terminal
+from libqtile.widget import Spacer, Backlight
+from libqtile.widget.image import Image
+from libqtile.dgroups import simple_key_binder
+from pathlib import Path
+from libqtile.log_utils import logger
+from libqtile.backend.wayland import InputConfig
+
+from qtile_extras import widget
+from qtile_extras.widget.decorations import RectDecoration 
+from qtile_extras.widget.decorations import PowerLineDecoration
+
 
 show_wlan = False
+show_bluetooth = False
+
 
 mod = "mod4"
 terminal = guess_terminal()
@@ -154,11 +174,39 @@ layouts = [
 # --------------------------------------------------------
 
 widget_defaults = dict(
-    font="Fira Sans SemiBold",
-    fontsize=14,
+    #font="Fira Sans SemiBold",
+    font='FontAwesome',
+    fontsize=24,
     padding=3
 )
 extension_defaults = widget_defaults.copy()
+
+# --------------------------------------------------------
+# Decorations
+# https://qtile-extras.readthedocs.io/en/stable/manual/how_to/decorations.html
+# --------------------------------------------------------
+
+decor_left = {
+    "decorations": [
+        PowerLineDecoration(
+            path="arrow_left"
+            # path="rounded_left"
+            # path="forward_slash"
+            # path="back_slash"
+        )
+    ],
+}
+
+decor_right = {
+    "decorations": [
+        PowerLineDecoration(
+            path="arrow_right"
+            # path="rounded_right"
+            # path="forward_slash"
+            # path="back_slash"
+        )
+    ],
+}
 
 # --------------------------------------------------------
 # Widgets
@@ -166,7 +214,7 @@ extension_defaults = widget_defaults.copy()
 
 widget_list = [
     widget.TextBox(
-        # **decor_left, 
+        **decor_left, 
         background=Color1+".4",
         text='Apps',
         #foreground='ffffff',
@@ -176,7 +224,7 @@ widget_list = [
         mouse_callbacks={"Button1": lambda: qtile.spawn("rofi -show drun")},
     ),
     widget.TextBox(
-        # **decor_left,
+        **decor_left,
         background="#ffffff.4",
         text="  ",
         foreground="000000.6",
@@ -184,7 +232,7 @@ widget_list = [
         mouse_callbacks={"Button1": lambda: qtile.spawn(home + "/dotfiles/qtile/scripts/wallpaper.sh select")},
     ),
     widget.GroupBox(
-        # **decor_left,
+        **decor_left,
         background="#ffffff.7",
         highlight_method='block',
         highlight='ffffff',
@@ -198,18 +246,19 @@ widget_list = [
         active='ffffff'
     ),
     widget.TextBox(
-        # **decor_left,
+        **decor_left,
         background="#ffffff.4",
-        text=" ",
+        text="",
         #foreground="000000.6",
         foreground='ff0000',
         fontsize=18,
+        #font='FontAwesome',
         mouse_callbacks={"Button1": lambda: qtile.spawn("firefox")},
     ),
     widget.TextBox(
-        # **decor_left,
+        **decor_left,
         background="#ffffff.4",
-        text=" ",
+        text="",
         #foreground="000000.6",
         foreground='ff0000',
         fontsize=18,
@@ -217,7 +266,7 @@ widget_list = [
     ),
     
     widget.WindowName(
-        # **decor_left,
+        **decor_left,
         max_chars=50,
         background=Color2+".4",
         width=400,
@@ -228,50 +277,50 @@ widget_list = [
         length=30
     ),
     widget.TextBox(
-        # **decor_right,
+        **decor_right,
         background="#000000.3"      
     ),    
     widget.Memory(
-        # **decor_right,
+        **decor_right,
         background=Color10+".4",
         padding=10,        
         measure_mem='G',
         format="{MemUsed:.0f}{mm} ({MemTotal:.0f}{mm})"
     ),
     widget.Volume(
-        # **decor_right,
+        **decor_right,
         background=Color12+".4",
         padding=10, 
         fmt='Vol: {}',
     ),
     widget.DF(
-        # **decor_right,
+        **decor_right,
         padding=10, 
         background=Color8+".4",        
         visible_on_warn=False,
         format="{p} {uf}{m} ({r:.0f}%)"
     ),
     widget.Bluetooth(
-        # **decor_right,
+        **decor_right,
         background=Color2+".4",
         padding=10,
         mouse_callbacks={"Button1": lambda: qtile.spawn("blueman-manager")},
     ),
-    # widget.Wlan(
-    #     # **decor_right,
-    #     background=Color2+".4",
-    #     padding=10,
-    #     format='{essid} {percent:2.0%}',
-    #     mouse_callbacks={"Button1": lambda: qtile.spawn("alacritty -e nmtui")},
-    # ),
+    widget.Wlan(
+        **decor_right,
+        background=Color2+".4",
+        padding=10,
+        format='{essid} {percent:2.0%}',
+        mouse_callbacks={"Button1": lambda: qtile.spawn("alacritty -e nmtui")},
+    ),
     widget.Clock(
-        # **decor_right,
+        **decor_right,
         background=Color4+".4",   
         padding=10,      
         format="%Y-%m-%d / %I:%M %p",
     ),
     widget.TextBox(
-        # **decor_right,
+        **decor_right,
         background=Color2+".4",     
         padding=5,    
         text=" ",
@@ -279,6 +328,13 @@ widget_list = [
         mouse_callbacks={"Button1": lambda: qtile.spawn(home + "/dotfiles/qtile/scripts/powermenu.sh")},
     ),
 ]
+
+# Hide Modules if not on laptop
+if (show_wlan == False):
+    del widget_list[13:14]
+
+if (show_bluetooth == False):
+    del widget_list[12:13]
 
 # groups = [Group(i) for i in "123456789"]
 
