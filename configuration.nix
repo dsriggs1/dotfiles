@@ -21,6 +21,11 @@
   #Auto update nix-store at each build
   nix.settings.auto-optimise-store = true;
 
+  # Set the interval for automatic garbage collection (e.g., weekly)
+  nix.gc.automatic = true;
+  nix.gc.dates = "daily";
+  nix.gc.options = "--delete-older-than +5";
+
 
   # Bootloader.
   boot.loader.grub.enable = true;
