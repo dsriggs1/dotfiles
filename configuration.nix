@@ -187,7 +187,7 @@
    alacritty
    eza
    starship
-  #  rofi
+   rofi
    pywal
    dunst
    xfce.xfce4-power-manager
