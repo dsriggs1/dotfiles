@@ -18,6 +18,9 @@
     '';
   };
 
+  #Auto update nix-store at each build
+  nix.settings.auto-optimise-store = true;
+
   # home-manager.users.sean = { pkgs, ... }: {
   #   nixpkgs.config = {
   #     allowUnfree = true;
