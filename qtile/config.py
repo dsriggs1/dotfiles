@@ -145,6 +145,10 @@ Color13=(colordict['colors']['color13'])
 Color14=(colordict['colors']['color14'])
 Color15=(colordict['colors']['color15'])
 
+foreground=(colordict['special']['foreground'])
+background=(colordict['special']['background'])
+widget_color=background
+
 # --------------------------------------------------------
 # Setup Layout Theme
 # --------------------------------------------------------
@@ -216,9 +220,11 @@ widget_list = [
     widget.TextBox(
         **decor_left, 
         background=Color1+".4",
-        text='Apps',
+        text='',
         #foreground='ffffff',
-        foreground='ff0000',
+        #foreground='ff0000',
+        foreground=widget_color,
+        fontsize=18,
         desc='',
         padding=10,
         mouse_callbacks={"Button1": lambda: qtile.spawn("rofi -show drun")},
@@ -227,7 +233,8 @@ widget_list = [
         **decor_left,
         background="#ffffff.4",
         text="  ",
-        foreground="000000.6",
+        #foreground="000000.6",
+        foreground=widget_color,
         fontsize=18,
         mouse_callbacks={"Button1": lambda: qtile.spawn(home + "/dotfiles/qtile/scripts/wallpaper.sh select")},
     ),
@@ -240,7 +247,8 @@ widget_list = [
         highlight_color=['ffffff','ffffff'],
         block_highlight_text_color='000000',
         #foreground='ffffff',
-        foreground='ff0000',
+        #foreground='ff0000',
+        foreground=widget_color,
         rounded=False,
         this_current_screen_border='ffffff',
         active='ffffff'
@@ -250,7 +258,8 @@ widget_list = [
         background="#ffffff.4",
         text="",
         #foreground="000000.6",
-        foreground='ff0000',
+        #foreground='ff0000',
+        foreground=widget_color,
         fontsize=18,
         #font='FontAwesome',
         mouse_callbacks={"Button1": lambda: qtile.spawn("firefox")},
@@ -260,7 +269,8 @@ widget_list = [
         background="#ffffff.4",
         text="",
         #foreground="000000.6",
-        foreground='ff0000',
+        #foreground='ff0000',
+        foreground=widget_color,
         fontsize=18,
         mouse_callbacks={"Button1": lambda: qtile.spawn("thunar")}
     ),
@@ -269,6 +279,7 @@ widget_list = [
         **decor_left,
         max_chars=50,
         background=Color2+".4",
+        foreground=widget_color,
         width=400,
         padding=10
     ),
@@ -283,6 +294,7 @@ widget_list = [
     widget.Memory(
         **decor_right,
         background=Color10+".4",
+        foreground=widget_color,
         padding=10,        
         measure_mem='G',
         format="{MemUsed:.0f}{mm} ({MemTotal:.0f}{mm})"
@@ -290,38 +302,44 @@ widget_list = [
     widget.Volume(
         **decor_right,
         background=Color12+".4",
+        foreground=widget_color,
         padding=10, 
         fmt='Vol: {}',
     ),
     widget.DF(
         **decor_right,
         padding=10, 
-        background=Color8+".4",        
+        background=Color8+".4",
+        foreground=widget_color,        
         visible_on_warn=False,
         format="{p} {uf}{m} ({r:.0f}%)"
     ),
     widget.Bluetooth(
         **decor_right,
         background=Color2+".4",
+        foreground=widget_color,
         padding=10,
         mouse_callbacks={"Button1": lambda: qtile.spawn("blueman-manager")},
     ),
     widget.Wlan(
         **decor_right,
         background=Color2+".4",
+        foreground=widget_color,
         padding=10,
         format='{essid} {percent:2.0%}',
         mouse_callbacks={"Button1": lambda: qtile.spawn("alacritty -e nmtui")},
     ),
     widget.Clock(
         **decor_right,
-        background=Color4+".4",   
+        background=Color4+".4",
+        foreground=widget_color,   
         padding=10,      
-        format="%Y-%m-%d / %I:%M %p",
+        format="%I:%M %p",
     ),
     widget.TextBox(
         **decor_right,
-        background=Color2+".4",     
+        background=Color2+".4",
+        foreground=widget_color,     
         padding=5,    
         text=" ",
         fontsize=20,
@@ -390,6 +408,7 @@ widget_defaults = dict(
     font="sans",
     fontsize=12,
     padding=3,
+    
 )
 extension_defaults = widget_defaults.copy()
 
