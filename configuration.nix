@@ -195,7 +195,7 @@
    expressvpn
    nil
    R
-  #  rstudio
+   rstudio
    btop
   #  python311Packages.pytorch-metric-learning
   #  python311Packages.psutil
