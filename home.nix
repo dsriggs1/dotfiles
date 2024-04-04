@@ -74,10 +74,45 @@
           ];
           bookmarks = [
             {
-              name = "wikipedia";
-              tags = [ "wiki" ];
-              keyword = "wiki";
-              url = "https://en.wikipedia.org/wiki/Main_Page";
+              name = "Jellyfin Server";
+              tags = [ "Jellyfin" ];
+              keyword = "Jellyfin";
+              url = "http://localhost:8096";
+            }
+
+            {
+              name = "Bazarr";
+              tags = [ "Bazarr" ];
+              keyword = "Bazarr";
+              url = "http://localhost:6767";
+            }
+
+            {  
+              name = "Lidarr";
+              tags = [ "Lidarr" ];
+              keyword = "Lidarr";
+              url = "http://localhost:8686";
+            }
+
+            {
+              name = "Prowlarr";
+              tags = [ "Prowlarr" ];
+              keyword = "Prowlarr";
+              url = "http://localhost:9696";
+            }
+
+            {
+              name = "Radarr";
+              tags = [ "Radarr" ];
+              keyword = "Radarr";
+              url = "http://localhost:7878";
+            }
+            
+            {
+              name = "Sonarr";
+              tags = [ "Sonarr" ];
+              keyword = "Sonarr";
+              url = "http://localhost:8989";
             }
           ];  
         };               
