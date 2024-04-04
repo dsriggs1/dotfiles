@@ -72,12 +72,18 @@
           ublock-origin
           #Dracula        
           ];
+          bookmarks = {
+            toolbar = {
+            name = "My Toolbar";
+            toolbar = true;
+                      
           bookmarks = [
             {
+              
               name = "Jellyfin Server";
               tags = [ "Jellyfin" ];
               keyword = "Jellyfin";
-              url = "http://localhost:8096";
+              url = "http://localhost:8096";              
             }
 
             {
@@ -114,8 +120,18 @@
               keyword = "Sonarr";
               url = "http://localhost:8989";
             }
-          ];  
-        };               
+
+            {
+              name = "github";
+              tags = [ "github" ];
+              keyword = "github";
+              url = "https://github.com/";
+              
+            }            
+          ]; 
+          };
+          };           
+        };         
       };
     };
   #};
