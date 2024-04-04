@@ -15,6 +15,11 @@
       url = "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nixarr= {
+      url = "github:rasmus-kirk/nixarr";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
   };
 
   outputs = {
@@ -24,6 +29,7 @@
     nur,
     home-manager, 
     firefox-addons,
+    nixarr,
     ... 
   } @inputs: 
   let 
@@ -51,12 +57,18 @@
               system = system;
               config.allowUnfree = true;
           };
+          nixarr = import nixarr {
+              system = system;
+              config.allowUnfree = true;
+          };
           
       };  
         modules = [
           # Import the previous configuration.nix we used,
           # so the old configuration file still takes effect
           ./configuration.nix
+          #./nixos/servarr/configuration.nix
+          nixarr.nixosModules.default
           home-manager.nixosModules.home-manager
           {
             home-manager.useGlobalPkgs = true;
@@ -69,6 +81,7 @@
         ];
       };
     };
+      
     # homeConfigurations = {
     #   "sean@nixos" = home-manager.lib.homeManagerConfiguration {
     #     pkgs = nixpkgs.legacyPackages.x86_64-linux;
