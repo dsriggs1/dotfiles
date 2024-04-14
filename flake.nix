@@ -46,7 +46,6 @@
           pkgs-unstable = import nixpkgs-unstable {
           system = system;
           config.allowUnfree = true;
-         #inherit inputs outputs firefox-addons;
           
         };
           nur = import nur {
@@ -61,7 +60,8 @@
               system = system;
               config.allowUnfree = true;
           };
-          
+
+          inherit pkgs inputs ;      
       };  
         modules = [
           # Import the previous configuration.nix we used,
