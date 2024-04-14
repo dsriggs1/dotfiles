@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, pkgs-unstable, nixarr, ... }:
+{ config, pkgs, pkgs-unstable, nixarr, inputs, ... }:
 
 {
   imports =
@@ -25,8 +25,20 @@
   # Set the interval for automatic garbage collection (e.g., weekly)
   nix.gc.automatic = true;
   nix.gc.dates = "daily";
-  nix.gc.options = "--delete-older-than +5";
+  nix.gc.options = "--delete-older-than 7d";
 
+  # Adding automatic upgrades of the system
+  system.autoUpgrade = {
+  enable = true;
+  flake = inputs.self.outPath;
+  flags = [
+    "--update-input"
+    "nixpkgs"
+    "--print-build-logs"
+  ];
+  dates = "02:00";
+  randomizedDelaySec = "45min";
+};
 
   # Bootloader.
   boot.loader.grub.enable = true;
@@ -80,14 +92,19 @@
    #desktopManager.plasma5.enable = true;
    displayManager = {
       lightdm = {
+        background = "/etc/nixos/background/default.jpg";
         enable = true;
         
         #Slick greeter configuration
         greeters.slick = {
           enable = true;
-          #background = "~/wallpapers/default.jpg"; 
-          theme.name = "Nordic-darker";
+          theme.name = "Adwaita";
+
+          extraConfig = ''
+            user-background = false
+          '';
         };
+        
       };
     };
   
