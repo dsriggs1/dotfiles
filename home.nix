@@ -79,6 +79,12 @@
                       
           bookmarks = [
             {
+              name = "Nixos Wiki";
+              tags = [ "nixos" ];
+              keyword = "nixos";
+              url = "https://wiki.nixos.org/wiki/NixOS_Wiki"; 
+            }
+            {
               
               name = "Jellyfin Server";
               tags = [ "Jellyfin" ];
