@@ -156,6 +156,7 @@
    python3Packages.qtile-extras
    lightdm
    firefox
+   chromium
    git
    neofetch
    pfetch
@@ -203,6 +204,8 @@
    qbittorrent
    kitty
    pkgs-unstable.pywalfox-native
+   spicetify-cli
+   spotify
   ];  
 
   fonts.packages = with pkgs; [
