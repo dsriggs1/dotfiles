@@ -69,7 +69,6 @@ def minimize_all(qtile):
         if hasattr(win, "toggle_minimize"):
             win.toggle_minimize()
 
-
 keys = [
     # A list of available commands that can be bound to keys can be found
     # at https://docs.qtile.org/en/latest/manual/config/lazy.html
@@ -120,6 +119,7 @@ keys = [
     # Apps
     Key([mod, "shift"], "w", lazy.spawn("bash -x '~/scripts/wallpaper.sh'"), desc="Update Theme and Wallpaper"),
     Key([mod, "shift"], "m", minimize_all(), desc="Toggle hide/show all windows on current group"),
+
 ]
 
 # --------------------------------------------------------
@@ -364,6 +364,25 @@ groups = [
     Group("5", layout='monadtall'),
 ]
 
+# --------------------------------------------------------
+# Scratchpads
+# --------------------------------------------------------
+
+groups.append(ScratchPad("6", [
+    DropDown("chatgpt", "chromium --app=https://chat.openai.com", x=0.3, y=0.1, width=0.40, height=0.4, on_focus_lost_hide=False ),
+    DropDown("mousepad", "mousepad", x=0.3, y=0.1, width=0.40, height=0.4, on_focus_lost_hide=False ),
+    DropDown("terminal", "alacritty", x=0.3, y=0.1, width=0.40, height=0.4, on_focus_lost_hide=False ),
+    DropDown("scrcpy", "scrcpy -d", x=0.8, y=0.05, width=0.15, height=0.6, on_focus_lost_hide=False )
+]))
+
+keys.extend([
+    Key([mod], 'c', lazy.group["6"].dropdown_toggle("chatgpt")),
+    Key([mod], 'F11', lazy.group["6"].dropdown_toggle("mousepad")),
+    Key([mod], 'a', lazy.group["6"].dropdown_toggle("terminal")),
+    Key([mod], 'F9', lazy.group["6"].dropdown_toggle("scrcpy"))
+])
+
+
 for i in groups:
     keys.extend(
         [
@@ -429,7 +448,6 @@ screens = [
         ),
     ),
 ]
-
 
 # Drag floating layouts.
 mouse = [
