@@ -4,21 +4,23 @@
   inputs = {
     # NixOS official package source, using the nixos-23.11 branch here
     #nixpkgs.url = "github:NixOS/nixpkgs/01885a071465";
-    nixpkgs.url = "github:NixOS/nixpkgs/master";
+    # nixpkgs.url = "github:NixOS/nixpkgs/master";
+    nixpkgs.url = "github:NixOS/nixpkgs/release-24.05";
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
     nur.url = "github:nix-community/NUR";
+    stylix.url = "github:danth/stylix/release-23.11";  
     home-manager = {
-      url = "github:nix-community/home-manager/release-23.11";
+      url = "github:nix-community/home-manager/release-24.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     firefox-addons = {
       url = "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    nixarr= {
-      url = "github:rasmus-kirk/nixarr";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    # nixarr= {
+    #   url = "github:rasmus-kirk/nixarr";
+    #   inputs.nixpkgs.follows = "nixpkgs";
+    # };
 
   };
 
@@ -29,7 +31,8 @@
     nur,
     home-manager, 
     firefox-addons,
-    nixarr,
+    # nixarr,
+    stylix,
     ... 
   } @inputs: 
   let 
@@ -56,7 +59,11 @@
               system = system;
               config.allowUnfree = true;
           };
-          nixarr = import nixarr {
+          # nixarr = import nixarr {
+          #     system = system;
+          #     config.allowUnfree = true;
+          # };
+          stylix = import stylix {
               system = system;
               config.allowUnfree = true;
           };
@@ -66,10 +73,11 @@
         modules = [
           # Import the previous configuration.nix we used,
           # so the old configuration file still takes effect
-          ./configuration.nix
+            ./configuration.nix
           #./nixos/servarr/configuration.nix
-          nixarr.nixosModules.default
-          home-manager.nixosModules.home-manager
+            # nixarr.nixosModules.default
+            stylix.nixosModules.stylix
+            home-manager.nixosModules.home-manager
           {
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
