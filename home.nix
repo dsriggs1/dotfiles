@@ -4,6 +4,10 @@
     home.username = "sean";
     home.homeDirectory = "/home/sean";
 
+  # home-manager.sharedModules = [{
+  #   stylix.targets.xyz.enable = false;
+  # }];
+
 # home-manager.users.sean = { pkgs, ... }: {
 #     nixpkgs.config = {
 #       allowUnfree = true;
@@ -70,7 +74,7 @@
           extensions = with inputs.firefox-addons.packages.${pkgs.system}; [
           pywalfox 
           ublock-origin
-          #Dracula        
+          #dracula        
           ];
           bookmarks = {
             toolbar = {
