@@ -40,7 +40,9 @@
 #   randomizedDelaySec = "45min";
 # };
 
-  stylix.image = /home/sean/wallpapers/liquid1.jpg;
+  stylix.image = /home/sean/wallpapers/lake-sunrise.jpg;
+  stylix.polarity = "dark";
+  stylix.cursor.size = 8;
 
   # Bootloader.
   boot.loader.grub.enable = true;
