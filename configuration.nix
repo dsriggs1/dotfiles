@@ -8,7 +8,7 @@
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
-      ./nixarr.nix
+      # ./nixarr.nix
       #<home-manager/nixos>
     ];
 
@@ -28,17 +28,19 @@
   nix.gc.options = "--delete-older-than 7d";
 
   # Adding automatic upgrades of the system
-  system.autoUpgrade = {
-  enable = true;
-  flake = inputs.self.outPath;
-  flags = [
-    "--update-input"
-    "nixpkgs"
-    "--print-build-logs"
-  ];
-  dates = "02:00";
-  randomizedDelaySec = "45min";
-};
+#   system.autoUpgrade = {
+#   enable = true;
+#   flake = inputs.self.outPath;
+#   flags = [
+#     "--update-input"
+#     "nixpkgs"
+#     "--print-build-logs"
+#   ];
+#   dates = "02:00";
+#   randomizedDelaySec = "45min";
+# };
+
+  stylix.image = /home/sean/wallpapers/liquid1.jpg;
 
   # Bootloader.
   boot.loader.grub.enable = true;
@@ -92,7 +94,7 @@
    #desktopManager.plasma5.enable = true;
    displayManager = {
       lightdm = {
-        background = "/etc/nixos/background/default.jpg";
+        # background = "/etc/nixos/background/default.jpg";
         enable = true;
         
         #Slick greeter configuration
@@ -110,11 +112,11 @@
   
   };
 
-  programs.hyprland= {
-    enable = true;
-    xwayland.enable = true;
-    # nvidiaPatches = true;
-  };
+  # programs.hyprland= {
+  #   enable = true;
+  #   xwayland.enable = true;
+  #   # nvidiaPatches = true;
+  # };
 
 #   services.xserver.windowManager.qtile = {
 #     ...
@@ -204,8 +206,9 @@
    qbittorrent
    kitty
    pkgs-unstable.pywalfox-native
-   spicetify-cli
-   spotify
+  #  spicetify-cli
+  #  spotify
+   qalculate-gtk
   ];  
 
   fonts.packages = with pkgs; [
