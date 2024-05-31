@@ -43,6 +43,8 @@
   stylix.image = /home/sean/wallpapers/lake-sunrise.jpg;
   stylix.polarity = "dark";
   stylix.cursor.size = 8;
+  stylix.fonts.sizes.applications = 10;
+  stylix.fonts.sizes.desktop=5;
 
   # Bootloader.
   boot.loader.grub.enable = true;
