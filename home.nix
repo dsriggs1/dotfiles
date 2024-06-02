@@ -72,9 +72,7 @@
       profiles = {
         default = {
           extensions = with inputs.firefox-addons.packages.${pkgs.system}; [
-          pywalfox 
           ublock-origin
-          #dracula        
           ];
           bookmarks = {
             toolbar = {
