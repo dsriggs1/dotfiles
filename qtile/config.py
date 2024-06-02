@@ -372,14 +372,16 @@ groups.append(ScratchPad("6", [
     DropDown("chatgpt", "chromium --app=https://chat.openai.com", x=0.3, y=0.1, width=0.40, height=0.4, on_focus_lost_hide=False ),
     DropDown("mousepad", "mousepad", x=0.3, y=0.1, width=0.40, height=0.4, on_focus_lost_hide=False ),
     DropDown("terminal", "alacritty", x=0.3, y=0.1, width=0.40, height=0.4, on_focus_lost_hide=False ),
-    DropDown("scrcpy", "scrcpy -d", x=0.8, y=0.05, width=0.15, height=0.6, on_focus_lost_hide=False )
+    DropDown("scrcpy", "scrcpy -d", x=0.8, y=0.05, width=0.15, height=0.6, on_focus_lost_hide=False ),
+    DropDown("Qalc", "qalculate-gtk", x=0.3, y=0.1, width=0.40, height=0.4, on_focus_lost_hide=False ),
 ]))
 
 keys.extend([
-    Key([mod], 'c', lazy.group["6"].dropdown_toggle("chatgpt")),
+    Key([mod], 'F10', lazy.group["6"].dropdown_toggle("chatgpt")),
     Key([mod], 'F11', lazy.group["6"].dropdown_toggle("mousepad")),
-    Key([mod], 'a', lazy.group["6"].dropdown_toggle("terminal")),
-    Key([mod], 'F9', lazy.group["6"].dropdown_toggle("scrcpy"))
+    Key([mod], 'F12', lazy.group["6"].dropdown_toggle("terminal")),
+    Key([mod], 'F9', lazy.group["6"].dropdown_toggle("scrcpy")),
+    Key([mod], 'F8', lazy.group["6"].dropdown_toggle("Qalc")),
 ])
 
 
