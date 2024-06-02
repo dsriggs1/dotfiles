@@ -17,10 +17,10 @@
       url = "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    # nixarr= {
-    #   url = "github:rasmus-kirk/nixarr";
-    #   inputs.nixpkgs.follows = "nixpkgs";
-    # };
+    nixarr= {
+      url = "github:rasmus-kirk/nixarr";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
   };
 
@@ -31,7 +31,7 @@
     nur,
     home-manager, 
     firefox-addons,
-    # nixarr,
+    nixarr,
     stylix,
     ... 
   } @inputs: 
@@ -59,10 +59,10 @@
               system = system;
               config.allowUnfree = true;
           };
-          # nixarr = import nixarr {
-          #     system = system;
-          #     config.allowUnfree = true;
-          # };
+          nixarr = import nixarr {
+              system = system;
+              config.allowUnfree = true;
+          };
           stylix = import stylix {
               system = system;
               config.allowUnfree = true;
@@ -75,7 +75,7 @@
           # so the old configuration file still takes effect
             ./configuration.nix
           #./nixos/servarr/configuration.nix
-            # nixarr.nixosModules.default
+            nixarr.nixosModules.default
             stylix.nixosModules.stylix
             home-manager.nixosModules.home-manager
           {
