@@ -162,7 +162,7 @@
    python3Packages.qtile-extras
    lightdm
    firefox
-   chromium
+  #  chromium
    git
    neofetch
    pfetch
@@ -213,6 +213,7 @@
   #  spicetify-cli
   #  spotify
    qalculate-gtk
+   jetbrains.pycharm-community-src
   ];  
 
   fonts.packages = with pkgs; [
