@@ -84,6 +84,7 @@
             home-manager.users.sean = import ./home.nix {
               inherit pkgs inputs ;
               config = pkgs.config;
+              stylix.targets.xyz.enable = false;
              };
           }
         ];
