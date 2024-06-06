@@ -115,6 +115,8 @@ keys = [
     Key([mod, "control"], "r", lazy.reload_config(), desc="Reload the config"),
     Key([mod, "control"], "q", lazy.shutdown(), desc="Shutdown Qtile"),
     Key([mod], "r", lazy.spawncmd(), desc="Spawn a command using a prompt widget"),
+    #use rofi to switch window
+    Key([mod], "s", lazy.spawn("rofi -show window"), desc="Rofi Launcher"),
 
     # Apps
     Key([mod, "shift"], "w", lazy.spawn("bash -x '~/scripts/wallpaper.sh'"), desc="Update Theme and Wallpaper"),
@@ -126,28 +128,50 @@ keys = [
 # Pywal Colors
 # --------------------------------------------------------
 
-colors = os.path.expanduser('~/.cache/wal/colors.json')
-colordict = json.load(open(colors))
-Color0=(colordict['colors']['color0'])
-Color1=(colordict['colors']['color1'])
-Color2=(colordict['colors']['color2'])
-Color3=(colordict['colors']['color3'])
-Color4=(colordict['colors']['color4'])
-Color5=(colordict['colors']['color5'])
-Color6=(colordict['colors']['color6'])
-Color7=(colordict['colors']['color7'])
-Color8=(colordict['colors']['color8'])
-Color9=(colordict['colors']['color9'])
-Color10=(colordict['colors']['color10'])
-Color11=(colordict['colors']['color11'])
-Color12=(colordict['colors']['color12'])
-Color13=(colordict['colors']['color13'])
-Color14=(colordict['colors']['color14'])
-Color15=(colordict['colors']['color15'])
+# colors = os.path.expanduser('~/.cache/wal/colors.json')
+# colordict = json.load(open(colors))
+# Color0=(colordict['colors']['color0'])
+# Color1=(colordict['colors']['color1'])
+# Color2=(colordict['colors']['color2'])
+# Color3=(colordict['colors']['color3'])
+# Color4=(colordict['colors']['color4'])
+# Color5=(colordict['colors']['color5'])
+# Color6=(colordict['colors']['color6'])
+# Color7=(colordict['colors']['color7'])
+# Color8=(colordict['colors']['color8'])
+# Color9=(colordict['colors']['color9'])
+# Color10=(colordict['colors']['color10'])
+# Color11=(colordict['colors']['color11'])
+# Color12=(colordict['colors']['color12'])
+# Color13=(colordict['colors']['color13'])
+# Color14=(colordict['colors']['color14'])
+# Color15=(colordict['colors']['color15'])
 
-foreground=(colordict['special']['foreground'])
-background=(colordict['special']['background'])
-widget_color=background
+# foreground=(colordict['special']['foreground'])
+# background=(colordict['special']['background'])
+# widget_color=background
+
+colors = os.path.expanduser('~/.config/stylix/generated.json')
+colordict = json.load(open(colors))
+
+Color0=(colordict['base00'])
+Color1=(colordict['base01'])
+Color2=(colordict['base02'])
+Color3=(colordict['base03'])
+Color4=(colordict['base04'])
+Color5=(colordict['base05'])
+Color6=(colordict['base06'])
+Color7=(colordict['base07'])
+Color8=(colordict['base08'])
+Color9=(colordict['base09'])
+Color10=(colordict['base0A'])
+Color11=(colordict['base0B'])
+Color12=(colordict['base0C'])
+Color13=(colordict['base0D'])
+Color14=(colordict['base0E'])
+Color15=(colordict['base0F'])
+
+widget_color=Color0
 
 # --------------------------------------------------------
 # Setup Layout Theme
@@ -227,7 +251,11 @@ widget_list = [
         fontsize=18,
         desc='',
         padding=10,
-        mouse_callbacks={"Button1": lambda: qtile.spawn("rofi -show drun")},
+        mouse_callbacks={
+            "Button1": lambda: qtile.spawn("rofi -show drun & rofi -show power-menu -modi power-menu:rofi-power-menu & rofi -show window"),
+            "Button3": lambda: qtile.spawn("rofi -show window")
+
+            },
     ),
     widget.TextBox(
         **decor_left,
