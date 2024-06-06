@@ -4,14 +4,7 @@
     home.username = "sean";
     home.homeDirectory = "/home/sean";
 
-  # home-manager.sharedModules = [{
-  #   stylix.targets.xyz.enable = false;
-  # }];
-
-# home-manager.users.sean = { pkgs, ... }: {
-#     nixpkgs.config = {
-#       allowUnfree = true;
-#     }; 
+  #  stylix.image = /home/sean/wallpapers/lake-sunrise.jpg;
 
     home.packages = with pkgs; [
         git
