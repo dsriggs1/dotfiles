@@ -194,7 +194,8 @@ layouts = [
     layout.MonadTall(**layout_theme),
     layout.MonadWide(**layout_theme),
     layout.RatioTile(**layout_theme),
-    layout.Floating()
+    layout.Floating(),
+    floating_layout
 ]
 
 # --------------------------------------------------------
@@ -502,6 +503,7 @@ floating_layout = layout.Floating(
         Match(wm_class="ssh-askpass"),  # ssh-askpass
         Match(title="branchdialog"),  # gitk
         Match(title="pinentry"),  # GPG key password entry
+        Match(wm_class="qalculate-gtk"),
     ]
 )
 auto_fullscreen = True
