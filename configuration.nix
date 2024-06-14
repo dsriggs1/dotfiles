@@ -9,7 +9,6 @@
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
       ./nixarr.nix
-      #<home-manager/nixos>
     ];
 
    nix = {
@@ -107,7 +106,6 @@
       extraPackages =
       python3Packages: with
       python3Packages; [
-         #(qtile-extras.overridePythonAttrs(old: { disabledTestPaths = [ "test/widget/test_strava.py" ]; }))
          qtile-extras
       ];
       
@@ -140,16 +138,6 @@
   #   # nvidiaPatches = true;
   # };
 
-#   services.xserver.windowManager.qtile = {
-#     ...
-#     extraPackages = python3Packages: with python3Packages; [
-#        ...
-#         (qtile-extras.overridePythonAttrs(old: { disabledTestPaths = [ "test/widget/test_strava.py" ]; }))
-#     ];
-# };
-
-  
-  #services.xserver.windowManager.qtile.extraPackages = p: with p; [ qtile-extras ];
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.sean = {
@@ -199,10 +187,6 @@
    R
    rstudio
    btop
-  #  python311Packages.pytorch-metric-learning
-  #  python311Packages.psutil
-  #  python311Packages.rich
-  #  python311Packages.click
    figlet
    bluez
    neovim
