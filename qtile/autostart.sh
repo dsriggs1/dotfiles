@@ -28,4 +28,5 @@ picom &
 #dunst &
 
 # Setup Wallpaper and update colors
-bash -x ~/.config/qtile/scripts/wallpaper.sh init
+#bash -x ~/.config/qtile/scripts/wallpaper.sh init
+bash -x wal -i /home/sean/Downloads/dotfiles/wallpapers/lake-sunrise.jpg
