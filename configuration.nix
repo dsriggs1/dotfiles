@@ -189,6 +189,7 @@
    starship
    rofi
    rofi-power-menu
+   rofi-screenshot
    pywal
    dunst
    xfce.xfce4-power-manager
@@ -280,6 +281,10 @@
         size=10;
         deviation=5.0;
       };
+      blur-background-fixed = true;
+       opacity-rule = [
+      "70:class_g = 'Alacritty'"
+      ];
     };
   };
 
