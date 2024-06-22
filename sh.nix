@@ -1,8 +1,7 @@
 { config, pkgs, ...}:
-
-{
-  let myAliases = {
-  c = "clear";
+  let 
+    myAliases = {
+        c = "clear";
         nf = "neofetch";
         pf = "pfetch";
         ll = "eza -al --icons";
@@ -18,7 +17,7 @@
         dot = "cd ~/dotfiles";
         picom = "picom --config ~/.config/picom/picom.conf";
         dotfiles = "cd ~/Downloads/dotfiles";
-
+        vim = "nvim";
         # SCRIPTS
         gr = "python ~/dotfiles/scripts/growthrate.py";
         ChatGPT = "python ~/mychatgpt/mychatgpt.py";
@@ -48,8 +47,32 @@
         res1 = "xrandr --output DisplayPort-0 --mode 2560x1440 --rate 120";
         res2 = "xrandr --output DisplayPort-0 --mode 1920x1080 --rate 120";
 };
-  myVariables = {
-        EDITOR = "code"; 
-  };
+    myVariables = {
+          EDITOR = "code"; 
+    };
 in 
+{
+  programs.bash = {
+      enable = true;      
+      sessionVariables = myVariables;
+
+      shellAliases = myAliases;
+      initExtra = ''
+        cd() {
+          builtin cd "$@" && ls -la
+        }
+      '';
+    };
+
+    programs.zsh = {
+      enable = true;      
+      sessionVariables = myVariables;
+
+      shellAliases = myAliases;
+      initExtra = ''
+        cd() {
+          builtin cd "$@" && ls -la
+        }
+      '';
+    };
 }
