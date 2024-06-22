@@ -9,7 +9,11 @@
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
     nur.url = "github:nix-community/NUR";
     stylix.url = "github:danth/stylix/release-23.11";  
-    home-manager = {
+    nixvim = {
+    	url = "github:nix-community/nixvim/nixos-24.05";
+	    inputs.nixpkgs.follows = "nixpkgs";
+    };
+      home-manager = {
       url = "github:nix-community/home-manager/release-24.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
@@ -33,6 +37,7 @@
     firefox-addons,
     nixarr,
     stylix,
+    nixvim,
     ... 
   } @inputs: 
   let 
@@ -67,6 +72,10 @@
               system = system;
               config.allowUnfree = true;
           };
+          nixvim = import nixvim {
+              system = system;
+              config.allowUnfree = true;
+          };
 
           inherit pkgs inputs ;      
       };  
@@ -81,10 +90,14 @@
           {
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
+            home-manager.sharedModules = [
+              nixvim.homeManagerModules.nixvim
+            ];
             home-manager.users.sean = import ./home.nix {
-              inherit pkgs inputs ;
+              
+              inherit pkgs inputs;
               config = pkgs.config;
-              stylix.targets.xyz.enable = false;
+              stylix.targets.xyz.enable = false;              
              };
           }
         ];
