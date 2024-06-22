@@ -219,6 +219,7 @@
    qalculate-gtk
    jetbrains.pycharm-community-src
    nitrogen
+   xclip
   ];  
 
   fonts.packages = with pkgs; [
@@ -260,12 +261,12 @@
     inactiveOpacity = 0.7;
     activeOpacity = 1;
     settings = {
-      blur = {
-        method = "guassian";
-        size=10;
-        deviation=5.0;
-      };
-      blur-background-fixed = true;
+      # blur = {
+      #   method = "gaussian";
+      #   size=10;
+      #   deviation=10.0;
+      # };
+      #blur-background-fixed = true;
        opacity-rule = [
       "70:class_g = 'Alacritty'"
       ];
