@@ -1,55 +1,13 @@
-{ config, pkgs, inputs, ... }:
+{ config, pkgs, inputs,  ... }:
 
-let myAliases = {
-  c = "clear";
-        nf = "neofetch";
-        pf = "pfetch";
-        ll = "eza -al --icons";
-        lt = "eza -a --tree --level=1 --icons";
-        shutdown = "systemctl poweroff";
-        v = "$EDITOR";
-        ts = "~/dotfiles/scripts/snapshot.sh";
-        matrix = "cmatrix";
-        wifi = "nmtui";
-        od = "~/private/onedrive.sh";
-        rw = "~/dotfiles/waybar/reload.sh";
-        winclass = "xprop | grep 'CLASS'";
-        dot = "cd ~/dotfiles";
-        picom = "picom --config ~/.config/picom/picom.conf";
-        dotfiles = "cd ~/Downloads/dotfiles";
-
-        # SCRIPTS
-        gr = "python ~/dotfiles/scripts/growthrate.py";
-        ChatGPT = "python ~/mychatgpt/mychatgpt.py";
-        chat = "python ~/mychatgpt/mychatgpt.py";
-        ascii = "~/dotfiles/scripts/figlet.sh";
-
-        # VIRTUAL MACHINE
-        vm = "~/private/launchvm.sh";
-        lg = "~/dotfiles/scripts/looking-glass.sh";
-        vmstart = "virsh --connect qemu:///system start win11";
-        vmstop = "virsh --connect qemu:///system destroy win11";
-
-        # EDIT CONFIG FILES
-        confq = "$EDITOR ~/.config/qtile/config.py";
-        confql = "$EDITOR ~/.local/share/qtile/qtile.log";
-        confp = "$EDITOR ~/dotfiles/picom/picom.conf";
-        confb = "$EDITOR ~/.bashrc";
-        confn = "$EDITOR ~/Downloads/dotfiles/configuration.nix";
-
-        # EDIT NOTES
-        notes = "$EDITOR ~/notes.txt";
-
-        # NIX SYSTEM
-        rebuild = "sudo nixos-rebuild switch";
-
-        # SCREEN RESOLUTIONS
-        res1 = "xrandr --output DisplayPort-0 --mode 2560x1440 --rate 120";
-        res2 = "xrandr --output DisplayPort-0 --mode 1920x1080 --rate 120";
-};
-
-in 
 {
+    imports = [
+      ./sh.nix
+      # ./firefox.nix
+      ./git.nix
+      ./vscode.nix
+    ];
+
     home.username = "sean";
     home.homeDirectory = "/home/sean";
 
@@ -59,85 +17,144 @@ in
         git
         vscode
         firefox
-        
-    ];
-
-    programs.git = {
-      enable = true;
-      userName = "dsriggs1";
-      userEmail = "dsriggs1@gmail.com";
-      aliases =
-        {
-          a = "add";
-          c = "commit";
-          ca = "commit --amend";
-          can = "commit --amend --no-edit";
-          cl = "clone";
-          cm = "commit -m";
-          co = "checkout";
-          cp = "cherry-pick";
-          cpx = "cherry-pick -x";
-          d = "diff";
-          f = "fetch";
-          fo = "fetch origin";
-          fu = "fetch upstream";
-          gds = "diff --staged";
-          lol = "log --graph --decorate --pretty=oneline --abbrev-commit";
-          lola = "log --graph --decorate --pretty=oneline --abbrev-commit --all";
-          pl = "pull";
-          pr = "pull -r";
-          ps = "push";
-          psf = "push -f";
-          rb = "rebase";
-          rbi = "rebase -i";
-          r = "remote";
-          ra = "remote add";
-          rr = "remote rm";
-          rv = "remote -v";
-          rs = "remote show";
-          st = "status";
-      };
-    };
-
-    programs.vscode = {
-      enable = true;
-      extensions = with pkgs.vscode-extensions; [
-        github.copilot
-        ms-python.python
-        jnoortheen.nix-ide        
-      ];
+ 	      # inputs.nixvim.packages.${system}.default       
+    ];       
+    
+    programs.nixvim = {
+      options.completeopt = ["menu" "menuone" "noselect"];
+     	enable = true; 
       
+      globals.mapleader = " ";
+
+      options = {
+        number = true;         # Show line numbers
+   #   	relativenumber = true; # Show relative line numbers
+
+      	shiftwidth = 2;        # Tab width should be 2
+     };
+     
+       keymaps = [
+      {
+	action = "<cmd>Telescope live_grep<CR>";
+	key = "<leader>g";
+      }
+      {
+        key = "<C-n>";
+        action = "<CMD>NvimTreeToggle<CR>";
+        options.desc = "Toggle NvimTree";
+      }
+     ];
+       
+
+      plugins = {
+        nvim-tree = {
+          enable = true;
+          openOnSetupFile = true;
+          autoReloadOnWrite = true;
+        };
+        
+        codeium-nvim.enable = true;
+        treesitter.enable = true;
+        
+        cmp = {
+            enable = true;
+            # menu = {
+            #   nvim_lsp = "[LSP]";
+            #   nvim_lua = "[api]";
+            #   path = "[path]";
+            #   luasnip = "[snip]";
+            #   buffer = "[buffer]";
+            #   neorg = "[neorg]";
+            #   cmp_tabnine = "[TabNine]";
+            # };
+          };
+
+        lsp = {
+          enable = true;
+          
+          servers = {
+            tsserver.enable = true;
+      
+            nil-ls ={
+              enable = true;
+            };
+
+            lua-ls = {
+              enable = true;
+              settings.telemetry.enable = false;
+            };
+
+            rust-analyzer = {
+              enable = true;
+              installCargo = true;
+            };
+
+            pyright = {
+              enable = true;
+            };
+          };  
+        };
     };
+   
+  #   plugins.nvim-tree = {
+  #   	enable = true;
+  #   };
+    
+  #   plugins.cmp = {
+  #       enable = true;
+  #       autoEnableSources = true;
+  #         sources = [
+  #           {name = "nvim_lsp";}
+  #       #   {name = "path";}
+  #       #   {name = "buffer";}
+  #       #   {name = "luasnip";}
+  #        ];
+  #     };    
 
-    programs.bash = {
-      enable = true;      
-      # home.sessionVariables = {
-      #   EDITOR = "code"; # replace "vim" with your preferred editor
-      # };
+  #  plugins.lsp = {
+  #     enable = true;
+      
+  #     servers = {
+  #       tsserver.enable = true;
+	
+  #       nil-ls ={
+  #         enable = true;
+  #       };
 
-      shellAliases = myAliases;
+  #       lua-ls = {
+  #         enable = true;
+  #         settings.telemetry.enable = false;
+  #       };
 
-      initExtra = ''
-        cd() {
-          builtin cd "$@" && ls -la
-        }
-      '';
-    };
+  #       rust-analyzer = {
+  #         enable = true;
+  #         installCargo = true;
+  #       };
 
-    programs.zsh = {
-      enable = true;      
-      # home.sessionVariables = {
-      #   EDITOR = "code"; # replace "vim" with your preferred editor
-      # };
+  #       pyright = {
+  #         enable = true;
+  #       };
+  #     };  
+  #   };
 
-      shellAliases = myAliases;
+  #   plugins.treesitter = { 
+  #     enable = true;
+  #   };
 
-      initExtra = ''
-        cd() {
-          builtin cd "$@" && ls -la
-        }
-      '';
-    };
+  #   plugins.codeium-nvim = {
+  #     enable = true;
+  #   };
+  };	
+
+    # programs.vscode = {
+    #   enable = true;
+    #   extensions = with pkgs.vscode-extensions; [
+    #     github.copilot
+    #     ms-python.python
+    #     jnoortheen.nix-ide        
+    #   ];
+      
+    # };
  
     programs.firefox = {
       enable = true;
@@ -214,8 +231,7 @@ in
         };         
       };
     };
-  #};
-        
+       
     home.stateVersion = "23.11";
     programs.home-manager.enable = true;
 }
