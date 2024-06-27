@@ -5,7 +5,10 @@
     ./options.nix
     ./keymaps.nix
     ./nvim-tree.nix
-  ];
+    ./conform.nix
+    ./autocommands.nix
+    ./nvim-notify.nix
+];
 programs.nixvim = {
 #      options.completeopt = ["menu" "menuone" "noselect"];
      	enable = true; 
