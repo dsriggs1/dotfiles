@@ -268,7 +268,7 @@
       # };
       #blur-background-fixed = true;
        opacity-rule = [
-      "70:class_g = 'Alacritty'"
+    #  "70:class_g = 'Alacritty'"
       ];
     };
   };
