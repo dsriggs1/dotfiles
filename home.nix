@@ -6,110 +6,111 @@
       # ./firefox.nix
       ./git.nix
       ./vscode.nix
+      ./nixvim.nix
     ];
 
     home.username = "sean";
     home.homeDirectory = "/home/sean";
 
   #  stylix.image = /home/sean/wallpapers/lake-sunrise.jpg;
+    stylix.base16Scheme = "${pkgs.base16-schemes}/share/themes/catppuccin-mocha.yaml";
 
     home.packages = with pkgs; [
         git
         vscode
-        firefox
- 	      # inputs.nixvim.packages.${system}.default       
+        firefox   
     ];       
     
-    programs.nixvim = {
-      options.completeopt = ["menu" "menuone" "noselect"];
-     	enable = true; 
+  #   programs.nixvim = {
+  #     options.completeopt = ["menu" "menuone" "noselect"];
+  #    	enable = true; 
       
-      globals.mapleader = " ";
+  #     globals.mapleader = " ";
 
-      options = {
-        number = true;         # Show line numbers
-   #   	relativenumber = true; # Show relative line numbers
+       #options = {
+         #number = true;         # Show line numbers
+  #  #   	relativenumber = true; # Show relative line numbers
 
-      	shiftwidth = 2;        # Tab width should be 2
-     };
+  #     	shiftwidth = 2;        # Tab width should be 2
+     # };
      
-       keymaps = [
-      {
-	action = "<cmd>Telescope live_grep<CR>";
-	key = "<leader>g";
-      }
-      {
-        key = "<C-n>";
-        action = "<CMD>NvimTreeToggle<CR>";
-        options.desc = "Toggle NvimTree";
-      }
-     ];
+  #      keymaps = [
+  #     {
+  #       action = "<cmd>Telescope live_grep<CR>";
+  #       key = "<leader>g";
+  #     }
+  #     {
+  #       key = "<C-n>";
+  #       action = "<CMD>NvimTreeToggle<CR>";
+  #       options.desc = "Toggle NvimTree";
+  #     }
+  #    ];
        
 
-      plugins = {
-        nvim-tree = {
-          enable = true;
-          openOnSetupFile = true;
-          autoReloadOnWrite = true;
-        };
+  #     plugins = {
+  #       nvim-tree = {
+  #         enable = true;
+  #         openOnSetupFile = true;
+  #         autoReloadOnWrite = true;
+  #       };
         
-        codeium-nvim.enable = true;
-        treesitter.enable = true;
+  #       codeium-nvim.enable = true;
+  #       treesitter.enable = true;
         
-        cmp = {
-            enable = true;
-            # menu = {
-            #   nvim_lsp = "[LSP]";
-            #   nvim_lua = "[api]";
-            #   path = "[path]";
-            #   luasnip = "[snip]";
-            #   buffer = "[buffer]";
-            #   neorg = "[neorg]";
-            #   cmp_tabnine = "[TabNine]";
-            # };
-          };
+  #       cmp = {
+  #           enable = true;
+  #           # menu = {
+  #           #   nvim_lsp = "[LSP]";
+  #           #   nvim_lua = "[api]";
+  #           #   path = "[path]";
+  #           #   luasnip = "[snip]";
+  #           #   buffer = "[buffer]";
+  #           #   neorg = "[neorg]";
+  #           #   cmp_tabnine = "[TabNine]";
+  #           # };
+  #         };
 
-        lsp = {
-          enable = true;
+  #       lsp = {
+  #         enable = true;
           
-          servers = {
-            tsserver.enable = true;
+  #         servers = {
+  #           tsserver.enable = true;
       
-            nil-ls ={
-              enable = true;
-            };
+  #           nil-ls ={
+  #             enable = true;
+  #           };
 
-            lua-ls = {
-              enable = true;
-              settings.telemetry.enable = false;
-            };
+  #           lua-ls = {
+  #             enable = true;
+  #             settings.telemetry.enable = false;
+  #           };
 
-            rust-analyzer = {
-              enable = true;
-              installCargo = true;
-            };
+  #           rust-analyzer = {
+  #             enable = true;
+  #             installCargo = true;
+  #           };
 
-            pyright = {
-              enable = true;
-            };
-          };  
-        };
-    };
-   
-  #   plugins.nvim-tree = {
-  #   	enable = true;
+  #           pyright = {
+  #             enable = true;
+  #           };
+  #         };  
+  #       };
   #   };
+   
+    # plugins.nvim-tree = {
+    # 	enable = true;
+    # };
     
-  #   plugins.cmp = {
-  #       enable = true;
-  #       autoEnableSources = true;
-  #         sources = [
-  #           {name = "nvim_lsp";}
-  #       #   {name = "path";}
-  #       #   {name = "buffer";}
-  #       #   {name = "luasnip";}
-  #        ];
-  #     };    
+    # plugins.cmp = {
+    #     enable = true;
+    #     autoEnableSources = true;
+    #       sources = [
+    #         {name = "nvim_lsp";}
+    #     #   {name = "path";}
+    #     #   {name = "buffer";}
+    #     #   {name = "luasnip";}
+    #      ];
+    #   };    
 
   #  plugins.lsp = {
   #     enable = true;
@@ -137,14 +138,14 @@
   #     };  
   #   };
 
-  #   plugins.treesitter = { 
-  #     enable = true;
-  #   };
+    # plugins.treesitter = { 
+    #   enable = true;
+    # };
 
-  #   plugins.codeium-nvim = {
-  #     enable = true;
-  #   };
-  };	
+    # plugins.codeium-nvim = {
+    #   enable = true;
+    # };
+  # };	
 
     # programs.vscode = {
     #   enable = true;
