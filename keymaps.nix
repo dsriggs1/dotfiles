@@ -6,6 +6,14 @@
       #key = "<leader>g";
       #}
       {
+        mode = "n";
+        key = "<C-f>";
+        action = "!tmux new tmux-sessionizer<CR>";
+        options = {
+          desc = "Switch between projects";
+        };
+      }
+      {
         key = "<C-n>";
         action = "<CMD>NvimTreeToggle<CR>";
         options.desc = "Toggle NvimTree";

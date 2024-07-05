@@ -19,6 +19,7 @@
     # ./neogit.nix
     ./telescope.nix
     ./fugitive.nix
+    ./tmux-navigator.nix
     #    ./codesnap.nix
   ];
   programs.nixvim = {
