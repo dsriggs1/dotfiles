@@ -1,17 +1,21 @@
-# Edit this configuration file to define what should be installed on
+#de Edit this configuration file to define what should be installed on
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
-
-{ config, pkgs, pkgs-unstable, nixarr, inputs, ... }:
-
 {
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-      ./nixarr.nix
-    ];
+  config,
+  pkgs,
+  pkgs-unstable,
+  nixarr,
+  inputs,
+  ...
+}: {
+  imports = [
+    # Include the results of the hardware scan.
+    ./hardware-configuration.nix
+    ./nixarr.nix
+  ];
 
-   nix = {
+  nix = {
     package = pkgs.nixFlakes;
     extraOptions = ''
       experimental-features = nix-command flakes
@@ -27,23 +31,23 @@
   nix.gc.options = "--delete-older-than 7d";
 
   # Adding automatic upgrades of the system
-#   system.autoUpgrade = {
-#   enable = true;
-#   flake = inputs.self.outPath;
-#   flags = [
-#     "--update-input"
-#     "nixpkgs"
-#     "--print-build-logs"
-#   ];
-#   dates = "02:00";
-#   randomizedDelaySec = "45min";
-# };
+  #   system.autoUpgrade = {
+  #   enable = true;
+  #   flake = inputs.self.outPath;
+  #   flags = [
+  #     "--update-input"
+  #     "nixpkgs"
+  #     "--print-build-logs"
+  #   ];
+  #   dates = "02:00";
+  #   randomizedDelaySec = "45min";
+  # };
 
   stylix.image = /home/sean/wallpapers/lake-sunrise.jpg;
   stylix.polarity = "dark";
   stylix.cursor.size = 8;
   stylix.fonts.sizes.applications = 10;
-  stylix.fonts.sizes.desktop=5;
+  stylix.fonts.sizes.desktop = 5;
 
   stylix.cursor.package = pkgs.bibata-cursors;
   stylix.cursor.name = "Bibata-Modern-Ice";
@@ -103,20 +107,18 @@
     xkbVariant = "";
     windowManager.qtile = {
       enable = true;
-      extraPackages =
-      python3Packages: with
-      python3Packages; [
-         qtile-extras
-      ];
-      
-   };
-   #desktopManager.xfce.enable = true;
-   #desktopManager.plasma5.enable = true;
-   displayManager = {
+      extraPackages = python3Packages:
+        with python3Packages; [
+          qtile-extras
+        ];
+    };
+    #desktopManager.xfce.enable = true;
+    #desktopManager.plasma5.enable = true;
+    displayManager = {
       lightdm = {
         # background = "/etc/nixos/background/default.jpg";
         enable = true;
-        
+
         #Slick greeter configuration
         greeters.slick = {
           enable = true;
@@ -126,10 +128,8 @@
             user-background = false
           '';
         };
-        
       };
     };
-  
   };
 
   # programs.hyprland= {
@@ -138,12 +138,11 @@
   #   # nvidiaPatches = true;
   # };
 
-
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.sean = {
     isNormalUser = true;
     description = "sean";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = ["networkmanager" "wheel"];
     packages = with pkgs; [];
   };
 
@@ -158,69 +157,77 @@
   # ];
 
   environment.systemPackages = with pkgs; [
-   xorg.xorgserver
-   xorg.xinit
-   vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-   wget
-   vscode
-   vscode-extensions.github.copilot
-   qtile
-   python3Packages.qtile-extras
-   lightdm
-   firefox
-  #  chromium
-   git
-   neofetch
-   pfetch
-   alacritty
-   eza
-   starship
-   rofi
-   rofi-power-menu
-   rofi-screenshot
-   pywal
-   dunst
-   xfce.xfce4-power-manager
-   xfce.thunar
-   expressvpn
-   nil
-   R
-   rstudio
-   btop
-   figlet
-   bluez
-   neovim
-   unzip
-   mpv
-   freerdp
-   xfce.mousepad
-   vlc
-   pavucontrol
-   xfce.tumbler
-   xautolock
-   papirus-icon-theme
-   polkit_gnome
-   qalculate-gtk
-   brightnessctl
-   gum
-   man-pages
-   xdg-desktop-portal
-   networkmanagerapplet
-   gvfs
-   xdg-user-dirs
-   jellyfin
-   jellyfin-web
-   jellyfin-ffmpeg
-   qbittorrent
-   kitty
-   pkgs-unstable.pywalfox-native
-  #  spicetify-cli
-  #  spotify
-   qalculate-gtk
-   jetbrains.pycharm-community-src
-   nitrogen
-   xclip
-  ];  
+    xorg.xorgserver
+    xorg.xinit
+    vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
+    wget
+    vscode
+    vscode-extensions.github.copilot
+    qtile
+    python3Packages.qtile-extras
+    lightdm
+    firefox
+    #  chromium
+    git
+    neofetch
+    pfetch
+    alacritty
+    eza
+    starship
+    rofi
+    rofi-power-menu
+    rofi-screenshot
+    pywal
+    dunst
+    xfce.xfce4-power-manager
+    xfce.thunar
+    expressvpn
+    nil
+    R
+    rstudio
+    btop
+    figlet
+    bluez
+    neovim
+    unzip
+    mpv
+    freerdp
+    xfce.mousepad
+    vlc
+    pavucontrol
+    xfce.tumbler
+    xautolock
+    papirus-icon-theme
+    polkit_gnome
+    qalculate-gtk
+    brightnessctl
+    gum
+    man-pages
+    xdg-desktop-portal
+    networkmanagerapplet
+    gvfs
+    xdg-user-dirs
+    jellyfin
+    jellyfin-web
+    jellyfin-ffmpeg
+    qbittorrent
+    kitty
+    pkgs-unstable.pywalfox-native
+    #  spicetify-cli
+    #  spotify
+    qalculate-gtk
+    jetbrains.pycharm-community-src
+    nitrogen
+    xclip
+    alejandra
+    black
+    google-java-format
+
+    prettierd
+    rustfmt
+    stylua
+    vimPlugins.plenary-nvim
+  ];
 
   fonts.packages = with pkgs; [
     font-awesome
@@ -235,25 +242,25 @@
   # };
 
   # List services that you want to enable:
-#   services.picom = {
-#   enable = true;
-#   #backend="glx";
-#    settings = {
-#     extraConfig = ''
-#     inactive-opacity = 0.7
-#     active-opacity =1;
-#     opacity-rule = [
-#    	"90:class_g = 'Alacritty' && focused",
-# 	"70:class_g = 'Alacritty' && !focused",
-# 	"70:class_g = 'Rofi'",
-#   "70:class_g = 'firefox'",
-#   "70:class_g = 'code'"
-#     ];
-#     '';
-#   };
-#      #extraConfig = builtins.readFile "/etc/nixos/picom.conf";
-#   #};
-# };
+  #   services.picom = {
+  #   enable = true;
+  #   #backend="glx";
+  #    settings = {
+  #     extraConfig = ''
+  #     inactive-opacity = 0.7
+  #     active-opacity =1;
+  #     opacity-rule = [
+  #    	"90:class_g = 'Alacritty' && focused",
+  # 	"70:class_g = 'Alacritty' && !focused",
+  # 	"70:class_g = 'Rofi'",
+  #   "70:class_g = 'firefox'",
+  #   "70:class_g = 'code'"
+  #     ];
+  #     '';
+  #   };
+  #      #extraConfig = builtins.readFile "/etc/nixos/picom.conf";
+  #   #};
+  # };
 
   services.picom = {
     enable = true;
@@ -267,17 +274,16 @@
       #   deviation=10.0;
       # };
       #blur-background-fixed = true;
-       opacity-rule = [
-    #  "70:class_g = 'Alacritty'"
+      opacity-rule = [
+        #  "70:class_g = 'Alacritty'"
       ];
     };
   };
 
-
   services.mysql = {
     enable = true;
     package = pkgs.mariadb;
-    ensureDatabases = [ "retrosheet" ];
+    ensureDatabases = ["retrosheet"];
     ensureUsers = [
       {
         name = "sean";
@@ -287,9 +293,9 @@
       }
     ];
   };
-  
+
   services.expressvpn = {
-    enable =true;
+    enable = true;
   };
 
   services.blueman = {
@@ -302,7 +308,7 @@
 
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
-  users.users.sean.openssh.authorizedKeys.keys =["~/.ssh/id_ed25519.pub"];
+  users.users.sean.openssh.authorizedKeys.keys = ["~/.ssh/id_ed25519.pub"];
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
@@ -317,5 +323,4 @@
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "23.11"; # Did you read the comment?
-
 }
