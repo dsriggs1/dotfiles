@@ -227,6 +227,7 @@
     rustfmt
     stylua
     vimPlugins.plenary-nvim
+    yazi
   ];
 
   fonts.packages = with pkgs; [
