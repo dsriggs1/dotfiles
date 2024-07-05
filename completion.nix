@@ -1,10 +1,9 @@
 {
   programs.nixvim = {
-    opts.completeopt = ["menu" "menuone" "noselect"];
-
     plugins = {
       luasnip.enable = true;
-
+      copilot-cmp.enable = true;
+      #      copilot-lua.enable = true;
       lspkind = {
         enable = true;
 
@@ -18,6 +17,8 @@
             buffer = "[buffer]";
             neorg = "[neorg]";
             cmp_tabby = "[Tabby]";
+            codeium = "[Codeium]";
+            copilot = "[Copilot]";
           };
         };
       };
@@ -43,6 +44,9 @@
             {name = "nvim_lsp";}
             {name = "cmp_tabby";}
             {name = "luasnip";}
+            {name = "codeium";}
+            {name = "copilot";}
+
             {
               name = "buffer";
               # Words from other open buffers can also be suggested.
@@ -52,9 +56,6 @@
           ];
         };
       };
-
-      
-     
     };
   };
 }
