@@ -13,6 +13,10 @@
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
     ./nixarr.nix
+    ./system/security/firewall.nix
+    ./system/security/vpn.nix
+    ./system/security/blocky.nix
+    ./system/app/jellyfin.nix
   ];
 
   nix = {
@@ -228,6 +232,7 @@
     stylua
     vimPlugins.plenary-nvim
     yazi
+    tmux
   ];
 
   fonts.packages = with pkgs; [
@@ -295,15 +300,7 @@
     ];
   };
 
-  services.expressvpn = {
-    enable = true;
-  };
-
   services.blueman = {
-    enable = true;
-  };
-
-  services.jellyfin = {
     enable = true;
   };
 
