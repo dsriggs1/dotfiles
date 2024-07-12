@@ -1,0 +1,5 @@
+{...}: {
+  services.expressvpn = {
+    enable = true;
+  };
+}
