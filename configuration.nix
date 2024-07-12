@@ -18,6 +18,7 @@
     ./system/security/blocky.nix
     ./system/app/jellyfin.nix
     ./system/hardware/bluetooth.nix
+    ./system/app/mysql.nix
   ];
 
   nix = {
@@ -285,24 +286,6 @@
         #  "70:class_g = 'Alacritty'"
       ];
     };
-  };
-
-  services.mysql = {
-    enable = true;
-    package = pkgs.mariadb;
-    ensureDatabases = ["retrosheet"];
-    ensureUsers = [
-      {
-        name = "sean";
-        ensurePermissions = {
-          "retrosheet.*" = "ALL PRIVILEGES";
-        };
-      }
-    ];
-  };
-
-  services.blueman = {
-    enable = true;
   };
 
   # Enable the OpenSSH daemon.
