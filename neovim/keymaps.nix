@@ -5,19 +5,30 @@
       # action = "<cmd>Telescope live_grep<CR>";
       #key = "<leader>g";
       #}
-      {
-        mode = "n";
-        key = "<C-f>";
-        action = "!tmux new tmux-sessionizer<CR>";
-        options = {
-          desc = "Switch between projects";
-        };
-      }
+      #      {
+      #       mode = "n";
+      #      key = "<C-f>";
+      #     action = "!tmux new tmux-sessionizer<CR>";
+      #    options = {
+      #     desc = "Switch between projects";
+      #  };
+      # }
       {
         key = "<C-n>";
         action = "<CMD>NvimTreeToggle<CR>";
         options.desc = "Toggle NvimTree";
       }
+      {
+        mode = "i";
+        key = "<C-s>";
+        action = "<Esc>:w<CR>";
+        options = {
+          desc = "Save File";
+          silent = true;
+          noremap = true;
+        };
+      }
+
       {
         key = "<leader>gc";
         action = ":Git commit<CR>";
