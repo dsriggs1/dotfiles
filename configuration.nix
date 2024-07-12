@@ -17,6 +17,7 @@
     ./system/security/vpn.nix
     ./system/security/blocky.nix
     ./system/app/jellyfin.nix
+    ./system/hardware/bluetooth.nix
   ];
 
   nix = {
