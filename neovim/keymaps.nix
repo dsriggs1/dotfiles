@@ -28,6 +28,16 @@
           noremap = true;
         };
       }
+      {
+        mode = ["i" "n"];
+        key = "<C-q>";
+        action = "<Esc>:qa!<cr>";
+        options = {
+          desc = "Quit vim";
+          silent = true;
+          noremap = true;
+        };
+      }
 
       {
         key = "<leader>gc";
@@ -166,7 +176,7 @@
       }
       {
         key = "<leader>g";
-        action = ":Git status<CR>";
+        action = ":G <CR>";
         options.desc = "Git Status";
       }
     ];
