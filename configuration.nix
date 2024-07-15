@@ -20,6 +20,7 @@
     ./system/hardware/bluetooth.nix
     ./system/app/mysql.nix
     ./system/app/picom.nix
+    ./system/wm/x11.nix
   ];
 
   nix = {
@@ -108,42 +109,10 @@
   };
 
   #Configure keymap in X11
-  services.xserver = {
-    enable = true;
-    layout = "us";
-    xkbVariant = "";
-    windowManager.qtile = {
-      enable = true;
-      extraPackages = python3Packages:
-        with python3Packages; [
-          qtile-extras
-        ];
-    };
-    #desktopManager.xfce.enable = true;
-    #desktopManager.plasma5.enable = true;
-    displayManager = {
-      lightdm = {
-        # background = "/etc/nixos/background/default.jpg";
-        enable = true;
-
-        #Slick greeter configuration
-        greeters.slick = {
-          enable = true;
-          theme.name = "Adwaita";
-
-          extraConfig = ''
-            user-background = false
-          '';
-        };
-      };
-    };
-  };
 
   # programs.hyprland= {
   #   enable = true;
   #   xwayland.enable = true;
-  #   # nvidiaPatches = true;
-  # };
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.sean = {
