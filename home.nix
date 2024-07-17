@@ -8,7 +8,7 @@
     ./sh.nix
     # ./firefox.nix
     ./user/app/git/git.nix
-    ./vscode.nix
+    ./user/app/vscode/vscode.nix
     ./neovim/nixvim.nix
   ];
 
