@@ -207,6 +207,7 @@
     tmux
     zoxide
     fzf
+    tmuxinator
   ];
 
   fonts.packages = with pkgs; [
