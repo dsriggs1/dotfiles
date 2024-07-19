@@ -60,15 +60,22 @@ in {
 
     shellAliases = myAliases;
     initExtra = ''
-             zl() {
-                z "$@" && ls -la
-             }
+                   zl() {
+                      z "$@" && ls -la
+                   }
 
-      cd() {
-          builtin cd "$@" && ls -la
-        }
+            cd() {
+                builtin cd "$@" && ls -la
+              }
 
-      eval "$(zoxide init bash)"
+            eval "$(zoxide init bash)"
+            eval "$(starship init bash)"
+
+      if [ -f ~/.bash_completion ]; then
+          . ~/.bash_completion
+      fi
+
+      eval "$(starship completions bash)"
     '';
   };
 
