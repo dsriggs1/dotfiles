@@ -19,7 +19,7 @@
         options.desc = "Toggle NvimTree";
       }
       {
-        mode = "i";
+        mode = ["n" "i"];
         key = "<C-s>";
         action = "<Esc>:w<CR>";
         options = {
