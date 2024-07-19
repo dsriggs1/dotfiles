@@ -205,6 +205,8 @@
     vimPlugins.plenary-nvim
     yazi
     tmux
+    zoxide
+    fzf
   ];
 
   fonts.packages = with pkgs; [
