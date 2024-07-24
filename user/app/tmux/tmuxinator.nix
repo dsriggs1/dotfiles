@@ -1,25 +1,15 @@
 {...}: {
   home.file = {
-    ".config/tmuxinator/my_project.yml".text = ''
-      name: my_project
-      root: ~/projects/my_project
+    ".config/tmuxinator/nixos.yml".text = ''
+      name: nixos
+      root: ~/Downloads/dotfiles
       windows:
-        - editor:
-            layout: main-vertical
+        - main:
+            layout: main-horizontal
             panes:
               - vim
-              - bash
-        - server: bundle exec rails server
-    '';
+              - shell: bash
 
-    ".config/tmuxinator/another_project.yml".text = ''
-      name: another_project
-      root: ~/projects/another_project
-      windows:
-        - shell: bash
-        - editor: vim
     '';
   };
-
-  # Other Home Manager configurations...
 }
