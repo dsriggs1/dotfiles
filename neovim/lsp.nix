@@ -1,34 +1,47 @@
 {
   programs.nixvim = {
-plugins = {
-  lsp = {
-          enable = true;
-          
-          servers = {
-            tsserver.enable = true;
-      
-            nil-ls ={
-              enable = true;
-            };
+    plugins = {
+      lsp = {
+        enable = true;
 
-            lua-ls = {
-              enable = true;
-              settings.telemetry.enable = false;
-            };
+        servers = {
+          tsserver.enable = true;
 
-            rust-analyzer = {
-              enable = true;
-              installCargo = true;
-            };
+          nil-ls = {
+            enable = true;
+          };
 
-            pyright = {
-              enable = true;
-    
-	  };  
-	};
+          lua-ls = {
+            enable = true;
+            settings.telemetry.enable = false;
+          };
+
+          rust-analyzer = {
+            enable = true;
+            installCargo = true;
+          };
+
+          pyright = {
+            enable = true;
+          };
+
+          sqls = {
+            enable = true;
+          };
+
+          bashls = {
+            enable = true;
+          };
+
+          yamlls = {
+            enable = true;
+          };
+
+          r-language-server = {
+            enable = true;
+          };
+        };
       };
     };
   };
 }
-
-
