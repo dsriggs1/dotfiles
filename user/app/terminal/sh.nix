@@ -1,8 +1,4 @@
-{
-  config,
-  pkgs,
-  ...
-}: let
+{...}: let
   myAliases = {
     c = "clear";
     nf = "neofetch";
@@ -49,6 +45,8 @@
     # SCREEN RESOLUTIONS
     res1 = "xrandr --output DisplayPort-0 --mode 2560x1440 --rate 120";
     res2 = "xrandr --output DisplayPort-0 --mode 1920x1080 --rate 120";
+    # TMUX sesssions
+    tnix = "tmuxinator nixos";
   };
   myVariables = {
     EDITOR = "code";
