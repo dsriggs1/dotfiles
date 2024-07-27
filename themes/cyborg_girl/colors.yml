@@ -1,0 +1,24 @@
+wallpaper: "/home/sean/Downloads/dotfiles/cyborg_girl.png"
+
+special:
+    background: "#071115"
+    foreground: "#e4a4c7"
+    cursor: "#e4a4c7"
+
+colors:
+    color0: "#071115"
+    color1: "#992962"
+    color2: "#B22561"
+    color3: "#9C4776"
+    color4: "#6A338E"
+    color5: "#A75294"
+    color6: "#C843AB"
+    color7: "#e4a4c7"
+    color8: "#9f728b"
+    color9: "#992962"
+    color10: "#B22561"
+    color11: "#9C4776"
+    color12: "#6A338E"
+    color13: "#A75294"
+    color14: "#C843AB"
+    color15: "#e4a4c7"
