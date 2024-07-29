@@ -4,11 +4,11 @@
     settings = {
       ports.dns = 53; # Port for incoming DNS Queries.
       upstreams.groups.default = [
-        "https://one.one.one.one/dns-query" # Using Cloudflare's DNS over HTTPS server for resolving queries.
+        "https://one.one.one.one/family" # Using Cloudflare's DNS over HTTPS server for resolving queries.
       ];
       # For initially solving DoH/DoT Requests when no system Resolver is available.
       bootstrapDns = {
-        upstream = "https://one.one.one.one/dns-query";
+        upstream = "https://one.one.one.one/family";
         ips = ["1.1.1.1" "1.0.0.1"];
       };
       #Enable Blocking of certian domains.
@@ -22,7 +22,7 @@
         };
         #Configure what block categories are used
         clientGroupsBlock = {
-          default = ["ads"];
+          default = ["ads" "adult"];
           kids-ipad = ["ads" "adult"];
         };
       };
