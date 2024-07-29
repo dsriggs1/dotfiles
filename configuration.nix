@@ -21,6 +21,7 @@
     ./system/app/mysql.nix
     ./system/app/picom.nix
     ./system/wm/x11.nix
+    ./disko-config.nix
   ];
 
   nix = {
