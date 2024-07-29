@@ -2,7 +2,10 @@
   description = "NixOS configuration for my personal laptop";
 
   inputs = {
-    # NixOS official package source, using the nixos-23.11 branch here
+    disko = {
+      url = "github:nix-community/disko";
+      inputs.disko.follows = "nixpkgs";
+    };
     nixpkgs.url = "github:NixOS/nixpkgs/release-24.05";
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
     nur.url = "github:nix-community/NUR";
@@ -80,6 +83,7 @@
           # so the old configuration file still takes effect
           ./configuration.nix
           #./nixos/servarr/configuration.nix
+          inputs.disko.nixosModules.disko
           nixarr.nixosModules.default
           stylix.nixosModules.stylix
           home-manager.nixosModules.home-manager
