@@ -21,6 +21,7 @@
     ./fugitive.nix
     ./tmux-navigator.nix
     #    ./codesnap.nix
+    ./vimtex.nix
   ];
   programs.nixvim = {
     enable = true;
