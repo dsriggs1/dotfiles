@@ -37,6 +37,9 @@
             bind-key -T copy-mode-vi "C-l" select-pane -R
       #      bind-key -T copy-mode-vi "C-\" select-pane -l
 
+          set-option -g status-position top
+          set -g @plugin 'tmux-plugins/tpm'
+          set -g @plugin 'tmux-plugins/tmux-weather'
     '';
   };
 }
