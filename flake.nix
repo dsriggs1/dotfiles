@@ -55,6 +55,7 @@
             system = system;
             config.allowUnfree = true;
           };
+
           nur = import nur {
             system = system;
             config.allowUnfree = true;
@@ -83,18 +84,31 @@
           # so the old configuration file still takes effect
           ./configuration.nix
           #./nixos/servarr/configuration.nix
-          inputs.disko.nixosModules.disko
+          #  inputs.disko.nixosModules.disko
           nixarr.nixosModules.default
           stylix.nixosModules.stylix
           home-manager.nixosModules.home-manager
           {
+            #   home-manager.extraSpecialArgs = specialArgs;
+
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
             home-manager.sharedModules = [
               nixvim.homeManagerModules.nixvim
             ];
             home-manager.users.sean = import ./home.nix {
-              inherit pkgs inputs;
+              inherit pkgs;
+              pkgs-unstable = import nixpkgs-unstable {
+                system = system;
+                config.allowUnfree = true;
+              };
+              extraSpecialArgs = {
+                inherit inputs;
+                pkgs-unstable = import nixpkgs-unstable {
+                  system = system;
+                  config.allowUnfree = true;
+                };
+              };
               config = pkgs.config;
               stylix.targets.xyz.enable = false;
             };
