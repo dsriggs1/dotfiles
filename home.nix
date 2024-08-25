@@ -1,4 +1,8 @@
-{pkgs, ...}: {
+{
+  pkgs,
+  pkgs-unstable,
+  ...
+}: {
   imports = [
     ./user/app/terminal/sh.nix
     # ./firefox.nix
@@ -27,6 +31,7 @@
     tmux
     starship
     tmuxinator
+    # pkgs-unstable.vimPlugins.codesnap-nvim
   ];
 
   home.stateVersion = "23.11";
