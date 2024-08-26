@@ -21,7 +21,8 @@
     ./system/app/mysql.nix
     ./system/app/picom.nix
     ./system/wm/x11.nix
-    ./disko-config.nix
+    ./system/security/sshd.nix
+    #    ./disko-config.nix
   ];
 
   nix = {
@@ -190,6 +191,7 @@
     qbittorrent
     kitty
     pkgs-unstable.pywalfox-native
+    #pkgs-unstable.codesnap-nvim
     #  spicetify-cli
     #  spotify
     qalculate-gtk
@@ -244,8 +246,8 @@
   # };
 
   # Enable the OpenSSH daemon.
-  services.openssh.enable = true;
-  users.users.sean.openssh.authorizedKeys.keys = ["~/.ssh/id_ed25519.pub"];
+  #services.openssh.enable = true;
+  #users.users.sean.openssh.authorizedKeys.keys = ["~/.ssh/id_ed25519.pub"];
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
