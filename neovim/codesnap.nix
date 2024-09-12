@@ -1,9 +1,7 @@
-{
+{...}: {
   programs.nixvim = {
-    plugins = {
-      codesnap = {
-        enable = true;
-      };
+    plugins.codesnap = {
+      enable = true;
     };
   };
 }
