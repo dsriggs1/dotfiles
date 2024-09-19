@@ -23,6 +23,7 @@
     ./system/wm/x11.nix
     ./system/security/sshd.nix
     #    ./disko-config.nix
+    ./system/style/stylix.nix
   ];
 
   nix = {
@@ -52,30 +53,6 @@
   #   dates = "02:00";
   #   randomizedDelaySec = "45min";
   # };
-
-  stylix.image = /home/sean/wallpapers/lake-sunrise.jpg;
-  stylix.polarity = "dark";
-  stylix.cursor.size = 8;
-  stylix.fonts.sizes.applications = 10;
-  stylix.fonts.sizes.desktop = 5;
-
-  stylix.cursor.package = pkgs.bibata-cursors;
-  stylix.cursor.name = "Bibata-Modern-Ice";
-
-  stylix.fonts = {
-    monospace = {
-      package = pkgs.nerdfonts.override {fonts = ["JetBrainsMono"];};
-      name = "JetBrainsMono Nerd Font Mono";
-    };
-    sansSerif = {
-      package = pkgs.dejavu_fonts;
-      name = "DejaVu Sans";
-    };
-    serif = {
-      package = pkgs.dejavu_fonts;
-      name = "DejaVu Serif";
-    };
-  };
 
   # Bootloader.
   boot.loader.grub.enable = true;
