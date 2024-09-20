@@ -1,5 +1,6 @@
 {
   pkgs,
+  userSettings,
   pkgs-unstable,
   ...
 }: {
@@ -15,8 +16,8 @@
     ./user/app/terminal/starship.nix
   ];
 
-  home.username = "sean";
-  home.homeDirectory = "/home/sean";
+  home.username = userSettings.username;
+  home.homeDirectory = userSettings.homeDir;
 
   # Example themes: https://github.com/tinted-theming/schemes/tree/spec-0.11/base16
   # Some example color schemes that can be turned on/off

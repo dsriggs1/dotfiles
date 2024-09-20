@@ -5,6 +5,7 @@
   #  config,
   pkgs,
   pkgs-unstable,
+  systemSettings,
   # nixarr,
   #inputs,
   ...
@@ -59,7 +60,7 @@
   boot.loader.grub.device = "/dev/vda";
   boot.loader.grub.useOSProber = true;
 
-  networking.hostName = "nixos"; # Define your hostname.
+  networking.hostName = systemSettings.hostname; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   # Configure network proxy if necessary
@@ -70,8 +71,8 @@
   networking.networkmanager.enable = true;
 
   # Set your time zone.
-  time.timeZone = "America/New_York";
-
+  #time.timeZone = "America/New_York";
+  time.timeZone = systemSettings.timezone;
   # Select internationalisation properties.
   i18n.defaultLocale = "en_US.UTF-8";
 

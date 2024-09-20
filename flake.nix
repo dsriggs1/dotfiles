@@ -45,7 +45,34 @@
     nixvim,
     ...
   } @ inputs: let
-    system = "x86_64-linux";
+    systemSettings = {
+      system = "x86_64-linux";
+      timezone = "America/New_York";
+      hostname = "nixos"; # hostname
+      profile = "personal"; # select a profile defined from my profiles directory
+      locale = "en_US.UTF-8"; # select locale
+    };
+
+    userSettings = {
+      username = "sean"; # username
+      name = "Sean"; # name/identifier
+      email = "dsriggs1@gmail.com"; # email (used for certain configurations)
+      dotfilesDir = "~/.dotfiles"; # absolute path of the local repo
+      #theme = "io"; # selcted theme from my themes directory (./themes/)
+      #wm = "hyprland"; # Selected window manager or desktop environment; must select one in both ./user/wm/ and ./system/wm/
+      # window manager type (hyprland or x11) translator
+      #wmType =
+      # if ((wm == "hyprland") || (wm == "plasma"))
+      #then "wayland"
+      #else "x11";
+      # browser = "qutebrowser"; # Default browser; must select one from ./user/app/browser/
+      term = "alacritty"; # Default terminal command;
+      #font = "Intel One Mono"; # Selected font
+      #fontPkg = pkgs.intel-one-mono; # Font package
+      #editor = "neovide"; # Default editor;
+      homeDir = "/home/sean";
+    };
+
     pkgs = import nixpkgs {
       system = "x86_64-linux";
       config = {allowUnfree = true;};
@@ -56,6 +83,7 @@
       nixos = nixpkgs.lib.nixosSystem rec {
         system = "x86_64-linux";
         specialArgs = {
+          inherit systemSettings;
           pkgs-unstable = import nixpkgs-unstable {
             system = system;
             config.allowUnfree = true;
@@ -97,6 +125,15 @@
           {
             #   home-manager.extraSpecialArgs = specialArgs;
 
+            home-manager.extraSpecialArgs = {
+              inherit inputs;
+              inherit userSettings;
+              pkgs-unstable = import nixpkgs-unstable {
+                system = system;
+                config.allowUnfree = true;
+              };
+            };
+
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
             home-manager.sharedModules = [
@@ -104,17 +141,12 @@
             ];
             home-manager.users.sean = import ./home.nix {
               inherit pkgs;
+              inherit userSettings;
               pkgs-unstable = import nixpkgs-unstable {
                 system = system;
                 config.allowUnfree = true;
               };
-              extraSpecialArgs = {
-                inherit inputs;
-                pkgs-unstable = import nixpkgs-unstable {
-                  system = system;
-                  config.allowUnfree = true;
-                };
-              };
+
               config = pkgs.config;
               stylix.targets.xyz.enable = false;
             };
