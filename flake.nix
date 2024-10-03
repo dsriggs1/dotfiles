@@ -117,11 +117,12 @@
           # so the old configuration file still takes effect
           ./configuration.nix
           #./nixos/servarr/configuration.nix
-          #  inputs.disko.nixosModules.disko
+          inputs.disko.nixosModules.disko
           nixarr.nixosModules.default
           stylix.nixosModules.stylix
           inputs.impermanence.nixosModules.impermanence
           home-manager.nixosModules.home-manager
+          #(import ./disko-config.nix {device = "/dev/vda";})
           {
             #   home-manager.extraSpecialArgs = specialArgs;
 
@@ -138,6 +139,7 @@
             home-manager.useUserPackages = true;
             home-manager.sharedModules = [
               nixvim.homeManagerModules.nixvim
+              # inputs.impermanence.homeManagerModules.impermanence
             ];
             home-manager.users.sean = import ./home.nix {
               inherit pkgs;
