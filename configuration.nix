@@ -6,6 +6,7 @@
   pkgs,
   pkgs-unstable,
   systemSettings,
+  lib,
   # nixarr,
   inputs,
   ...
