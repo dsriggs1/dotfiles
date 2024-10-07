@@ -122,7 +122,7 @@
           stylix.nixosModules.stylix
           inputs.impermanence.nixosModules.impermanence
           home-manager.nixosModules.home-manager
-          #(import ./disko-config.nix {device = "/dev/vda";})
+          (import ./disko-config.nix {device = "/dev/vda";})
           {
             #   home-manager.extraSpecialArgs = specialArgs;
 
