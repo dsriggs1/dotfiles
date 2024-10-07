@@ -43,6 +43,7 @@
     nixarr,
     stylix,
     nixvim,
+    disko,
     ...
   } @ inputs: let
     systemSettings = {
