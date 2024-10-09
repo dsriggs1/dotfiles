@@ -2,6 +2,7 @@
   description = "NixOS configuration for my personal laptop";
 
   inputs = {
+    nixpkgs.url = "github:NixOS/nixpkgs/release-24.05";
     disko = {
       url = "github:nix-community/disko";
       inputs.disko.follows = "nixpkgs";
@@ -11,7 +12,6 @@
       url = "github:nix-community/impermanence";
     };
 
-    nixpkgs.url = "github:NixOS/nixpkgs/release-24.05";
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
     nur.url = "github:nix-community/NUR";
     stylix.url = "github:danth/stylix/release-23.11";
