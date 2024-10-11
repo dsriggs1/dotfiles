@@ -79,9 +79,9 @@
       config = {allowUnfree = true;};
     }; #addon-pkgs = pkgs.callPackage firefox-addons { };
   in {
-    apps.x86_64-linux = {
-      disko = disko.defaultApp.x86_64-linux;
-    };
+    #apps.x86_64-linux = {
+    # disko = disko.defaultApp.x86_64-linux;
+    # };
     # Please replace my-nixos with your hostname
     nixosConfigurations.${systemSettings.hostname} = nixpkgs.lib.nixosSystem rec {
       #inherit systemSettings.system;
@@ -117,7 +117,7 @@
         inherit pkgs inputs;
       };
       modules = [
-        ./disko-config.nix
+        #    ./disko-config.nix
         # Import the previous configuration.nix we used,
         # so the old configuration file still takes effect
         ./configuration.nix
