@@ -16,8 +16,9 @@
     ./telescope.nix
     ./fugitive.nix
     ./tmux-navigator.nix
-    #    ./codesnap.nix
+    ./codesnap.nix
     ./vimtex.nix
+    ./avante.nix
   ];
   programs.nixvim = {
     enable = true;
