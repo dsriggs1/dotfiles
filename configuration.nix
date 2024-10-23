@@ -4,7 +4,7 @@
 {
   #  config,
   pkgs,
-  pkgs-unstable,
+  pkgs-stable,
   systemSettings,
   lib,
   # nixarr,
@@ -150,87 +150,91 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
 
-  # environment.systemPackages = with pkgs-unstable; [
-  #   pywalfox-native
-  # ];
+  # environment.systemPackages = with pkgs-stable; [
+  #  pywalfox-native
+  #];
 
-  environment.systemPackages = with pkgs; [
-    xorg.xorgserver
-    xorg.xinit
-    vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-    wget
-    vscode
-    vscode-extensions.github.copilot
-    qtile
-    python3Packages.qtile-extras
-    lightdm
-    firefox
-    #  chromium
-    git
-    neofetch
-    pfetch
-    alacritty
-    eza
-    starship
-    rofi
-    rofi-power-menu
-    rofi-screenshot
-    pywal
-    dunst
-    xfce.xfce4-power-manager
-    xfce.thunar
-    expressvpn
-    nil
-    R
-    rstudio
-    btop
-    figlet
-    bluez
-    neovim
-    unzip
-    mpv
-    freerdp
-    xfce.mousepad
-    vlc
-    pavucontrol
-    xfce.tumbler
-    xautolock
-    papirus-icon-theme
-    polkit_gnome
-    qalculate-gtk
-    brightnessctl
-    gum
-    man-pages
-    xdg-desktop-portal
-    networkmanagerapplet
-    gvfs
-    xdg-user-dirs
-    jellyfin
-    jellyfin-web
-    jellyfin-ffmpeg
-    qbittorrent
-    kitty
-    pkgs-unstable.pywalfox-native
-    #pkgs-unstable.codesnap-nvim
-    #  spicetify-cli
-    #  spotify
-    qalculate-gtk
-    jetbrains.pycharm-community-src
-    nitrogen
-    xclip
-    alejandra
-    black
-    google-java-format
+  environment.systemPackages =
+    (with pkgs; [
+      xorg.xorgserver
+      xorg.xinit
+      vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
+      wget
+      vscode
+      vscode-extensions.github.copilot
+      #  pkgs-stable.qtile
+      # pkgs-stable.python3Packages.qtile-extras
+      lightdm
+      firefox
+      #  chromium
+      git
+      neofetch
+      pfetch
+      alacritty
+      eza
+      starship
+      rofi
+      rofi-power-menu
+      rofi-screenshot
+      pywal
+      dunst
+      xfce.xfce4-power-manager
+      xfce.thunar
+      expressvpn
+      nil
+      R
+      rstudio
+      btop
+      figlet
+      bluez
+      neovim
+      unzip
+      mpv
+      freerdp
+      xfce.mousepad
+      vlc
+      pavucontrol
+      xfce.tumbler
+      xautolock
+      papirus-icon-theme
+      polkit_gnome
+      qalculate-gtk
+      brightnessctl
+      gum
+      man-pages
+      xdg-desktop-portal
+      networkmanagerapplet
+      gvfs
+      xdg-user-dirs
+      jellyfin
+      jellyfin-web
+      jellyfin-ffmpeg
+      qbittorrent
+      kitty
+      #pkgs-unstable.pywalfox-native
+      #pkgs-unstable.codesnap-nvim
+      #  spicetify-cli
+      #  spotify
+      qalculate-gtk
+      jetbrains.pycharm-community-src
+      nitrogen
+      xclip
+      alejandra
+      black
+      google-java-format
 
-    prettierd
-    rustfmt
-    stylua
-    vimPlugins.plenary-nvim
-    yazi
-    tmux
-    zoxide
-    fzf
-  ];
+      prettierd
+      rustfmt
+      stylua
+      vimPlugins.plenary-nvim
+      yazi
+      tmux
+      zoxide
+      fzf
+    ])
+    ++ (with pkgs-stable; [
+      #python311Packages.qtile
+    ]);
 
   fonts.packages = with pkgs; [
     font-awesome

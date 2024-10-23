@@ -2,7 +2,7 @@
   description = "NixOS configuration for my personal laptop";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/release-24.05";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     disko = {
       url = "github:nix-community/disko";
       inputs.disko.follows = "nixpkgs";
@@ -12,15 +12,15 @@
       url = "github:nix-community/impermanence";
     };
 
-    nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
+    nixpkgs-stable.url = "github:NixOS/nixpkgs/release-24.05";
     nur.url = "github:nix-community/NUR";
     stylix.url = "github:danth/stylix/release-23.11";
     nixvim = {
-      url = "github:nix-community/nixvim/nixos-24.05";
+      url = "github:nix-community/nixvim/";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     home-manager = {
-      url = "github:nix-community/home-manager/release-24.05";
+      url = "github:nix-community/home-manager/";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     firefox-addons = {
@@ -36,7 +36,7 @@
   outputs = {
     self,
     nixpkgs,
-    nixpkgs-unstable,
+    nixpkgs-stable,
     nur,
     home-manager,
     firefox-addons,
@@ -88,7 +88,7 @@
       system = "x86_64-linux";
       specialArgs = {
         inherit systemSettings;
-        pkgs-unstable = import nixpkgs-unstable {
+        pkgs-stable = import nixpkgs-stable {
           system = system;
           config.allowUnfree = true;
         };
@@ -134,7 +134,7 @@
           home-manager.extraSpecialArgs = {
             inherit inputs;
             inherit userSettings;
-            pkgs-unstable = import nixpkgs-unstable {
+            pkgs-stable = import nixpkgs-stable {
               system = system;
               config.allowUnfree = true;
             };
@@ -149,7 +149,7 @@
           home-manager.users.sean = import ./home.nix {
             inherit pkgs;
             inherit userSettings;
-            pkgs-unstable = import nixpkgs-unstable {
+            pkgs-stable = import nixpkgs-stable {
               system = system;
               config.allowUnfree = true;
             };
