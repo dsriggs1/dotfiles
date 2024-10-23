@@ -1,4 +1,8 @@
-{...}:
+{
+  pkgs,
+  pkgs-stable,
+  ...
+}:
 #xserver nix install xserver
 {
   services.xserver = {
@@ -7,9 +11,9 @@
     xkbVariant = "";
     windowManager.qtile = {
       enable = true;
-      extraPackages = python3Packages:
-        with python3Packages; [
-          qtile-extras
+      extraPackages = python312Packages:
+        with pkgs-stable.python312Packages; [
+          # qtile-extras
         ];
     };
     #desktopManager.xfce.enable = true;
