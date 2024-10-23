@@ -47,9 +47,9 @@ from pathlib import Path
 from libqtile.log_utils import logger
 from libqtile.backend.wayland import InputConfig
 
-from qtile_extras import widget
-from qtile_extras.widget.decorations import RectDecoration 
-from qtile_extras.widget.decorations import PowerLineDecoration
+#from qtile_extras import widget
+#from qtile_extras.widget.decorations import RectDecoration 
+#from qtile_extras.widget.decorations import PowerLineDecoration
 
 
 show_wlan = False
@@ -232,27 +232,27 @@ extension_defaults = widget_defaults.copy()
 # https://qtile-extras.readthedocs.io/en/stable/manual/how_to/decorations.html
 # --------------------------------------------------------
 
-decor_left = {
-    "decorations": [
-        PowerLineDecoration(
-            path="arrow_left"
+#decor_left = {
+ #   "decorations": [
+  #      PowerLineDecoration(
+   #         path="arrow_left"
             # path="rounded_left"
             # path="forward_slash"
             # path="back_slash"
-        )
-    ],
-}
+    #    )
+    #],
+#}
 
-decor_right = {
-    "decorations": [
-        PowerLineDecoration(
-            path="arrow_right"
+#decor_right = {
+#    "decorations": [
+ #       PowerLineDecoration(
+  #          path="arrow_right"
             # path="rounded_right"
             # path="forward_slash"
             # path="back_slash"
-        )
-    ],
-}
+   #     )
+   # ],
+#}
 
 # --------------------------------------------------------
 # Widgets
@@ -260,7 +260,7 @@ decor_right = {
 
 widget_list = [
     widget.TextBox(
-        **decor_left, 
+#        **decor_left, 
         background=Color1+".4",
         text='',
         #foreground='ffffff',
@@ -276,7 +276,7 @@ widget_list = [
             },
     ),
     widget.TextBox(
-        **decor_left,
+ #       **decor_left,
         background="#ffffff.4",
         text="  ",
         #foreground="000000.6",
@@ -285,7 +285,7 @@ widget_list = [
         mouse_callbacks={"Button1": lambda: qtile.spawn(home + "/dotfiles/qtile/scripts/wallpaper.sh select")},
     ),
     widget.GroupBox(
-        **decor_left,
+ #       **decor_left,
         background="#ffffff.7",
         highlight_method='block',
         highlight='ffffff',
@@ -300,7 +300,7 @@ widget_list = [
         active='ffffff'
     ),
     widget.TextBox(
-        **decor_left,
+ #       **decor_left,
         background="#ffffff.4",
         text="",
         #foreground="000000.6",
@@ -311,7 +311,7 @@ widget_list = [
         mouse_callbacks={"Button1": lambda: qtile.spawn("firefox")},
     ),
     widget.TextBox(
-        **decor_left,
+ #       **decor_left,
         background="#ffffff.4",
         text="",
         #foreground="000000.6",
@@ -322,7 +322,7 @@ widget_list = [
     ),
     
     widget.WindowName(
-        **decor_left,
+ #       **decor_left,
         max_chars=50,
         background=Color2+".4",
         foreground=widget_color,
@@ -334,11 +334,11 @@ widget_list = [
         length=30
     ),
     widget.TextBox(
-        **decor_right,
+ #       **decor_right,
         background="#000000.3"      
     ),    
     widget.Memory(
-        **decor_right,
+   #     **decor_right,
         background=Color10+".4",
         foreground=widget_color,
         padding=10,        
@@ -346,14 +346,14 @@ widget_list = [
         format="{MemUsed:.0f}{mm} ({MemTotal:.0f}{mm})"
     ),
     widget.Volume(
-        **decor_right,
+ #       **decor_right,
         background=Color12+".4",
         foreground=widget_color,
         padding=10, 
         fmt='Vol: {}',
     ),
     widget.DF(
-        **decor_right,
+ #       **decor_right,
         padding=10, 
         background=Color8+".4",
         foreground=widget_color,        
@@ -361,14 +361,14 @@ widget_list = [
         format="{p} {uf}{m} ({r:.0f}%)"
     ),
     widget.Bluetooth(
-        **decor_right,
+ #       **decor_right,
         background=Color2+".4",
         foreground=widget_color,
         padding=10,
         mouse_callbacks={"Button1": lambda: qtile.spawn("blueman-manager")},
     ),
     widget.Wlan(
-        **decor_right,
+  #      **decor_right,
         background=Color2+".4",
         foreground=widget_color,
         padding=10,
@@ -376,14 +376,14 @@ widget_list = [
         mouse_callbacks={"Button1": lambda: qtile.spawn("alacritty -e nmtui")},
     ),
     widget.Clock(
-        **decor_right,
+   #     **decor_right,
         background=Color4+".4",
         foreground=widget_color,   
         padding=10,      
         format="%I:%M %p",
     ),
     widget.TextBox(
-        **decor_right,
+   #     **decor_right,
         background=Color2+".4",
         foreground=widget_color,     
         padding=5,    
