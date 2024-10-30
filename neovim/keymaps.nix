@@ -14,6 +14,13 @@
       #  };
       # }
       {
+        #open codesnap window
+        mode = ["n" "v" "i"];
+        key = "<leader>cs";
+        action = "<cmd>CodeSnap<CR>";
+        options.desc = "Open CodeSnap";
+      }
+      {
         key = "<C-n>";
         action = "<CMD>NvimTreeToggle<CR>";
         options.desc = "Toggle NvimTree";
