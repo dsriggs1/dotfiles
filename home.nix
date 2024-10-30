@@ -33,7 +33,12 @@
     starship
     tmuxinator
     # pkgs-unstable.vimPlugins.codesnap-nvim
+    # qtile
   ];
+
+  home.file.".config/qtile/config.py" = {
+    source = ./qtile/config.py;
+  };
 
   home.stateVersion = "23.11";
   programs.home-manager.enable = true;
