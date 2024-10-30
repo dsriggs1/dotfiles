@@ -234,6 +234,8 @@
     ])
     ++ (with pkgs-stable; [
       #python311Packages.qtile
+      mycli
+      python3Packages.qtile-extras
     ]);
 
   fonts.packages = with pkgs; [
