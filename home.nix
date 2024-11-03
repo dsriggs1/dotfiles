@@ -40,6 +40,17 @@
     source = ./qtile/config.py;
   };
 
+  xdg.userDirs.enable = true;
+
+  xdg.userDirs.createDirectories = true;
+
+  xdg.userDirs = {
+    music = "$HOME/Music";
+    #   downloads = "$HOME/Downloads";
+    documents = "$HOME/Documents";
+    pictures = "$HOME/Pictures";
+    videos = "$HOME/Videos";
+  };
   home.stateVersion = "23.11";
   programs.home-manager.enable = true;
 }
