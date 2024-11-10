@@ -142,6 +142,7 @@
     description = "sean";
     extraGroups = ["networkmanager" "wheel"];
     packages = with pkgs; [];
+    shell = pkgs.nushell;
   };
 
   # Allow unfree packages
@@ -231,6 +232,7 @@
       tmux
       zoxide
       fzf
+      # nushell
     ])
     ++ (with pkgs-stable; [
       #python311Packages.qtile
