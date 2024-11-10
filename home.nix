@@ -34,6 +34,7 @@
     tmuxinator
     # pkgs-unstable.vimPlugins.codesnap-nvim
     # qtile
+    nushell
   ];
 
   home.file.".config/qtile/config.py" = {
