@@ -6,7 +6,7 @@
     ll = "eza -al --icons";
     lt = "eza -a --tree --level=1 --icons";
     shutdown = "systemctl poweroff";
-    v = "$EDITOR";
+    v = "nvim";
     ts = "~/dotfiles/scripts/snapshot.sh";
     matrix = "cmatrix";
     wifi = "nmtui";
@@ -30,14 +30,14 @@
     vmstop = "virsh --connect qemu:///system destroy win11";
 
     # EDIT CONFIG FILES
-    confq = "$EDITOR ~/.config/qtile/config.py";
-    confql = "$EDITOR ~/.local/share/qtile/qtile.log";
-    confp = "$EDITOR ~/dotfiles/picom/picom.conf";
-    confb = "$EDITOR ~/.bashrc";
-    confn = "$EDITOR ~/Downloads/dotfiles/configuration.nix";
+    confq = "nvim ~/.config/qtile/config.py";
+    confql = "nvim ~/.local/share/qtile/qtile.log";
+    confp = "nvim ~/dotfiles/picom/picom.conf";
+    confb = "nvim ~/.bashrc";
+    confn = "nvim ~/Downloads/dotfiles/configuration.nix";
 
     # EDIT NOTES
-    notes = "$EDITOR ~/notes.txt";
+    notes = "nvim ~/notes.txt";
 
     # NIX SYSTEM
     rebuild = "sudo nixos-rebuild switch";
@@ -49,7 +49,7 @@
     tnix = "tmuxinator nixos";
   };
   myVariables = {
-    EDITOR = "code";
+    EDITOR = "nvim";
   };
 in {
   programs.bash = {
@@ -94,5 +94,43 @@ in {
 
         eval "$(zoxide init zsh)"
     '';
+  };
+
+  programs.nushell = {
+    enable = true;
+    #configFile.source = ./../config.nu;
+    environmentVariables = {env.EDITOR = "nvim";};
+    shellAliases = myAliases;
+
+    #shellAliases = {
+    # c = "clear";
+    # confq = "$env.EDITOR ~/.config/qtile/config.py";
+    #};
+    extraConfig = ''                  $env.config = { edit_mode: vi }
+
+                  def --env cd_func [path: string] {
+                      cd $path
+            eza -al --icons
+
+                  }
+                  alias cd = cd_func
+
+      zoxide init nushell | save -f ~/.zoxide.nu
+      source ~/.zoxide.nu
+    '';
+
+    #extraConfig = ''
+    #             zl() {
+    #  	  z "$@" && ls -la
+    #       }
+    # cd() {
+    #   builtin cd "$@" && ls -la
+    # }
+    # eval "$(zoxide init nu)"
+    #'';
+  };
+  programs.carapace = {
+    enable = true;
+    enableNushellIntegration = true;
   };
 }
