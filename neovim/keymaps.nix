@@ -38,7 +38,7 @@
       {
         mode = ["i" "n"];
         key = "<C-q>";
-        action = "<Esc>:qa!<cr>";
+        action = "<Esc>:q!<cr>";
         options = {
           desc = "Quit vim";
           silent = true;
