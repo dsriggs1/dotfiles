@@ -42,11 +42,24 @@
     # NIX SYSTEM
     rebuild = "sudo nixos-rebuild switch";
 
+    rebuildTest = "sudo nixos-rebuild test";
+    rebuildBoot = "sudo nixos-rebuild boot";
+    rebuildDryRun = "sudo nixos-rebuild dry-run";
+    rebuildBuild = "nixos-rebuild build";
+    rebuildUpgrade = "sudo nixos-rebuild switch --upgrade";
+    rebuildShowTrace = "sudo nixos-rebuild switch --show-trace";
+    rebuildKeepGoing = "sudo nixos-rebuild switch --keep-going";
+    rebuildFast = "sudo nixos-rebuild switch --fast";
+    rebuildRollback = "sudo nixos-rebuild switch --rollback";
+    rebuildFlake = "sudo nixos-rebuild switch --flake .#hostname";
+    # rebuildChannels = "sudo nix-channel --update && sudo nixos-rebuild switch";
+
     # SCREEN RESOLUTIONS
     res1 = "xrandr --output DisplayPort-0 --mode 2560x1440 --rate 120";
     res2 = "xrandr --output DisplayPort-0 --mode 1920x1080 --rate 120";
     # TMUX sesssions
     tnix = "tmuxinator nixos";
+    tnixn = "tmuxinator nixos_nvim";
   };
   myVariables = {
     EDITOR = "nvim";
