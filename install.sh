@@ -1,5 +1,5 @@
 #!/bin/bash
-curl https://raw.githubusercontent.com/dsriggs1/dotfiles/main/btrfs-subvolumes.nix -o /tmp/disko.nix
+curl https://raw.githubusercontent.com/dsriggs1/dotfiles/main/disko/btrfs-subvolumes.nix -o /tmp/disko.nix
 sudo nix --experimental-features "nix-command flakes" run github:nix-community/disko -- --mode disko /tmp/disko.nix --arg device '"/dev/vda"'
 
 sudo nixos-generate-config --no-filesystems --root /mnt
