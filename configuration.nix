@@ -24,7 +24,7 @@
     ./system/app/picom.nix
     ./system/wm/x11.nix
     ./system/security/sshd.nix
-    ./disko/btrfs-subvolumes.nix
+    (import ./disko/btrfs-subvolumes.nix {device = "/dev/vda";})
     ./system/style/stylix.nix
   ];
 
@@ -57,9 +57,12 @@
   # };
 
   # Bootloader.
-  boot.loader.grub.enable = true;
-  boot.loader.grub.device = "/dev/vda";
-  boot.loader.grub.useOSProber = true;
+  #boot.loader.grub.enable = true;
+  #boot.loader.grub.device = "/dev/vda";
+  #boot.loader.grub.useOSProber = true;
+
+  boot.loader.systemd-boot.enable = true;
+  boot.loader.efi.canTouchEfiVariables = true;
 
   networking.hostName = systemSettings.hostname; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
@@ -127,13 +130,13 @@
     hideMounts = true;
     directories = [
       "/etc/nixos"
-      "/var/log"
-      "/var/lib/bluetooth"
-      "/var/lib/nixos"
-      "/var/lib/systemd/coredump"
-      "/etc/NetworkManager/system-connections"
-      "/home/sean/Downloads"
-      "/home/sean/Downloads/dotfiles"
+      # "/var/log"
+      # "/var/lib/bluetooth"
+      # "/var/lib/nixos"
+      #"/var/lib/systemd/coredump"
+      # "/etc/NetworkManager/system-connections"
+      # "/home/sean/Downloads"
+      # "/home/sean/Downloads/dotfiles"
     ];
   };
 
