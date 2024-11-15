@@ -1,8 +1,9 @@
 #!/bin/bash
-curl https://raw.githubusercontent.com/dsriggs1/dotfiles/main/disko/btrfs-subvolumes.nix -o /tmp/disko.nix
-sudo nix --experimental-features "nix-command flakes" run github:nix-community/disko -- --mode disko /tmp/disko.nix --arg device '"/dev/vda"'
+curl https://raw.githubusercontent.com/dsriggs1/dotfiles/main/disko/btrfs-subvolumes.nix -o /tmp/btrfs-subvolumes.nix
+sudo nix --experimental-features "nix-command flakes" run github:nix-community/disko -- --mode disko /tmp/btrfs-subvolumes.nix --arg device '"/dev/vda"'
 
 sudo nixos-generate-config --no-filesystems --root /mnt
+sudo git clone https://github.com/dsriggs1/dotfiles /mnt/etc/nixos
 
 #curl https://raw.githubusercontent.com/vimjoyer/impermanent-setup/main/final/disko.nix -o /tmp/disko.nix
 #sudo nix --experimental-features "nix-command flakes" run github:nix-community/disko -- --mode disko /tmp/disko.nix --arg device '"/dev/vda"'
