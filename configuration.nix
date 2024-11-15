@@ -125,20 +125,20 @@
      umount /btrfs_tmp
   '';
 
-  fileSystems."/persist".neededForBoot = true;
-  environment.persistence."/persist/system" = {
-    hideMounts = true;
-    directories = [
-      "/etc/nixos"
-      # "/var/log"
-      # "/var/lib/bluetooth"
-      "/var/lib/nixos"
-      #"/var/lib/systemd/coredump"
-      # "/etc/NetworkManager/system-connections"
-      # "/home/sean/Downloads"
-      # "/home/sean/Downloads/dotfiles"
-    ];
-  };
+  #fileSystems."/persist".neededForBoot = true;
+  #environment.persistence."/persist/system" = {
+  # hideMounts = true;
+  # directories = [
+  #   "/etc/nixos"
+  # "/var/log"
+  # "/var/lib/bluetooth"
+  #"/var/lib/nixos"
+  #"/var/lib/systemd/coredump"
+  # "/etc/NetworkManager/system-connections"
+  # "/home/sean/Downloads"
+  # "/home/sean/Downloads/dotfiles"
+  #];
+  #};
 
   users.users.sean = {
     isNormalUser = true;
