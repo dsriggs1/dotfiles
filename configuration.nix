@@ -130,11 +130,11 @@
     hideMounts = true;
     directories = [
       "/etc/nixos"
-      "/var/log"
-      "/var/lib/bluetooth"
+      #"/var/log"
+      #"/var/lib/bluetooth"
       "/var/lib/nixos"
-      "/var/lib/systemd/coredump"
-      "/etc/NetworkManager/system-connections"
+      #"/var/lib/systemd/coredump"
+      #"/etc/NetworkManager/system-connections"
       # "/home/sean/Downloads"
       # "/home/sean/Downloads/dotfiles"
     ];
