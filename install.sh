@@ -8,6 +8,7 @@ sudo nixos-generate-config --no-filesystems --root /mnt
 cd /mnt/etc/nixos || exit 1
 #nix-shell -p git --run "git clone https://github.com/dsriggs1/dotfiles"
 sudo git clone https://github.com/dsriggs1/dotfiles
+cd dotfiles || exit
 sudo git checkout install
 sudo rm hardware-configuration.nix
 sudo cp /mnt/etc/nixos/hardware-configuration.nix /mnt/etc/nixos/dotfiles
