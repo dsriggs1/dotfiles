@@ -14,7 +14,7 @@ sudo rm hardware-configuration.nix
 sudo cp /mnt/etc/nixos/hardware-configuration.nix /mnt/etc/nixos/dotfiles
 sudo cp -r /mnt/etc/nixos /mnt/etc/persist
 sudo rm -r /etc/nixos/*
-
+sudo mkdir /persist/system/
 
 
 #curl https://raw.githubusercontent.com/vimjoyer/impermanent-setup/main/final/disko.nix -o /tmp/disko.nix
