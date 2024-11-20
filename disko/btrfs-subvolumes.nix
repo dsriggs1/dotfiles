@@ -54,10 +54,10 @@
                   mountpoint = "/";
                 };
 
-                "/home" = {
-                  mountOptions = ["compress=zstd"];
-                  mountpoint = "/home";
-                };
+                #                "/home" = {
+                #                 mountOptions = ["compress=zstd"];
+                #                mountpoint = "/home";
+                #             };
 
                 "/persist" = {
                   mountOptions = ["subvol=persist" "noatime"];
