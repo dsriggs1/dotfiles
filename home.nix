@@ -14,6 +14,7 @@
     ./user/app/tmux/tmux.nix
     ./user/app/tmux/tmuxinator.nix
     ./user/app/terminal/starship.nix
+    ./user/app/terminal/zoxide.nix
   ];
 
   home.username = userSettings.username;
