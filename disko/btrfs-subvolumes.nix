@@ -9,7 +9,7 @@
           boot = {
             name = "boot";
             size = "1M";
-            type = "EF00";
+            type = "EF02";
           };
           esp = {
             name = "ESP";
