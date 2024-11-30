@@ -2,7 +2,7 @@
 #!nix-shell -i bash -p git
 
 curl https://raw.githubusercontent.com/dsriggs1/dotfiles/main/disko/btrfs-subvolumes.nix -o /tmp/btrfs-subvolumes.nix
-sudo nix --experimental-features "nix-command flakes" run github:nix-community/disko -- --mode disko /tmp/btrfs-subvolumes.nix --arg device '"/dev/vda"'
+sudo nix --experimental-features "nix-command flakes" run github:nix-community/disko -- --mode disko /tmp/btrfs-subvolumes.nix --arg device '"/dev/nvme0n1"'
 
 sudo nixos-generate-config --no-filesystems --root /mnt
 cd /mnt/etc/nixos || exit 1
