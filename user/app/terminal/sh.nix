@@ -119,17 +119,17 @@ in {
     # c = "clear";
     # confq = "$env.EDITOR ~/.config/qtile/config.py";
     #};
-    extraConfig = ''                  $env.config = { edit_mode: vi }
+    extraConfig = ''                        $env.config = { edit_mode: vi }
 
-                  def --env cd_func [path: string] {
-                      cd $path
-            eza -al --icons
+                        def --env cd_func [path: string] {
+                            cd $path
+                  eza -al --icons
 
-                  }
-                  alias cd = cd_func
+                        }
+                        alias cd = cd_func
 
-      zoxide init nushell | save -f ~/.zoxide.nu
-      source ~/.zoxide.nu
+      #      zoxide init nushell | save -f ~/.zoxide.nu
+            source ~/.zoxide.nu
     '';
 
     #extraConfig = ''

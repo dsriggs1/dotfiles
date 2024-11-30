@@ -21,13 +21,13 @@
               mountpoint = "/boot";
             };
           };
-          swap = {
-            size = "4G";
-            content = {
-              type = "swap";
-              resumeDevice = true;
-            };
-          };
+          #  swap = {
+          #   size = "4G";
+          #  content = {
+          #   type = "swap";
+          #  resumeDevice = true;
+          #  };
+          #};
           root = {
             name = "root";
             size = "100%";
@@ -55,7 +55,7 @@
                 };
 
                 "/home" = {
-                  mountOptions = ["compress=zstd"];
+                  mountOptions = ["subvol=home" "noatime"];
                   mountpoint = "/home";
                 };
 

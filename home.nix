@@ -14,6 +14,7 @@
     ./user/app/tmux/tmux.nix
     ./user/app/tmux/tmuxinator.nix
     ./user/app/terminal/starship.nix
+    ./user/app/terminal/zoxide.nix
   ];
 
   home.username = userSettings.username;
@@ -47,10 +48,11 @@
 
   xdg.userDirs = {
     music = "$HOME/Music";
-    #   downloads = "$HOME/Downloads";
+    downloads = "$HOME/Downloads";
     documents = "$HOME/Documents";
     pictures = "$HOME/Pictures";
     videos = "$HOME/Videos";
+    books = "$HOME/Books";
   };
   home.stateVersion = "23.11";
   programs.home-manager.enable = true;
