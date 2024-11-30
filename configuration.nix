@@ -24,7 +24,7 @@
     ./system/app/picom.nix
     ./system/wm/x11.nix
     ./system/security/sshd.nix
-    (import ./disko/btrfs-subvolumes.nix {device = "/dev/vda";})
+    (import ./disko/btrfs-subvolumes.nix {device = "/dev/nvme0n1";})
     ./system/style/stylix.nix
     #./impermanence.nix
   ];
@@ -59,7 +59,7 @@
 
   # Bootloader.
   boot.loader.grub.enable = true;
-  boot.loader.grub.devices = ["/dev/vda"];
+  boot.loader.grub.devices = ["/dev/nvme0n1"];
   boot.loader.grub.useOSProber = true;
 
   networking.hostName = systemSettings.hostname; # Define your hostname.
