@@ -59,8 +59,10 @@
 
   # Bootloader.
   boot.loader.grub.enable = true;
-  boot.loader.grub.devices = ["/dev/nvme0n1"];
-  boot.loader.grub.useOSProber = true;
+  boot.loader.grub.efiSupport = true;
+  boot.loader.grub.efiInstallAsRemovable = true;
+  # boot.loader.grub.devices = ["/dev/nvme0n1"];
+  #boot.loader.grub.useOSProber = true;
 
   networking.hostName = systemSettings.hostname; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
@@ -125,8 +127,8 @@
 
   users.users.sean = {
     isNormalUser = true;
-    # initialPassword = "1";
-    hashedPassword = /persist/passwords/sean;
+    initialPassword = "1";
+    # hashedPassword = /persist/passwords/sean;
     description = "sean";
     extraGroups = ["networkmanager" "wheel"];
     packages = with pkgs; [];
