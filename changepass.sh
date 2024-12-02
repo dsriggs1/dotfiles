@@ -13,7 +13,7 @@ elif
   exit
 fi
 
-sudo mkpasswd -m sha-512 "$p1" | sudo tee /persist/passwords/user
+sudo mkpasswd -m sha-512 "$p1" | sudo tee /persist/passwords/sean
 echo
 echo "New password written to /persist/passwords/user"
 echo "Password will become active next time you run:" 
