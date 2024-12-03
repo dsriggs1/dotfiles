@@ -26,7 +26,7 @@
     ./system/security/sshd.nix
     (import ./disko/btrfs-subvolumes.nix {device = "/dev/nvme0n1";})
     ./system/style/stylix.nix
-    #./impermanence.nix
+    ./impermanence.nix
   ];
 
   nix = {
@@ -65,15 +65,25 @@
   #boot.loader.grub.useOSProber = true;
 
   networking.hostName = systemSettings.hostname; # Define your hostname.
-  # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
+  networking.wireless.enable = true; # Enables wireless support via wpa_supplicant.
+  networking.wireless.networks = {
+    #"MySpectrumWiFi08-5G".pskFile = "/persist/passwords/wifi-password";
+    # other networks go here
+  };
 
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";
   # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
 
   # Enable networking
-  networking.networkmanager.enable = true;
-
+  networking.networkmanager = {
+    enable = true;
+    unmanaged = [
+      "*"
+      "except:type:wwan"
+      "except:type:gsm"
+    ];
+  };
   # Set your time zone.
   #time.timeZone = "America/New_York";
   time.timeZone = systemSettings.timezone;
@@ -125,14 +135,19 @@
     umount /btrfs_tmp
   '';
 
-  users.users.sean = {
-    isNormalUser = true;
-    initialPassword = "1";
-    # hashedPassword = /persist/passwords/sean;
-    description = "sean";
-    extraGroups = ["networkmanager" "wheel"];
-    packages = with pkgs; [];
-    shell = pkgs.nushell;
+  users = {
+    mutableUsers = false;
+    users = {
+      sean = {
+        isNormalUser = true;
+        #initialPassword = "1";
+        hashedPasswordFile = "/persist/passwords/sean";
+        description = "sean";
+        extraGroups = ["networkmanager" "wheel"];
+        packages = with pkgs; [];
+        shell = pkgs.nushell;
+      };
+    };
   };
 
   # Allow unfree packages
@@ -222,7 +237,7 @@
       tmux
       zoxide
       fzf
-      # nushell
+      inotify-tools
     ])
     ++ (with pkgs-stable; [
       #python311Packages.qtile
