@@ -8,6 +8,7 @@
       "/var/lib/bluetooth"
       "/var/lib/nixos"
       "/var/lib/systemd/coredump"
+      "/var/lib/expressvpn"
       "/etc/NetworkManager/system-connections"
       # "/home/sean/Downloads"
       # "/home/sean/Downloads/dotfiles"
@@ -20,6 +21,7 @@
     ];
     files = [
       "/etc/machine-id"
+      #      "/etc/systemd/system/expressvpn.service"
       #{
       # file="/var/keys/secret_file";
       # parentDirectory = {mode="u=rwX,g=rX,o=";};
