@@ -70,6 +70,12 @@
                 keyword = "github";
                 url = "https://github.com/";
               }
+              {
+                name = "gmail";
+                tags = ["gmail"];
+                keyword = "gmail";
+                url = "https://mail.google.com/mail/u/0/#inbox";
+              }
             ];
           };
         };
