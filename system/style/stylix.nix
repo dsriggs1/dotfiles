@@ -1,9 +1,9 @@
 {pkgs, ...}: {
   stylix.image = ./lake-sunrise.jpg;
   stylix.polarity = "dark";
-  stylix.cursor.size = 8;
-  stylix.fonts.sizes.applications = 10;
-  stylix.fonts.sizes.desktop = 5;
+  stylix.cursor.size = 16;
+  stylix.fonts.sizes.applications = 16;
+  stylix.fonts.sizes.desktop = 16;
 
   stylix.cursor.package = pkgs.bibata-cursors;
   stylix.cursor.name = "Bibata-Modern-Ice";
