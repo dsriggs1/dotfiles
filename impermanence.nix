@@ -9,9 +9,14 @@
       "/var/lib/nixos"
       "/var/lib/systemd/coredump"
       "/var/lib/expressvpn"
+      "/var/lib/jellyfin"
+      "/var/lib/libvirt"
       "/etc/NetworkManager/system-connections"
+      "/data/media/.state"
+      "/data/media/library"
       # "/home/sean/Downloads"
       # "/home/sean/Downloads/dotfiles"
+
       {
         directory = "/var/lib/colord";
         user = "color";
