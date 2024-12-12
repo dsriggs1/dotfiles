@@ -7,9 +7,9 @@
     enable = true;
     profiles = {
       default = {
-        #        extensions = with inputs.firefox-addons.packages.${pkgs.system}; [
-        #         ublock-origin
-        #      ];
+        extensions = with inputs.firefox-addons.packages.${pkgs.system}; [
+          ublock-origin
+        ];
         bookmarks = {
           toolbar = {
             name = "My Toolbar";
