@@ -15,6 +15,7 @@
     ./user/app/tmux/tmuxinator.nix
     ./user/app/terminal/starship.nix
     ./user/app/terminal/zoxide.nix
+    ./user/app/virtualmachine/virt-manager.nix
   ];
 
   home.username = userSettings.username;
@@ -54,6 +55,7 @@
     videos = "$HOME/Videos";
     #  books = "$HOME/Books";
   };
+
   home.stateVersion = "23.11";
   programs.home-manager.enable = true;
 }
