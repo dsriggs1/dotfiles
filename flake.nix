@@ -8,9 +8,9 @@
       inputs.disko.follows = "nixpkgs";
     };
 
-    #    impermanence = {
-    #     url = "github:nix-community/impermanence";
-    #   };
+    impermanence = {
+      url = "github:nix-community/impermanence";
+    };
 
     nixpkgs-stable.url = "github:NixOS/nixpkgs/release-24.05";
     nur.url = "github:nix-community/NUR";
@@ -125,7 +125,7 @@
         inputs.disko.nixosModules.disko
         nixarr.nixosModules.default
         stylix.nixosModules.stylix
-        # inputs.impermanence.nixosModules.impermanence
+        inputs.impermanence.nixosModules.impermanence
         home-manager.nixosModules.home-manager
         #   (import ./disko-config.nix {device = "/dev/vda";})
         {
