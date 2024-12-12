@@ -40,7 +40,7 @@
     notes = "nvim ~/notes.txt";
 
     # NIX SYSTEM
-    rebuild = "sudo nixos-rebuild switch";
+    rebuild = "sudo nixos-rebuild switch --flake .";
 
     rebuildTest = "sudo nixos-rebuild test";
     rebuildBoot = "sudo nixos-rebuild boot";
