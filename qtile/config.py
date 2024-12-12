@@ -649,3 +649,6 @@ def autostart():
     autostartscript = "~/.config/qtile/autostart.sh"
     home = os.path.expanduser(autostartscript)
     subprocess.Popen(["bash", "-x", home])
+    subprocess.Popen(
+        ["wal", "-i", "/home/sean/Downloads/dotfiles/wallpapers/lake-sunrise.jpg"]
+    )
