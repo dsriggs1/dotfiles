@@ -27,6 +27,9 @@
     (import ./disko/btrfs-subvolumes.nix {device = "/dev/nvme0n1";})
     ./system/style/stylix.nix
     ./impermanence.nix
+    ./system/hardware/power.nix
+    ./system/app/virt-manager.nix
+    ./system/app/distrobox.nix
   ];
 
   nix = {
@@ -143,7 +146,7 @@
         #initialPassword = "1";
         hashedPasswordFile = "/persist/passwords/sean";
         description = "sean";
-        extraGroups = ["networkmanager" "wheel"];
+        extraGroups = ["networkmanager" "wheel" "libvirtd" "kvm"];
         packages = with pkgs; [];
         shell = pkgs.nushell;
       };
@@ -182,6 +185,7 @@
       rofi
       rofi-power-menu
       rofi-screenshot
+      rofi-bluetooth
       pywal
       dunst
       xfce.xfce4-power-manager
@@ -238,6 +242,11 @@
       zoxide
       fzf
       inotify-tools
+      distrobox
+      dnsmasq
+      okular
+      texworks
+      element-desktop
     ])
     ++ (with pkgs-stable; [
       #python311Packages.qtile
