@@ -12,9 +12,9 @@
       url = "github:nix-community/impermanence";
     };
 
-    nixpkgs-stable.url = "github:NixOS/nixpkgs/release-24.05";
+    nixpkgs-stable.url = "github:NixOS/nixpkgs/release-24.11";
     nur.url = "github:nix-community/NUR";
-    stylix.url = "github:danth/stylix/release-23.11";
+    stylix.url = "github:danth/stylix/release-23.05";
     nixvim = {
       url = "github:nix-community/nixvim/";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -127,6 +127,7 @@
         stylix.nixosModules.stylix
         inputs.impermanence.nixosModules.impermanence
         home-manager.nixosModules.home-manager
+
         #   (import ./disko-config.nix {device = "/dev/vda";})
         {
           #   home-manager.extraSpecialArgs = specialArgs;
