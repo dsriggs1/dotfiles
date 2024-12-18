@@ -63,7 +63,7 @@ from libqtile.backend.wayland import InputConfig
 
 
 show_wlan = False
-show_bluetooth = False
+show_bluetooth = True
 
 
 mod = "mod4"
@@ -238,6 +238,7 @@ floating_layout = layout.Floating(
         Match(title="branchdialog"),  # gitk
         Match(title="pinentry"),  # GPG key password entry
         Match(wm_class="qalculate-gtk"),
+        Match(wm_class=".blueman-manager-wrapped"),
     ]
 )
 
@@ -397,12 +398,21 @@ widget_list = [
         visible_on_warn=False,
         format="{p} {uf}{m} ({r:.0f}%)",
     ),
-    widget.Bluetooth(
-        #       **decor_right,
+    # widget.Bluetooth(
+    #       **decor_right,
+    #    background=Color2 + ".4",
+    #   foreground=widget_color,
+    #  padding=10,
+    # format="\uf293 ",
+    # mouse_callbacks={"Button1": lambda: qtile.spawn("blueman-manager")},
+    # device_battery_format=" ({battery}%)",
+    # ),
+    widget.TextBox(
+        text="",
         background=Color2 + ".4",
         foreground=widget_color,
         padding=10,
-        mouse_callbacks={"Button1": lambda: qtile.spawn("blueman-manager")},
+        mouse_callbacks={"Button1": lambda: qtile.spawn("rofi-bluetooth")},
     ),
     widget.Wlan(
         #      **decor_right,
@@ -650,5 +660,5 @@ def autostart():
     home = os.path.expanduser(autostartscript)
     subprocess.Popen(["bash", "-x", home])
     subprocess.Popen(
-        ["wal", "-i", "/home/sean/Downloads/dotfiles/wallpapers/lake-sunrise.jpg"]
+        ["wal", "-i", "/home/sean/Downloads/dotfiles/wallpapers/Fantasy-Autumn.png"]
     )
