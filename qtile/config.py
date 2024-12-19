@@ -258,7 +258,7 @@ layouts = [
 widget_defaults = dict(
     # font="Fira Sans SemiBold",
     font="FontAwesome",
-    fontsize=18,
+    fontsize=24,
     padding=3,
 )
 extension_defaults = widget_defaults.copy()
@@ -596,7 +596,7 @@ screens = [
     Screen(
         top=bar.Bar(
             widget_list,
-            30,
+            50,
             padding=20,
             opacity=1,
             border_width=[0, 0, 0, 0],
