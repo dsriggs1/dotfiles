@@ -239,6 +239,7 @@ floating_layout = layout.Floating(
         Match(title="pinentry"),  # GPG key password entry
         Match(wm_class="qalculate-gtk"),
         Match(wm_class=".blueman-manager-wrapped"),
+        Match(wm_class="Morgen"),
     ]
 )
 
@@ -428,6 +429,7 @@ widget_list = [
         foreground=widget_color,
         padding=10,
         format="%I:%M %p",
+        mouse_callbacks={"Button1": lambda: qtile.spawn("morgen")},
     ),
     widget.TextBox(
         #     **decor_right,
@@ -450,9 +452,9 @@ widget_list = [
         foreground=widget_color,
         low_foreground="FF0000",
         notify_below=15,
-        discharge_char="",
-        charge_char="",
-        full_char="",
+        discharge_char=" ",
+        charge_char=" ",
+        full_char=" ",
     ),
 ]
 
