@@ -2,7 +2,8 @@
   description = "NixOS configuration for my personal laptop";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    #    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    nixpkgs.url = "github:NixOS/nixpkgs/release-24.11";
     disko = {
       url = "github:nix-community/disko";
       inputs.disko.follows = "nixpkgs";
@@ -16,7 +17,7 @@
     nur.url = "github:nix-community/NUR";
     stylix.url = "github:danth/stylix/release-23.05";
     nixvim = {
-      url = "github:nix-community/nixvim/";
+      url = "github:nix-community/nixvim/nixos-24.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     home-manager = {
