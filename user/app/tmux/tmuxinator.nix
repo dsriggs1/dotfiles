@@ -8,7 +8,7 @@
             layout: main-horizontal
             panes:
               - nvim
-              - shell: bash
+              - bash
 
     '';
   };
