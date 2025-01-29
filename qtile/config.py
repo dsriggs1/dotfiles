@@ -658,6 +658,7 @@ wmname = "LG3D"
 # HOOK startup
 @hook.subscribe.startup_once
 def autostart():
+    subprocess.Popen(["bash", os.path.expanduser("~/.screenlayout/detect-dock.sh")])
     autostartscript = "~/.config/qtile/autostart.sh"
     home = os.path.expanduser(autostartscript)
     subprocess.Popen(["bash", "-x", home])
