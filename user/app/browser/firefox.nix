@@ -77,6 +77,12 @@
                 keyword = "gmail";
                 url = "https://mail.google.com/mail/u/0/#inbox";
               }
+              {
+                name = "truist";
+                tags = ["truist"];
+                keyword = "gmail";
+                url = "https://bank.truist.com/web/home";
+              }
             ];
           };
         };
