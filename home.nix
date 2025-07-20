@@ -37,6 +37,7 @@
     # pkgs-unstable.vimPlugins.codesnap-nvim
     # qtile
     nushell
+    pfetch
   ];
 
   home.file.".config/qtile/config.py" = {
