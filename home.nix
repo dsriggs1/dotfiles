@@ -15,6 +15,7 @@
     ./user/app/tmux/tmuxinator.nix
     ./user/app/terminal/starship.nix
     ./user/app/terminal/zoxide.nix
+    ./user/app/plasma-manager/plasma.nix
   ];
 
   home.username = userSettings.username;
@@ -48,11 +49,16 @@
 
   xdg.userDirs = {
     music = "$HOME/Music";
-    downloads = "$HOME/Downloads";
+    #  downloads = "$HOME/Downloads";
     documents = "$HOME/Documents";
     pictures = "$HOME/Pictures";
     videos = "$HOME/Videos";
-    books = "$HOME/Books";
+    #  books = "$HOME/Books";
+
+    extraConfig = {
+      XDG_BOOKS_DIR = "$HOME/Books";
+      XDG_GITHUB_DIR = "$HOME/Github";
+    };
   };
   home.stateVersion = "23.11";
   programs.home-manager.enable = true;
