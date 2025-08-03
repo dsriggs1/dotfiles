@@ -17,21 +17,21 @@
         ];
     };
     #desktopManager.xfce.enable = true;
-    #desktopManager.plasma5.enable = true;
+    desktopManager.plasma6.enable = true;
     displayManager = {
-      lightdm = {
+      sddm = {
         # background = "/etc/nixos/background/default.jpg";
         enable = true;
 
         #Slick greeter configuration
-        greeters.slick = {
-          enable = true;
-          theme.name = "Adwaita";
+        #  greeters.slick = {
+        #   enable = true;
+        #  theme.name = "Adwaita";
 
-          extraConfig = ''
-            user-background = false
-          '';
-        };
+        # extraConfig = ''
+        #    user-background = false
+        #'';
+        # };
       };
     };
   };
