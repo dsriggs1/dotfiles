@@ -2,7 +2,8 @@
   description = "NixOS configuration for my personal laptop";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    #nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    nixpkgs.url = "github:NixOS/nixpkgs/release-25.05";
     disko = {
       url = "github:nix-community/disko";
       inputs.disko.follows = "nixpkgs";
@@ -12,24 +13,30 @@
     #     url = "github:nix-community/impermanence";
     #   };
 
-    nixpkgs-stable.url = "github:NixOS/nixpkgs/release-24.05";
-    nur.url = "github:nix-community/NUR";
-    stylix.url = "github:danth/stylix/release-23.11";
+    nixpkgs-stable.url = "github:NixOS/nixpkgs/release-25.05";
+
+    # nur.url = "github:nix-community/NUR";
+    stylix.url = "github:danth/stylix/release-25.05";
     nixvim = {
-      url = "github:nix-community/nixvim/";
+      url = "github:nix-community/nixvim/nixos-25.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     home-manager = {
-      url = "github:nix-community/home-manager/";
+      url = "github:nix-community/home-manager/release-25.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     firefox-addons = {
       url = "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    nixarr = {
-      url = "github:rasmus-kirk/nixarr";
+    #nixarr = {
+    #url = "github:rasmus-kirk/nixarr";
+    #inputs.nixpkgs.follows = "nixpkgs";
+    #};
+    plasma-manager = {
+      url = "github:nix-community/plasma-manager";
       inputs.nixpkgs.follows = "nixpkgs";
+      inputs.home-manager.follows = "home-manager";
     };
   };
 
@@ -37,13 +44,14 @@
     self,
     nixpkgs,
     nixpkgs-stable,
-    nur,
+    #nur,
     home-manager,
     firefox-addons,
-    nixarr,
+    #nixarr,
     stylix,
     nixvim,
     disko,
+    plasma-manager,
     ...
   } @ inputs: let
     systemSettings = {
@@ -93,18 +101,18 @@
           config.allowUnfree = true;
         };
 
-        nur = import nur {
-          system = system;
-          config.allowUnfree = true;
-        };
+        #nur = import nur {
+        #system = system;
+        #config.allowUnfree = true;
+        #};
         firefox-addons = import firefox-addons {
           system = system;
           config.allowUnfree = true;
         };
-        nixarr = import nixarr {
-          system = system;
-          config.allowUnfree = true;
-        };
+        #nixarr = import nixarr {
+        #system = system;
+        #config.allowUnfree = true;
+        #};
         stylix = import stylix {
           system = system;
           config.allowUnfree = true;
@@ -123,7 +131,7 @@
         ./configuration.nix
         #./nixos/servarr/configuration.nix
         inputs.disko.nixosModules.disko
-        nixarr.nixosModules.default
+        #nixarr.nixosModules.default
         stylix.nixosModules.stylix
         # inputs.impermanence.nixosModules.impermanence
         home-manager.nixosModules.home-manager
@@ -142,8 +150,10 @@
 
           home-manager.useGlobalPkgs = true;
           home-manager.useUserPackages = true;
+	  home-manager.backupFileExtension="backup";
           home-manager.sharedModules = [
             nixvim.homeManagerModules.nixvim
+            inputs.plasma-manager.homeManagerModules.plasma-manager
             # inputs.impermanence.homeManagerModules.impermanence
           ];
           home-manager.users.sean = import ./home.nix {
