@@ -41,6 +41,9 @@
             enable = true;
           };
 
+          clangd = {
+            enable = true;
+          };
           #          r-language-server = {
           #           enable = true;
           #        };
