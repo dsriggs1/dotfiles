@@ -8,11 +8,11 @@
     ./nvim-notify.nix
     ./lsp.nix
     ./completion.nix
-    ./codeium.nix
+    #    ./codeium.nix
     #    ./copilot.nix
     ./copilot-lua.nix
     ./treesitter.nix
-    # ./neogit.nix
+    ./neogit.nix
     ./telescope.nix
     ./fugitive.nix
     ./tmux-navigator.nix

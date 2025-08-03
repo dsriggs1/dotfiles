@@ -20,7 +20,22 @@
           };
         };
       }
-
+      {
+        description = "Hide titlebar for Alacritty";
+        match = {
+          window-class = {
+            value = "alacritty";
+            type = "substring";
+            match-whole = true;
+          };
+        };
+        apply = {
+          noborder = {
+            value = true;
+            apply = "force";
+          };
+        };
+      }
       {
         description = "Rstudio active opacity 70%";
 
