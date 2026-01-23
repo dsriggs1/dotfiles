@@ -3,7 +3,7 @@
 
   inputs = {
     #nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-    nixpkgs.url = "github:NixOS/nixpkgs/release-25.05";
+    nixpkgs.url = "github:NixOS/nixpkgs/release-25.11";
     disko = {
       url = "github:nix-community/disko";
       inputs.disko.follows = "nixpkgs";
@@ -13,16 +13,16 @@
     #     url = "github:nix-community/impermanence";
     #   };
 
-    nixpkgs-stable.url = "github:NixOS/nixpkgs/release-25.05";
+    nixpkgs-stable.url = "github:NixOS/nixpkgs/release-25.11";
 
     # nur.url = "github:nix-community/NUR";
-    stylix.url = "github:danth/stylix/release-25.05";
+    stylix.url = "github:danth/stylix/release-25.11";
     nixvim = {
-      url = "github:nix-community/nixvim/nixos-25.05";
+      url = "github:nix-community/nixvim/nixos-25.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     home-manager = {
-      url = "github:nix-community/home-manager/release-25.05";
+      url = "github:nix-community/home-manager/release-25.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     firefox-addons = {
@@ -150,7 +150,7 @@
 
           home-manager.useGlobalPkgs = true;
           home-manager.useUserPackages = true;
-	  home-manager.backupFileExtension="backup";
+          home-manager.backupFileExtension = "backup";
           home-manager.sharedModules = [
             nixvim.homeManagerModules.nixvim
             inputs.plasma-manager.homeManagerModules.plasma-manager
