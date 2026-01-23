@@ -6,6 +6,7 @@
     ./kwin.nix
     ./window-rules.nix
     ./config-files.nix
+    ./battery.nix
   ];
   programs.plasma = {
     enable = true;
