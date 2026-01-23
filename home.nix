@@ -24,6 +24,7 @@
   # Example themes: https://github.com/tinted-theming/schemes/tree/spec-0.11/base16
   # Some example color schemes that can be turned on/off
   stylix.image = ./system/style/lake-sunrise.jpg;
+  stylix.targets.gnome.enable = false;
   #stylix.base16Scheme = "${pkgs.base16-schemes}/share/themes/dracula.yaml";
   #  stylix.base16Scheme = "${pkgs.base16-schemes}/share/themes/oxocarbon-dark.yaml";
   #stylix.base16Scheme = "/home/sean/Downloads/dotfiles/themes/cyborg_girl";
