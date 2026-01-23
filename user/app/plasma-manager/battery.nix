@@ -12,7 +12,7 @@
         # Idle → suspend
         autoSuspend = {
           action = "sleep"; # "sleep" | "hibernate" | "shutDown" | "nothing"
-          idleTimeout = 3600; # suspend after 60 min inactive
+          idleTimeout = 5400; # suspend after 60 min inactive
         };
         whenSleepingEnter = "standbyThenHibernate";
 
@@ -26,7 +26,7 @@
           idleTimeoutWhenLocked = 60; # turn off after 1 min when locked
         };
 
-        displayBrightness = 100; # keep full brightness on AC
+        displayBrightness = 70; # keep full brightness on AC
         powerProfile = "balanced"; # "performance" | "balanced" | "powerSaving"
       };
 
