@@ -3,7 +3,7 @@
     enable = true;
     plugins.copilot-lua = {
       enable = true;
-      suggestion = {
+      settings.suggestion = {
         enabled = false;
       };
     };
