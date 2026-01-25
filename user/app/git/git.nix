@@ -2,10 +2,12 @@
 {
   programs.git = {
       enable = true;
-      userName = "dsriggs1";
-      userEmail = "dsriggs1@gmail.com";
-      aliases =
-        {
+      settings = {
+        user = {
+          name = "dsriggs1";
+          email = "dsriggs1@gmail.com";
+        };
+        alias = {
           a = "add";
           c = "commit";
           ca = "commit --amend";
@@ -34,6 +36,7 @@
           rv = "remote -v";
           rs = "remote show";
           st = "status";
+        };
       };
     };
 }
