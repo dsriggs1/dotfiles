@@ -40,7 +40,7 @@
     notes = "nvim ~/notes.txt";
 
     # NIX SYSTEM
-    rebuild = "sudo nixos-rebuild switch";
+    rebuild = "sudo nixos-rebuild switch --flake /home/sean/Downloads/dotfiles#nixos";
 
     rebuildTest = "sudo nixos-rebuild test";
     rebuildBoot = "sudo nixos-rebuild boot";
@@ -95,7 +95,7 @@ in {
     sessionVariables = myVariables;
 
     shellAliases = myAliases;
-    initExtra = ''
+    initContent = ''
       zl() {
                   z "$@" && ls -la
                }
