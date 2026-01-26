@@ -70,7 +70,9 @@
     },
     "disko": {
       "inputs": {
-        "nixpkgs": "nixpkgs"
+        "nixpkgs": [
+          "nixpkgs"
+        ]
       },
       "locked": {
         "lastModified": 1722476845,
@@ -286,22 +288,6 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1722415718,
-        "narHash": "sha256-5US0/pgxbMksF92k1+eOa8arJTJiPvsdZj9Dl+vJkM4=",
-        "owner": "NixOS",
-        "repo": "nixpkgs",
-        "rev": "c3392ad349a5227f4a3464dce87bcc5046692fce",
-        "type": "github"
-      },
-      "original": {
-        "owner": "NixOS",
-        "ref": "nixpkgs-unstable",
-        "repo": "nixpkgs",
-        "type": "github"
-      }
-    },
-    "nixpkgs-stable": {
-      "locked": {
         "lastModified": 1769022647,
         "narHash": "sha256-cRRhexGv4btt2iVtMQmyJxBPSlp+kCgLmrVPHB3ae24=",
         "owner": "NixOS",
@@ -317,22 +303,6 @@
       }
     },
     "nixpkgs_2": {
-      "locked": {
-        "lastModified": 1769022647,
-        "narHash": "sha256-cRRhexGv4btt2iVtMQmyJxBPSlp+kCgLmrVPHB3ae24=",
-        "owner": "NixOS",
-        "repo": "nixpkgs",
-        "rev": "2506e701ae60b9516db03456198f891c4751fd49",
-        "type": "github"
-      },
-      "original": {
-        "owner": "NixOS",
-        "ref": "release-25.11",
-        "repo": "nixpkgs",
-        "type": "github"
-      }
-    },
-    "nixpkgs_3": {
       "locked": {
         "lastModified": 1768940263,
         "narHash": "sha256-sJERJIYTKPFXkoz/gBaBtRKke82h4DkX3BBSsKbfbvI=",
@@ -449,8 +419,7 @@
         "disko": "disko",
         "firefox-addons": "firefox-addons",
         "home-manager": "home-manager",
-        "nixpkgs": "nixpkgs_2",
-        "nixpkgs-stable": "nixpkgs-stable",
+        "nixpkgs": "nixpkgs",
         "nixvim": "nixvim",
         "plasma-manager": "plasma-manager",
         "stylix": "stylix"
@@ -465,7 +434,7 @@
         "firefox-gnome-theme": "firefox-gnome-theme",
         "flake-parts": "flake-parts_2",
         "gnome-shell": "gnome-shell",
-        "nixpkgs": "nixpkgs_3",
+        "nixpkgs": "nixpkgs_2",
         "nur": "nur",
         "systems": "systems_3",
         "tinted-foot": "tinted-foot",

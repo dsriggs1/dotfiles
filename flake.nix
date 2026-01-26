@@ -6,14 +6,12 @@
     nixpkgs.url = "github:NixOS/nixpkgs/release-25.11";
     disko = {
       url = "github:nix-community/disko";
-      inputs.disko.follows = "nixpkgs";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     #    impermanence = {
     #     url = "github:nix-community/impermanence";
     #   };
-
-    nixpkgs-stable.url = "github:NixOS/nixpkgs/release-25.11";
 
     # nur.url = "github:nix-community/NUR";
     stylix.url = "github:danth/stylix/release-25.11";
@@ -43,7 +41,6 @@
   outputs = {
     self,
     nixpkgs,
-    nixpkgs-stable,
     #nur,
     home-manager,
     firefox-addons,
@@ -82,47 +79,27 @@
       homeDir = "/home/sean";
     };
 
-    pkgs = import nixpkgs {
-      system = "x86_64-linux";
-      config = {allowUnfree = true;};
-    }; #addon-pkgs = pkgs.callPackage firefox-addons { };
+    # Define pkgs-stable once for reuse
+    pkgs-stable = import nixpkgs {
+      system = systemSettings.system;
+      config.allowUnfree = true;
+    };
   in {
     #apps.x86_64-linux = {
     # disko = disko.defaultApp.x86_64-linux;
     # };
-    # Please replace my-nixos with your hostname
-    nixosConfigurations.${systemSettings.hostname} = nixpkgs.lib.nixosSystem rec {
-      #inherit systemSettings.system;
-      system = "x86_64-linux";
+    nixosConfigurations.${systemSettings.hostname} = nixpkgs.lib.nixosSystem {
+      system = systemSettings.system;
       specialArgs = {
-        inherit systemSettings;
-        pkgs-stable = import nixpkgs-stable {
-          system = system;
-          config.allowUnfree = true;
-        };
-
+        inherit systemSettings pkgs-stable inputs;
         #nur = import nur {
-        #system = system;
+        #system = systemSettings.system;
         #config.allowUnfree = true;
         #};
-        firefox-addons = import firefox-addons {
-          system = system;
-          config.allowUnfree = true;
-        };
         #nixarr = import nixarr {
-        #system = system;
+        #system = systemSettings.system;
         #config.allowUnfree = true;
         #};
-        stylix = import stylix {
-          system = system;
-          config.allowUnfree = true;
-        };
-        nixvim = import nixvim {
-          system = system;
-          config.allowUnfree = true;
-        };
-
-        inherit pkgs inputs;
       };
       modules = [
         #    ./disko-config.nix
@@ -140,12 +117,7 @@
           #   home-manager.extraSpecialArgs = specialArgs;
 
           home-manager.extraSpecialArgs = {
-            inherit inputs;
-            inherit userSettings;
-            pkgs-stable = import nixpkgs-stable {
-              system = system;
-              config.allowUnfree = true;
-            };
+            inherit inputs userSettings pkgs-stable;
           };
 
           home-manager.useGlobalPkgs = true;
@@ -156,34 +128,9 @@
             inputs.plasma-manager.homeManagerModules.plasma-manager
             # inputs.impermanence.homeManagerModules.impermanence
           ];
-          home-manager.users.sean = import ./home.nix {
-            inherit pkgs;
-            inherit userSettings;
-            pkgs-stable = import nixpkgs-stable {
-              system = system;
-              config.allowUnfree = true;
-            };
-
-            config = pkgs.config;
-            stylix.targets.xyz.enable = false;
-          };
+          home-manager.users.${userSettings.username} = import ./home.nix;
         }
       ];
     };
-
-    # homeConfigurations = {
-    #   "sean@nixos" = home-manager.lib.homeManagerConfiguration {
-    #     pkgs = nixpkgs.legacyPackages.x86_64-linux;
-    #     extraSpecialArgs = {inherit inputs outputs;};
-    #     modules = [
-    #       ./home.nix
-    #     ];
-    #   };
-    # };
-    # homeConfigurations."sean@nixos" = home-manager.lib.homeManagerConfiguration {
-    #   inherit pkgs;
-    #   extraSpecialArgs = { inherit inputs; };
-    #   modules = [ ./home.nix ];
-    # };
   };
 }
