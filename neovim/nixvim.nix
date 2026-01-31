@@ -24,5 +24,7 @@
     enable = true;
 
     globals.mapleader = " ";
+
+    plugins.web-devicons.enable = true;
   };
 }
