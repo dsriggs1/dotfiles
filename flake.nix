@@ -124,7 +124,7 @@
           home-manager.useUserPackages = true;
           home-manager.backupFileExtension = "backup";
           home-manager.sharedModules = [
-            nixvim.homeManagerModules.nixvim
+            nixvim.homeModules.nixvim
             inputs.plasma-manager.homeManagerModules.plasma-manager
             # inputs.impermanence.homeManagerModules.impermanence
           ];
