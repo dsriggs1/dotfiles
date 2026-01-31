@@ -32,7 +32,6 @@
     git
     vscode
     #    firefox
-    tmux
     starship
     tmuxinator
     # pkgs-unstable.vimPlugins.codesnap-nvim
