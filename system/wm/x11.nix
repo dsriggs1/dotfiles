@@ -1,14 +1,12 @@
 {
   pkgs,
   pkgs-stable,
-  lib,
   ...
 }:
 #xserver nix install xserver
 {
   services.xserver = {
     enable = true;
-    videoDrivers = ["displaylink" "modesetting"];
     layout = "us";
     xkbVariant = "";
     windowManager.qtile = {
@@ -19,23 +17,21 @@
         ];
     };
     #desktopManager.xfce.enable = true;
-    #desktopManager.plasma5.enable = true;
+    desktopManager.plasma6.enable = true;
     displayManager = {
-      sessionCommands = ''
-        ${lib.getBin pkgs.xorg.xrandr}/bin/xrandr --setprovideroutputsource 2 0'';
-      lightdm = {
+      sddm = {
         # background = "/etc/nixos/background/default.jpg";
         enable = true;
 
         #Slick greeter configuration
-        greeters.slick = {
-          enable = true;
-          theme.name = "Adwaita";
+        #  greeters.slick = {
+        #   enable = true;
+        #  theme.name = "Adwaita";
 
-          extraConfig = ''
-            user-background = false
-          '';
-        };
+        # extraConfig = ''
+        #    user-background = false
+        #'';
+        # };
       };
     };
   };

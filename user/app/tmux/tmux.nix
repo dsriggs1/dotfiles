@@ -5,6 +5,15 @@
 }: {
   programs.tmux = {
     enable = true;
+    package = pkgs.tmux.overrideAttrs (oldAttrs: rec {
+      version = "3.5a";
+      src = pkgs.fetchFromGitHub {
+        owner = "tmux";
+        repo = "tmux";
+        rev = version;
+        hash = "sha256-Z9XHpyh4Y6iBI4+SfFBCGA8huFJpRFZy9nEB7+WQVJE=";
+      };
+    });
     shortcut = "b";
     # aggressiveResize = true; -- Disabled to be iTerm-friendly
     baseIndex = 1;

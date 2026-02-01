@@ -8,11 +8,11 @@
     ./nvim-notify.nix
     ./lsp.nix
     ./completion.nix
-    ./codeium.nix
-    #    ./copilot.nix
+    #./codeium.nix
+    ./copilot.nix
     ./copilot-lua.nix
     ./treesitter.nix
-    # ./neogit.nix
+    ./neogit.nix
     ./telescope.nix
     ./fugitive.nix
     ./tmux-navigator.nix
@@ -24,5 +24,7 @@
     enable = true;
 
     globals.mapleader = " ";
+
+    plugins.web-devicons.enable = true;
   };
 }

@@ -14,7 +14,7 @@
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
-    ./nixarr.nix
+    #    ./nixarr.nix
     ./system/security/firewall.nix
     ./system/security/vpn.nix
     ./system/security/blocky.nix
@@ -33,7 +33,7 @@
   ];
 
   nix = {
-    package = pkgs.nixFlakes;
+    package = pkgs.nixVersions.stable;
     extraOptions = ''
       experimental-features = nix-command flakes
     '';
@@ -111,7 +111,7 @@
   #   enable = true;
   #   xwayland.enable = true;
 
-  # Define a user account. Don't forget to set a password with ‘passwd’.
+  # Define a user account. Don't forget to set a password with 'passwd'.
 
   boot.initrd.postDeviceCommands = lib.mkAfter ''
          mkdir /btrfs_tmp
@@ -183,11 +183,12 @@
       eza
       starship
       rofi
+      rofi-bluetooth
       rofi-power-menu
       rofi-screenshot
-      rofi-bluetooth
       pywal
       dunst
+      inotify-tools
       xfce.xfce4-power-manager
       xfce.thunar
       expressvpn
@@ -225,7 +226,6 @@
       #pkgs-unstable.codesnap-nvim
       #  spicetify-cli
       #  spotify
-      qalculate-gtk
       jetbrains.pycharm-community-src
       nitrogen
       xclip
@@ -238,15 +238,20 @@
       stylua
       vimPlugins.plenary-nvim
       yazi
-      tmux
       zoxide
       fzf
-      inotify-tools
+      nushell
+      nextcloud-client
+      pcloud
+      deskflow
       distrobox
       dnsmasq
-      okular
-      texworks
       element-desktop
+      kodi
+      kdePackages.okular
+      texworks
+      # stremio
+      claude-code
     ])
     ++ (with pkgs-stable; [
       #python311Packages.qtile
@@ -267,6 +272,8 @@
   # };
 
   # List services that you want to enable:
+  #jellyseerr service
+  services.jellyseerr.enable = true;
   #   services.picom = {
   #   enable = true;
   #   #backend="glx";
