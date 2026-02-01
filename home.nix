@@ -15,7 +15,7 @@
     ./user/app/tmux/tmuxinator.nix
     ./user/app/terminal/starship.nix
     ./user/app/terminal/zoxide.nix
-    ./user/app/virtualmachine/virt-manager.nix
+    ./user/app/plasma-manager/plasma.nix
   ];
 
   home.username = userSettings.username;
@@ -23,9 +23,8 @@
 
   # Example themes: https://github.com/tinted-theming/schemes/tree/spec-0.11/base16
   # Some example color schemes that can be turned on/off
-  #stylix.image = ./system/style/lake-sunrise.jpg;
-  #stylix.enable = true;
-  stylix.image = ./wallpapers/Fantasy-Autumn.png;
+  stylix.image = ./system/style/lake-sunrise.jpg;
+  stylix.targets.gnome.enable = false;
   #stylix.base16Scheme = "${pkgs.base16-schemes}/share/themes/dracula.yaml";
   #  stylix.base16Scheme = "${pkgs.base16-schemes}/share/themes/oxocarbon-dark.yaml";
   #stylix.base16Scheme = "/home/sean/Downloads/dotfiles/themes/cyborg_girl";
@@ -33,12 +32,12 @@
     git
     vscode
     #    firefox
-    tmux
     starship
     tmuxinator
     # pkgs-unstable.vimPlugins.codesnap-nvim
     # qtile
     nushell
+    pfetch
   ];
 
   home.file.".config/qtile/config.py" = {
@@ -56,8 +55,12 @@
     pictures = "$HOME/Pictures";
     videos = "$HOME/Videos";
     #  books = "$HOME/Books";
-  };
 
+    extraConfig = {
+      XDG_BOOKS_DIR = "$HOME/Books";
+      XDG_GITHUB_DIR = "$HOME/Github";
+    };
+  };
   home.stateVersion = "23.11";
   programs.home-manager.enable = true;
 }

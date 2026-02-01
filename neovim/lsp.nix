@@ -5,7 +5,7 @@
         enable = true;
 
         servers = {
-          tsserver.enable = true;
+          ts_ls.enable = true;
 
           #          nil-ls = {
           #           enable = true;
@@ -15,7 +15,7 @@
             enable = true;
           };
 
-          lua-ls = {
+          lua_ls = {
             enable = true;
             settings.telemetry.enable = false;
           };
@@ -41,6 +41,9 @@
             enable = true;
           };
 
+          clangd = {
+            enable = true;
+          };
           #          r-language-server = {
           #           enable = true;
           #        };

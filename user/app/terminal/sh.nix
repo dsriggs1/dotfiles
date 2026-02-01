@@ -40,7 +40,7 @@
     notes = "nvim ~/notes.txt";
 
     # NIX SYSTEM
-    rebuild = "sudo nixos-rebuild switch --flake .";
+    rebuild = "sudo nixos-rebuild switch --flake /home/sean/Downloads/dotfiles#nixos";
 
     rebuildTest = "sudo nixos-rebuild test";
     rebuildBoot = "sudo nixos-rebuild boot";
@@ -95,7 +95,7 @@ in {
     sessionVariables = myVariables;
 
     shellAliases = myAliases;
-    initExtra = ''
+    initContent = ''
       zl() {
                   z "$@" && ls -la
                }
@@ -112,24 +112,28 @@ in {
   programs.nushell = {
     enable = true;
     #configFile.source = ./../config.nu;
-    environmentVariables = {env.EDITOR = "nvim";};
+    environmentVariables = {
+      env.EDITOR = "nvim";
+    };
     shellAliases = myAliases;
 
     #shellAliases = {
     # c = "clear";
     # confq = "$env.EDITOR ~/.config/qtile/config.py";
     #};
-    extraConfig = ''                        $env.config = { edit_mode: vi }
+    extraConfig = ''                           $env.config = { edit_mode: vi }
 
-                        def --env cd_func [path: string] {
-                            cd $path
-                  eza -al --icons
+      $env.config = { show_banner:false }
+                           def --env cd_func [path: string] {
+                               cd $path
+                     eza -al --icons
 
-                        }
-                        alias cd = cd_func
+                           }
+                           alias cd = cd_func
 
-      #      zoxide init nushell | save -f ~/.zoxide.nu
-            source ~/.zoxide.nu
+         #      zoxide init nushell | save -f ~/.zoxide.nu
+               source ~/.zoxide.nu
+        pfetch
     '';
 
     #extraConfig = ''
