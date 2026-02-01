@@ -14,7 +14,7 @@
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
-    ./nixarr.nix
+    #    ./nixarr.nix
     ./system/security/firewall.nix
     ./system/security/vpn.nix
     ./system/security/blocky.nix
@@ -30,7 +30,7 @@
   ];
 
   nix = {
-    package = pkgs.nixFlakes;
+    package = pkgs.nixVersions.stable;
     extraOptions = ''
       experimental-features = nix-command flakes
     '';
@@ -59,7 +59,7 @@
 
   # Bootloader.
   boot.loader.grub.enable = true;
-  boot.loader.grub.devices = ["/dev/vda"];
+  #  boot.loader.grub.devices = ["/dev/vda"];
   boot.loader.grub.useOSProber = true;
 
   networking.hostName = systemSettings.hostname; # Define your hostname.
@@ -90,6 +90,9 @@
     LC_TIME = "en_US.UTF-8";
   };
 
+  virtualisation.libvirtd.enable = true;
+  programs.virt-manager.enable = true;
+
   #Configure keymap in X11
 
   # programs.hyprland= {
@@ -98,37 +101,37 @@
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
 
-  boot.initrd.postDeviceCommands = lib.mkAfter ''
-         mkdir /btrfs_tmp
-       mount /dev/root_vg/root /btrfs_tmp
-     if [[ -e /btrfs_tmp/root ]]; then
-       mkdir -p /btrfs_tmp/old_roots
-     timestamp=$(date --date="@$(stat -c %Y /btrfs_tmp/root)" "+%Y-%m-%-d_%H:%M:%S")
-    mv /btrfs_tmp/root "/btrfs_tmp/old_roots/$timestamp"
-    fi
-
-      delete_subvolume_recursively() {
-        IFS=$'\n'
-      for i in $(btrfs subvolume list -o "$1" | cut -f 9- -d ' '); do
-        delete_subvolume_recursively "/btrfs_tmp/$i"
-    done
-    btrfs subvolume delete "$1"
-    }
-
-    for i in $(find /btrfs_tmp/old_roots/ -maxdepth 1 -mtime +30); do
-      delete_subvolume_recursively "$i"
-    done
-
-    btrfs subvolume create /btrfs_tmp/root
-    umount /btrfs_tmp
-  '';
+  #boot.initrd.postDeviceCommands = lib.mkAfter ''
+  #mkdir /btrfs_tmp
+  #mount /dev/root_vg/root /btrfs_tmp
+  #if [[ -e /btrfs_tmp/root ]]; then
+  #mkdir -p /btrfs_tmp/old_roots
+  #timestamp=$(date --date="@$(stat -c %Y /btrfs_tmp/root)" "+%Y-%m-%-d_%H:%M:%S")
+  #mv /btrfs_tmp/root "/btrfs_tmp/old_roots/$timestamp"
+  #fi
+  #
+  #delete_subvolume_recursively() {
+  #IFS=$'\n'
+  #for i in $(btrfs subvolume list -o "$1" | cut -f 9- -d ' '); do
+  #delete_subvolume_recursively "/btrfs_tmp/$i"
+  #done
+  #btrfs subvolume delete "$1"
+  #}
+  #
+  #for i in $(find /btrfs_tmp/old_roots/ -maxdepth 1 -mtime +30); do
+  #delete_subvolume_recursively "$i"
+  #done
+  #
+  #btrfs subvolume create /btrfs_tmp/root
+  #umount /btrfs_tmp
+  #'';
 
   users.users.sean = {
     isNormalUser = true;
-    # initialPassword = "1";
-    hashedPassword = /persist/passwords/sean;
+    initialPassword = "1";
+    #hashedPassword = /persist/passwords/sean;
     description = "sean";
-    extraGroups = ["networkmanager" "wheel"];
+    extraGroups = ["networkmanager" "wheel" "libvirtd" "kvm"];
     packages = with pkgs; [];
     shell = pkgs.nushell;
   };
@@ -163,10 +166,12 @@
       eza
       starship
       rofi
+      rofi-bluetooth
       rofi-power-menu
       rofi-screenshot
       pywal
       dunst
+      inotify-tools
       xfce.xfce4-power-manager
       xfce.thunar
       expressvpn
@@ -217,10 +222,20 @@
       stylua
       vimPlugins.plenary-nvim
       yazi
-      tmux
       zoxide
       fzf
-      # nushell
+      nushell
+      nextcloud-client
+      pcloud
+      deskflow
+      distrobox
+      dnsmasq
+      element-desktop
+      kodi
+      kdePackages.okular
+      texworks
+      # stremio
+      claude-code
     ])
     ++ (with pkgs-stable; [
       #python311Packages.qtile
@@ -241,6 +256,8 @@
   # };
 
   # List services that you want to enable:
+  #jellyseerr service
+  services.jellyseerr.enable = true;
   #   services.picom = {
   #   enable = true;
   #   #backend="glx";
