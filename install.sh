@@ -14,8 +14,12 @@ sudo rm hardware-configuration.nix
 sudo cp /mnt/etc/nixos/hardware-configuration.nix /mnt/etc/nixos/dotfiles
 sudo cp -r /mnt/etc/nixos /mnt/etc/persist
 sudo rm -r /etc/nixos/*
-sudo mkdir /persist/system/
+sudo mkdir -p /persist/system/
 
+# Install NixOS with the flake configuration
+sudo nixos-install --root /mnt --flake /mnt/etc/nixos/dotfiles#nixos
+
+echo "Installation complete! Set root password when prompted, then reboot."
 
 #curl https://raw.githubusercontent.com/vimjoyer/impermanent-setup/main/final/disko.nix -o /tmp/disko.nix
 #sudo nix --experimental-features "nix-command flakes" run github:nix-community/disko -- --mode disko /tmp/disko.nix --arg device '"/dev/vda"'
