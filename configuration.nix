@@ -236,6 +236,7 @@
       element-desktop
       kodi
       kdePackages.okular
+      kdePackages.krohnkite
       texworks
       # stremio
       claude-code
