@@ -1,5 +1,6 @@
 {
   pkgs,
+  lib,
   userSettings,
   pkgs-stable,
   ...
@@ -61,6 +62,34 @@
       XDG_GITHUB_DIR = "$HOME/Github";
     };
   };
+
+  # Automatically clone GitHub repositories on first setup
+  home.activation.cloneGithubRepos = lib.hm.dag.entryAfter ["writeBoundary"] ''
+    GITHUB_DIR="${userSettings.homeDir}/Github"
+
+    # Ensure directory exists
+    mkdir -p "$GITHUB_DIR"
+
+    # List of repos to clone
+    repos=(
+      "https://github.com/dsriggs1/dotfiles.git"
+      "https://github.com/dsriggs1/retrosheet.git"
+      "https://github.com/dsriggs1/Resume.git"
+      "https://github.com/dsriggs1/Baseball_Project.git"
+      "https://github.com/dsriggs1/Rcpp-Library.git"
+    )
+
+    for repo in "''${repos[@]}"; do
+      repo_name=$(basename "$repo" .git)
+      if [ ! -d "$GITHUB_DIR/$repo_name" ]; then
+        echo "Cloning $repo_name..."
+        $DRY_RUN_CMD ${pkgs.git}/bin/git clone "$repo" "$GITHUB_DIR/$repo_name"
+      else
+        echo "Repository $repo_name already exists, skipping..."
+      fi
+    done
+  '';
+
   home.stateVersion = "23.11";
   programs.home-manager.enable = true;
 }
