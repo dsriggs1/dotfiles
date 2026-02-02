@@ -154,14 +154,162 @@ Claude SHOULD after any changes:
 
 ---
 
-## Git workflow
+## Git Usage
 
-- Work on the current branch unless told otherwise.
-- Never push without approval.
-- After successful rebuilds:
-  - present a short summary of changes
-  - propose 1–3 commit messages
-  - wait for explicit "commit" instruction.
+### Branch Management
+
+**Main Branches**:
+- `main`: Stable, tested configurations
+- Feature branches: For development and testing (e.g., `install`, `feature/plasma-config`)
+
+**Branch Operations**:
+- Stay on current branch unless explicitly instructed to switch
+- Create feature branches for experimental changes: `git checkout -b feature/description`
+- Never delete branches without approval
+- Keep branch names descriptive and lowercase with hyphens
+
+### Commit Message Conventions
+
+Follow conventional commits format:
+
+```
+<type>(<scope>): <short description>
+
+[optional body]
+
+[optional footer]
+```
+
+**Types**:
+- `feat`: New feature or module
+- `fix`: Bug fix or correction
+- `refactor`: Code restructuring without behavior change
+- `docs`: Documentation updates
+- `style`: Formatting, theming changes
+- `chore`: Maintenance tasks (dependency updates, cleanup)
+- `config`: Configuration changes
+
+**Examples**:
+- `feat(plasma): add custom keyboard shortcuts`
+- `fix(nixvim): resolve LSP configuration error`
+- `chore(flake): update nixpkgs to 25.11`
+- `config(system): enable bluetooth module`
+
+**Commit Message Rules**:
+- Focus on WHAT changed and WHY, not HOW it was created
+- Do NOT include references to Claude Code, AI generation, or automated tools
+- Remove any footers like "Generated with Claude Code" or "Co-Authored-By: Claude"
+- Keep messages professional and tool-agnostic
+- Commit history should reflect project changes, not development methodology
+
+### Commit Workflow
+
+**Before Committing**:
+1. Format code: `alejandra .`
+2. Check build: `sudo nixos-rebuild test --flake .#nixos`
+3. Review changes: `git diff`
+4. Stage relevant files: `git add <files>`
+
+**Creating Commits**:
+- Commit logical units of work (one feature/fix per commit)
+- Always wait for explicit user approval before committing
+- After successful rebuild, Claude will propose 1-3 commit messages
+- User must explicitly say "commit" or "yes, commit" to proceed
+
+**Never Commit**:
+- Broken configurations
+- Untested changes
+- Secrets or credentials
+- Generated files (hardware-configuration.nix changes require review)
+
+### Push/Pull Policy
+
+**Pulling**:
+- Pull before starting new work: `git pull origin main`
+- Use rebase to keep history clean: `git pull --rebase`
+
+**Pushing**:
+- NEVER push without explicit user approval
+- Always push to feature branches first
+- Never force-push to `main`
+- Force-push to feature branches only with approval: `git push --force-with-lease`
+
+### Merge/Rebase Strategy
+
+**For Feature Branches**:
+- Rebase on main to keep history linear: `git rebase main`
+- Squash commits if needed before merging: `git rebase -i main`
+
+**For Main Branch**:
+- Merge feature branches with: `git merge --no-ff feature/name`
+- Keep merge commits for features
+- Fast-forward for small fixes
+
+**Never Without Approval**:
+- Interactive rebase
+- History rewriting (amend, reset, rebase) on pushed commits
+- Merge to main branch
+
+### Common Operations
+
+**Status Check**:
+```bash
+git status              # Check working tree
+git log --oneline -10   # View recent commits
+git diff                # View unstaged changes
+git diff --staged       # View staged changes
+```
+
+**Stashing**:
+```bash
+git stash               # Save work in progress
+git stash pop           # Restore stashed changes
+git stash list          # View all stashes
+```
+
+**Undoing Changes**:
+```bash
+git restore <file>      # Discard unstaged changes
+git restore --staged <file>  # Unstage file
+git reset HEAD~1        # Undo last commit (keep changes)
+```
+
+**Viewing History**:
+```bash
+git log --graph --oneline --all  # Visual branch history
+git show <commit>                # Show specific commit
+git blame <file>                 # See line-by-line authorship
+```
+
+### After Changes Checklist
+
+When Claude makes configuration changes:
+
+1. ✅ Show `git status`
+2. ✅ Show `git diff` for modified files
+3. ✅ List all files changed
+4. ✅ Report build/test results
+5. ✅ Propose 1-3 commit messages following conventions
+6. ⏸️ **WAIT** for explicit commit approval
+7. ⏸️ **WAIT** for explicit push approval (if applicable)
+
+### Emergency Procedures
+
+**If Build Breaks**:
+1. Don't commit
+2. Review git diff to identify issues
+3. Restore last working state if needed: `git restore .`
+4. Check previous generation: `nixos-rebuild --list-generations`
+
+**If Accidentally Staged**:
+```bash
+git restore --staged .  # Unstage everything
+```
+
+**If Need to Abort Merge**:
+```bash
+git merge --abort
+```
 
 ---
 
