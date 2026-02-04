@@ -11,19 +11,19 @@
 
         # Idle → suspend
         autoSuspend = {
-          action = "sleep"; # "sleep" | "hibernate" | "shutDown" | "nothing"
-          idleTimeout = 5400; # suspend after 60 min inactive
+          action = "nothing"; # "sleep" | "hibernate" | "shutDown" | "nothing"
+          idleTimeout = null;
         };
         whenSleepingEnter = "standbyThenHibernate";
 
         # Display behavior
         dimDisplay = {
-          enable = true;
-          idleTimeout = 300; # dim after 5 min
+          enable = false;
+          idleTimeout = null;
         };
         turnOffDisplay = {
-          idleTimeout = 900; # turn off after 15 min (unlocked)
-          idleTimeoutWhenLocked = 60; # turn off after 1 min when locked
+          idleTimeout = "never";
+          idleTimeoutWhenLocked = null;
         };
 
         displayBrightness = 70; # keep full brightness on AC
