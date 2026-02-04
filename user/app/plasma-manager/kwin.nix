@@ -2,11 +2,7 @@
   programs.plasma = {
     kwin = {
       effects = {
-        blur = {
-          enable = true;
-          strength = 5;
-          noiseStrength = 8;
-        };
+        blur.enable = false; # replaced by kwin-effects-better-blur-dx (force blur)
         cube.enable = false;
         desktopSwitching.animation = "off";
         dimAdminMode.enable = false;
