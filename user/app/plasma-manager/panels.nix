@@ -31,7 +31,7 @@
               Appearance = {
                 dateDisplayFormat = "BesideTime";
                 dateFormat = "custom";
-                use24hFormat = 2;
+                use24hFormat = 0;
               };
             };
           }
