@@ -2,7 +2,7 @@
   stylix.enable = true;
   stylix.image = ./lake-sunrise.jpg;
   stylix.polarity = "dark";
-  stylix.cursor.size = 8;
+  stylix.cursor.size = 24;
   stylix.fonts.sizes.applications = 10;
   stylix.fonts.sizes.desktop = 5;
 
