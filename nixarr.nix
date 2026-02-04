@@ -46,4 +46,3 @@
     sonarr.enable = true;
   };
 }
-
