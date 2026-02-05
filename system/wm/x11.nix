@@ -7,6 +7,7 @@
 {
   services.xserver = {
     enable = true;
+    dpi = 96;
     layout = "us";
     xkbVariant = "";
     windowManager.qtile = {
