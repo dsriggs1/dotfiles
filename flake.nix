@@ -61,6 +61,7 @@
       hostname = "nixos"; # hostname
       profile = "personal"; # select a profile defined from my profiles directory
       locale = "en_US.UTF-8"; # select locale
+      device = "/dev/nvme0n1"; # disk device - install.sh auto-detects and patches this
     };
 
     userSettings = {
