@@ -83,6 +83,8 @@
       homeDir = "/home/sean";
     };
 
+    keybindings = import ./settings/keybindings.nix;
+
     # Define pkgs-stable once for reuse
     pkgs-stable = import nixpkgs {
       system = systemSettings.system;
@@ -95,7 +97,7 @@
     nixosConfigurations.${systemSettings.hostname} = nixpkgs.lib.nixosSystem {
       system = systemSettings.system;
       specialArgs = {
-        inherit systemSettings pkgs-stable inputs;
+        inherit systemSettings keybindings pkgs-stable inputs;
         #nur = import nur {
         #system = systemSettings.system;
         #config.allowUnfree = true;
@@ -121,7 +123,7 @@
           #   home-manager.extraSpecialArgs = specialArgs;
 
           home-manager.extraSpecialArgs = {
-            inherit inputs userSettings pkgs-stable;
+            inherit inputs userSettings keybindings pkgs-stable;
           };
 
           home-manager.useGlobalPkgs = true;
