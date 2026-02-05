@@ -123,6 +123,32 @@ When modifying configurations:
 # Execution & Safety Rules
 
 ## Default permissions
+
+### No approval needed (read-only / non-destructive)
+Claude MAY freely run without asking:
+- read any file in the repo or filesystem
+- search the codebase (grep, glob, find)
+- run web searches and fetch web pages
+- query the nix store (nix-store -q*, nix flake show, nix flake metadata, nix eval)
+- run nix flake check, nix build, nixos-rebuild dry-activate / test
+- show git status / diff / log
+- run alejandra / nix fmt (formatting only)
+
+### Approval needed (writes / mutations)
+Claude MUST ask before:
+- creating, editing, or deleting files
+- adding or removing modules
+- running home-manager switch
+- running nixos-rebuild switch or boot
+- committing, pushing, rebasing, or force-pushing
+- deleting branches or tags
+- modifying Disko / partitioning / filesystem layout
+- deleting snapshots or subvolumes
+- touching secrets or credentials
+- any other destructive system commands
+
+---
+
 Claude MAY:
 - create or edit files
 - add new modules
@@ -320,6 +346,7 @@ git merge --abort
 - Never auto-garbage-collect or delete generations.
 - Avoid removing boot entries.
 - Keep changes minimal.
+- **Display server awareness**: When making or suggesting changes that are relevant to the display server (e.g. compositing, GPU, windowing, desktop environment, app config that differs between X11 and Wayland), first check which one is in use. Look at `system/wm/` for the active session file (currently `x11.nix`; a `wayland.nix` may be added later) and, if needed, confirm at runtime with `echo $WAYLAND_DISPLAY` (non-empty = Wayland, empty = X11). Tailor suggestions and configs accordingly — do not assume X11.
 
 ---
 
