@@ -3,7 +3,7 @@
     enable = true;
     fade = true;
     inactiveOpacity = 0.7;
-    activeOpacity = 1;
+    activeOpacity = 0.7;
     settings = {
       # blur = {
       #   method = "gaussian";
