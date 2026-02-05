@@ -1,68 +1,68 @@
-{...}: {
+{keybindings, ...}: {
   programs.plasma = {
     enable = true;
     hotkeys.commands = {
       # Terminal
       launch-alacritty = {
         name = "Launch Alacritty";
-        key = "Meta+Return";
+        key = keybindings.launchTerminal;
         command = "alacritty";
       };
 
       # Browser
       launch-firefox = {
         name = "Launch Firefox";
-        key = "Meta+Shift+B";
+        key = keybindings.launchBrowser;
         command = "firefox";
       };
 
       # File Manager
       launch-file-manager = {
         name = "Launch File Manager";
-        key = "Meta+E";
+        key = keybindings.launchFileManager;
         command = "dolphin";
       };
 
       # Screenshots
       screenshot-area = {
         name = "Screenshot Area";
-        key = "Meta+Shift+S";
+        key = keybindings.screenshotArea;
         command = "spectacle -r";
       };
 
       screenshot-full = {
         name = "Screenshot Full Screen";
-        key = "Print";
+        key = keybindings.screenshotFull;
         command = "spectacle -f";
       };
 
       screenshot-window = {
         name = "Screenshot Window";
-        key = "Meta+Print";
+        key = keybindings.screenshotWindow;
         command = "spectacle -a";
       };
 
       # System
       power-menu = {
         name = "Power Menu";
-        key = "Meta+Ctrl+Delete";
+        key = keybindings.powerMenu;
         command = "qdbus org.kde.LogoutPrompt /LogoutPrompt promptAll";
       };
 
       launch-system-monitor = {
         name = "Launch System Monitor";
-        key = "Meta+Shift+Escape";
+        key = keybindings.launchSystemMonitor;
         command = "plasma-systemmonitor";
       };
 
       # Application Launcher
       launch-runner = {
         name = "KRunner";
-        key = "Meta+Space";
+        key = keybindings.appRunner;
         command = "krunner";
       };
 
-      # Clipboard
+      # Clipboard (plasma-specific: requires klipper)
       clipboard-history = {
         name = "Clipboard History";
         key = "Meta+V";
@@ -72,26 +72,26 @@
       # Editor
       launch-vscode = {
         name = "Launch VSCode";
-        key = "Meta+Shift+C";
+        key = keybindings.launchVscode;
         command = "code";
       };
 
       # Volume Controls
       volume-up = {
         name = "Volume Up";
-        key = "Meta+Up";
+        key = keybindings.volumeUp;
         command = "pactl set-sink-volume @DEFAULT_SINK@ +5%";
       };
 
       volume-down = {
         name = "Volume Down";
-        key = "Meta+Down";
+        key = keybindings.volumeDown;
         command = "pactl set-sink-volume @DEFAULT_SINK@ -5%";
       };
 
       volume-mute = {
         name = "Volume Mute";
-        key = "Meta+M";
+        key = keybindings.volumeMute;
         command = "pactl set-sink-mute @DEFAULT_SINK@ toggle";
       };
     };
