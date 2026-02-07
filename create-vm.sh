@@ -10,15 +10,15 @@ VM_NAME="nixos-vm"
 
 # Memory - Amount of RAM in megabytes (MB)
 # Examples: 1024 = 1GB, 2048 = 2GB, 4096 = 4GB, 8192 = 8GB
-MEMORY=1024
+MEMORY=2048
 
 # vCPUs - Number of virtual CPU cores
 # Recommended: 1-4 for most use cases
-VCPUS=1
+VCPUS=2
 
 # Disk Size - Virtual hard drive size in gigabytes (GB)
 # Examples: 10, 20, 50, 100
-DISK_SIZE=10
+DISK_SIZE=50
 
 # ISO Path - Full path to the installation ISO file
 # This must be an existing file on your system
@@ -52,6 +52,15 @@ CONNECTION="qemu:///session"
 # Auto-attach Console - Open console after creation
 # Options: true, false
 AUTO_CONSOLE=false
+
+# Auto-install - After VM boots, automatically downloads install.sh via
+# the serial console, then runs it. Hands off to your terminal once
+# install.sh is running so you can watch/interact.
+# Options: true, false
+AUTO_INSTALL=true
+
+# Install script URL - raw GitHub URL for install.sh
+INSTALL_URL="https://raw.githubusercontent.com/dsriggs1/dotfiles/main/install.sh"
 
 ################################################################################
 # Script execution (no need to edit below this line)
@@ -126,26 +135,56 @@ echo ""
 echo ""
 echo -e "${GREEN}✓ VM '$VM_NAME' created successfully!${NC}"
 echo ""
-echo "Next steps:"
-echo "  # Open VM in virt-manager GUI"
-echo "  virt-manager --connect $CONNECTION"
-echo ""
-echo "  # Or connect to console"
-echo "  virsh --connect $CONNECTION console $VM_NAME"
-echo ""
-echo "Useful commands:"
-echo "  # List all VMs"
-echo "  virsh --connect $CONNECTION list --all"
-echo ""
-echo "  # Start VM"
-echo "  virsh --connect $CONNECTION start $VM_NAME"
-echo ""
-echo "  # Shutdown VM"
-echo "  virsh --connect $CONNECTION shutdown $VM_NAME"
-echo ""
-echo "  # Force stop VM"
-echo "  virsh --connect $CONNECTION destroy $VM_NAME"
-echo ""
-echo "  # Delete VM (WARNING: removes all data)"
-echo "  virsh --connect $CONNECTION undefine $VM_NAME --remove-all-storage"
-echo ""
+
+if [[ "$AUTO_INSTALL" == true ]]; then
+    echo -e "${GREEN}Auto-install enabled. Connecting to VM console...${NC}"
+    echo -e "${YELLOW}Waiting for NixOS installer to boot (timeout: 5 min)...${NC}"
+    echo ""
+
+    EXPECT_SCRIPT=$(mktemp)
+    cat > "$EXPECT_SCRIPT" << EOF
+set timeout 300
+spawn virsh --connect ${CONNECTION} console ${VM_NAME}
+# Wait for GRUB boot countdown on serial, then Tab into edit mode
+expect -re {Automatic boot}
+send "\t"
+# Wait for edit mode to render, go to end of line, append console param
+after 1000
+send "\x05"
+send " console=ttyS0,115200"
+send "\r"
+# Now wait for the installer shell prompt (nixos or root)
+expect -re {(root|nixos)@}
+send "curl -s -o /tmp/install.sh ${INSTALL_URL}\r"
+expect -re {(root|nixos)@}
+send "chmod +x /tmp/install.sh && /tmp/install.sh\r"
+interact
+EOF
+
+    nix-shell -p expect --run "expect $EXPECT_SCRIPT"
+    rm -f "$EXPECT_SCRIPT"
+else
+    echo "Next steps:"
+    echo "  # Open VM in virt-manager GUI"
+    echo "  virt-manager --connect $CONNECTION"
+    echo ""
+    echo "  # Or connect to console"
+    echo "  virsh --connect $CONNECTION console $VM_NAME"
+    echo ""
+    echo "Useful commands:"
+    echo "  # List all VMs"
+    echo "  virsh --connect $CONNECTION list --all"
+    echo ""
+    echo "  # Start VM"
+    echo "  virsh --connect $CONNECTION start $VM_NAME"
+    echo ""
+    echo "  # Shutdown VM"
+    echo "  virsh --connect $CONNECTION shutdown $VM_NAME"
+    echo ""
+    echo "  # Force stop VM"
+    echo "  virsh --connect $CONNECTION destroy $VM_NAME"
+    echo ""
+    echo "  # Delete VM (WARNING: removes all data)"
+    echo "  virsh --connect $CONNECTION undefine $VM_NAME --remove-all-storage"
+    echo ""
+fi

@@ -1,8 +1,17 @@
 #!/usr/bin/env nix-shell
 #!nix-shell -i bash -p git
 
+# Auto-detect disk device
+DEVICE=$(lsblk -dpn -o NAME,TYPE | awk '$2 == "disk" {print $1; exit}')
+if [ -z "$DEVICE" ]; then
+  echo "Error: could not auto-detect disk device"
+  lsblk -dp
+  exit 1
+fi
+echo "Detected disk device: $DEVICE"
+
 curl https://raw.githubusercontent.com/dsriggs1/dotfiles/main/disko/btrfs-subvolumes.nix -o /tmp/btrfs-subvolumes.nix
-sudo nix --experimental-features "nix-command flakes" run github:nix-community/disko -- --mode disko /tmp/btrfs-subvolumes.nix --arg device '"/dev/nvme0n1"'
+sudo nix --experimental-features "nix-command flakes" run github:nix-community/disko -- --mode disko /tmp/btrfs-subvolumes.nix --arg device "\"$DEVICE\""
 
 sudo nixos-generate-config --no-filesystems --root /mnt
 cd /mnt/etc/nixos || exit 1
@@ -10,6 +19,7 @@ cd /mnt/etc/nixos || exit 1
 sudo git clone https://github.com/dsriggs1/dotfiles
 cd dotfiles || exit
 sudo git checkout install
+sudo sed -i "s|device = \"[^\"]*\"|device = \"$DEVICE\"|" flake.nix
 sudo rm hardware-configuration.nix
 sudo cp /mnt/etc/nixos/hardware-configuration.nix /mnt/etc/nixos/dotfiles
 sudo cp -r /mnt/etc/nixos /mnt/etc/persist

@@ -1,7 +1,9 @@
 {
+  config,
   pkgs,
   lib,
   userSettings,
+  keybindings,
   pkgs-stable,
   ...
 }: {
@@ -24,8 +26,9 @@
 
   # Example themes: https://github.com/tinted-theming/schemes/tree/spec-0.11/base16
   # Some example color schemes that can be turned on/off
-  stylix.image = ./system/style/lake-sunrise.jpg;
+  stylix.image = ./wallpapers/Fantasy-Autumn.png;
   stylix.targets.gnome.enable = false;
+  programs.alacritty.enable = true;
   #stylix.base16Scheme = "${pkgs.base16-schemes}/share/themes/dracula.yaml";
   #  stylix.base16Scheme = "${pkgs.base16-schemes}/share/themes/oxocarbon-dark.yaml";
   #stylix.base16Scheme = "/home/sean/Downloads/dotfiles/themes/cyborg_girl";
@@ -39,7 +42,23 @@
     # qtile
     nushell
     pfetch
+    # GitHub SSH setup script
+    (writeShellScriptBin "setup-github-ssh" (builtins.readFile ./scripts/setup-github-ssh.sh))
   ];
+
+  home.file.".config/stylix/wallpaper".source = config.stylix.image;
+
+  home.file.".config/stylix/fonts.json" = {
+    text = builtins.toJSON {
+      desktop = config.stylix.fonts.sizes.desktop;
+      applications = config.stylix.fonts.sizes.applications;
+      terminal = config.stylix.fonts.sizes.terminal;
+    };
+  };
+
+  home.file.".config/qtile/keybindings.json" = {
+    text = builtins.toJSON keybindings;
+  };
 
   home.file.".config/qtile/config.py" = {
     source = ./qtile/config.py;
@@ -62,6 +81,63 @@
       XDG_GITHUB_DIR = "$HOME/Github";
     };
   };
+
+  # Automatically setup GitHub SSH key on first activation
+  home.activation.setupGithubSSH = lib.hm.dag.entryAfter ["writeBoundary"] ''
+        SSH_KEY="${userSettings.homeDir}/.ssh/github"
+        SSH_PUB="$SSH_KEY.pub"
+        NOTICE_FILE="${userSettings.homeDir}/GITHUB_SSH_SETUP.txt"
+
+        if [ ! -f "$SSH_KEY" ]; then
+          # Ensure .ssh directory exists with correct permissions
+          mkdir -p "${userSettings.homeDir}/.ssh"
+          chmod 700 "${userSettings.homeDir}/.ssh"
+
+          # Generate SSH key
+          ${pkgs.openssh}/bin/ssh-keygen -t ed25519 -C "dsriggs1@gmail.com" -f "$SSH_KEY" -N "" -q
+          chmod 600 "$SSH_KEY"
+          chmod 644 "$SSH_PUB"
+
+          # Create notice file with instructions
+          cat > "$NOTICE_FILE" << 'NOTICE_EOF'
+    ==========================================
+       GitHub SSH Key Generated!
+    ==========================================
+
+    Your new SSH key has been generated at:
+      ~/.ssh/github
+
+    Add this public key to GitHub:
+    ------------------------------------------
+    NOTICE_EOF
+          cat "$SSH_PUB" >> "$NOTICE_FILE"
+          cat >> "$NOTICE_FILE" << 'NOTICE_EOF'
+    ------------------------------------------
+
+    Next Steps:
+    1. Copy the public key above
+    2. Visit: https://github.com/settings/ssh/new
+    3. Paste the key and give it a title
+    4. Click 'Add SSH key'
+    5. Test with: ssh -T git@github.com
+
+    After adding to GitHub, update your dotfiles remote:
+      cd ~/Downloads/dotfiles
+      git remote set-url origin git@github.com:YOUR_USERNAME/dotfiles.git
+
+    Delete this file after completing setup:
+      rm ~/GITHUB_SSH_SETUP.txt
+    ==========================================
+    NOTICE_EOF
+
+          echo "" >&2
+          echo "=========================================="
+          echo "   GitHub SSH Key Generated!"
+          echo "   See ~/GITHUB_SSH_SETUP.txt for details"
+          echo "=========================================="
+          echo ""
+        fi
+  '';
 
   # Automatically clone GitHub repositories on first setup
   home.activation.cloneGithubRepos = lib.hm.dag.entryAfter ["writeBoundary"] ''

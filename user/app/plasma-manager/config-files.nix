@@ -13,6 +13,16 @@
         Effect-overview.BorderActivate = 9;
         Plugins = {
           krohnkiteEnabled = true;
+          shapecornersEnabled = true;
+          better_blur_dxEnabled = true;
+        };
+        "Effect-better-blur-dx" = {
+          BlurStrength = 5;
+          NoiseStrength = 8;
+          BlurMatching = true;
+          BlurNonMatching = true;
+          BlurDecorations = true;
+          WindowClasses = "firefox\nthunar\nalacritty\nkitty\ndolphin";
         };
         "Round-Corners" = {
           ActiveOutlineAlpha = 255;
@@ -23,21 +33,21 @@
           DisableOutlineTile = false;
           DisableRoundTile = false;
           InactiveCornerRadius = 8;
-          InactiveOutlineAlpha = 0;
+          InactiveOutlineAlpha = 128;
           InactiveOutlineUseCustom = false;
           InactiveOutlineUsePalette = true;
           InactiveSecondOutlineAlpha = 0;
           InactiveSecondOutlineThickness = 0;
-          OutlineThickness = 1;
-          SecondOutlineThickness = 0;
+          OutlineThickness = 3;
+          SecondOutlineThickness = 1;
           Size = 8;
         };
         "Script-krohnkite" = {
-          screenGapBetween = 3;
-          screenGapBottom = 3;
-          screenGapLeft = 3;
-          screenGapRight = 3;
-          screenGapTop = 3;
+          screenGapBetween = 5;
+          screenGapBottom = 5;
+          screenGapLeft = 5;
+          screenGapRight = 5;
+          screenGapTop = 5;
         };
       };
     };

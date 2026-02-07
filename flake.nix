@@ -36,6 +36,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.home-manager.follows = "home-manager";
     };
+    kwin-effects-better-blur-dx = {
+      url = "github:xarblu/kwin-effects-better-blur-dx";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = {
@@ -57,6 +61,7 @@
       hostname = "nixos"; # hostname
       profile = "personal"; # select a profile defined from my profiles directory
       locale = "en_US.UTF-8"; # select locale
+      device = "/dev/nvme0n1"; # disk device - install.sh auto-detects and patches this
     };
 
     userSettings = {
@@ -79,6 +84,8 @@
       homeDir = "/home/sean";
     };
 
+    keybindings = import ./settings/keybindings.nix;
+
     # Define pkgs-stable once for reuse
     pkgs-stable = import nixpkgs {
       system = systemSettings.system;
@@ -91,7 +98,7 @@
     nixosConfigurations.${systemSettings.hostname} = nixpkgs.lib.nixosSystem {
       system = systemSettings.system;
       specialArgs = {
-        inherit systemSettings pkgs-stable inputs;
+        inherit systemSettings keybindings pkgs-stable inputs;
         #nur = import nur {
         #system = systemSettings.system;
         #config.allowUnfree = true;
@@ -117,7 +124,7 @@
           #   home-manager.extraSpecialArgs = specialArgs;
 
           home-manager.extraSpecialArgs = {
-            inherit inputs userSettings pkgs-stable;
+            inherit inputs userSettings keybindings pkgs-stable;
           };
 
           home-manager.useGlobalPkgs = true;

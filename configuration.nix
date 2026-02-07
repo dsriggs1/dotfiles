@@ -4,9 +4,7 @@
 {
   #  config,
   pkgs,
-  pkgs-stable,
   systemSettings,
-  lib,
   # nixarr,
   inputs,
   ...
@@ -24,9 +22,11 @@
     ./system/app/picom.nix
     ./system/wm/x11.nix
     ./system/security/sshd.nix
-    (import ./disko/btrfs-subvolumes.nix {device = "/dev/nvme0n1";})
+    (import ./disko/btrfs-subvolumes.nix {device = systemSettings.device;})
     ./system/style/stylix.nix
-    ./impermanence.nix
+    ./system/packages.nix
+    ./system/users.nix
+    #./impermanence.nix
     ./system/hardware/power.nix
     ./system/app/virt-manager.nix
     ./system/app/distrobox.nix
@@ -60,33 +60,26 @@
   #   randomizedDelaySec = "45min";
   # };
 
-  # Bootloader.
+  # Bootloader - Robust configuration for VMs and physical hardware
   boot.loader.grub.enable = true;
+  boot.loader.grub.device = "nodev";
   boot.loader.grub.efiSupport = true;
   boot.loader.grub.efiInstallAsRemovable = true;
-  # boot.loader.grub.devices = ["/dev/nvme0n1"];
-  #boot.loader.grub.useOSProber = true;
+  boot.loader.grub.useOSProber = true;
+
+  # Enable firmware for WiFi and other hardware
+  hardware.enableRedistributableFirmware = true;
 
   networking.hostName = systemSettings.hostname; # Define your hostname.
-  networking.wireless.enable = true; # Enables wireless support via wpa_supplicant.
-  networking.wireless.networks = {
-    #"MySpectrumWiFi08-5G".pskFile = "/persist/passwords/wifi-password";
-    # other networks go here
-  };
+  # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";
   # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
 
   # Enable networking
-  networking.networkmanager = {
-    enable = true;
-    unmanaged = [
-      "*"
-      "except:type:wwan"
-      "except:type:gsm"
-    ];
-  };
+  networking.networkmanager.enable = true;
+
   # Set your time zone.
   #time.timeZone = "America/New_York";
   time.timeZone = systemSettings.timezone;
@@ -111,158 +104,6 @@
   #   enable = true;
   #   xwayland.enable = true;
 
-  # Define a user account. Don't forget to set a password with 'passwd'.
-
-  boot.initrd.postDeviceCommands = lib.mkAfter ''
-         mkdir /btrfs_tmp
-       mount /dev/root_vg/root /btrfs_tmp
-     if [[ -e /btrfs_tmp/root ]]; then
-       mkdir -p /btrfs_tmp/old_roots
-     timestamp=$(date --date="@$(stat -c %Y /btrfs_tmp/root)" "+%Y-%m-%-d_%H:%M:%S")
-    mv /btrfs_tmp/root "/btrfs_tmp/old_roots/$timestamp"
-    fi
-
-      delete_subvolume_recursively() {
-        IFS=$'\n'
-      for i in $(btrfs subvolume list -o "$1" | cut -f 9- -d ' '); do
-        delete_subvolume_recursively "/btrfs_tmp/$i"
-    done
-    btrfs subvolume delete "$1"
-    }
-
-    for i in $(find /btrfs_tmp/old_roots/ -maxdepth 1 -mtime +30); do
-      delete_subvolume_recursively "$i"
-    done
-
-    btrfs subvolume create /btrfs_tmp/root
-    umount /btrfs_tmp
-  '';
-
-  users = {
-    mutableUsers = false;
-    users = {
-      sean = {
-        isNormalUser = true;
-        #initialPassword = "1";
-        hashedPasswordFile = "/persist/passwords/sean";
-        description = "sean";
-        extraGroups = ["networkmanager" "wheel" "libvirtd" "kvm"];
-        packages = with pkgs; [];
-        shell = pkgs.nushell;
-      };
-    };
-  };
-
-  # Allow unfree packages
-  nixpkgs.config.allowUnfree = true;
-
-  # List packages installed in system profile. To search, run:
-  # $ nix search wget
-
-  # environment.systemPackages = with pkgs-stable; [
-  #  pywalfox-native
-  #];
-
-  environment.systemPackages =
-    (with pkgs; [
-      xorg.xorgserver
-      xorg.xinit
-      vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-      wget
-      vscode
-      vscode-extensions.github.copilot
-      #  pkgs-stable.qtile
-      # pkgs-stable.python3Packages.qtile-extras
-      lightdm
-      firefox
-      #  chromium
-      git
-      neofetch
-      pfetch
-      alacritty
-      eza
-      starship
-      rofi
-      rofi-bluetooth
-      rofi-power-menu
-      rofi-screenshot
-      pywal
-      dunst
-      inotify-tools
-      xfce.xfce4-power-manager
-      xfce.thunar
-      expressvpn
-      nil
-      R
-      rstudio
-      btop
-      figlet
-      bluez
-      neovim
-      unzip
-      mpv
-      freerdp
-      xfce.mousepad
-      vlc
-      pavucontrol
-      xfce.tumbler
-      xautolock
-      papirus-icon-theme
-      polkit_gnome
-      qalculate-gtk
-      brightnessctl
-      gum
-      man-pages
-      xdg-desktop-portal
-      networkmanagerapplet
-      gvfs
-      xdg-user-dirs
-      jellyfin
-      jellyfin-web
-      jellyfin-ffmpeg
-      qbittorrent
-      kitty
-      #pkgs-unstable.pywalfox-native
-      #pkgs-unstable.codesnap-nvim
-      #  spicetify-cli
-      #  spotify
-      jetbrains.pycharm-community-src
-      nitrogen
-      xclip
-      alejandra
-      black
-      google-java-format
-
-      prettierd
-      rustfmt
-      stylua
-      vimPlugins.plenary-nvim
-      yazi
-      zoxide
-      fzf
-      nushell
-      nextcloud-client
-      pcloud
-      deskflow
-      distrobox
-      dnsmasq
-      element-desktop
-      kodi
-      kdePackages.okular
-      texworks
-      # stremio
-      claude-code
-    ])
-    ++ (with pkgs-stable; [
-      #python311Packages.qtile
-      mycli
-      python3Packages.qtile-extras
-    ]);
-
-  fonts.packages = with pkgs; [
-    font-awesome
-  ];
-
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
   # programs.mtr.enable = true;
@@ -273,7 +114,6 @@
 
   # List services that you want to enable:
   #jellyseerr service
-  services.jellyseerr.enable = true;
   #   services.picom = {
   #   enable = true;
   #   #backend="glx";

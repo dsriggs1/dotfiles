@@ -3,20 +3,34 @@
     enable = true;
     window-rules = [
       {
-        description = "Alacritty active opacity 70%";
-
+        description = "Disable transparency for Gwenview";
         match = {
           window-class = {
-            value = "alacritty";
+            value = "gwenview";
             type = "substring";
-            match-whole = true;
+            match-whole = false;
           };
         };
+        apply = {
+          opacityactive = {
+            value = 100;
+            apply = "force";
+          };
+          opacityinactive = {
+            value = 100;
+            apply = "force";
+          };
+        };
+      }
+      {
+        description = "All windows active opacity 70%";
+
+        match = {};
 
         apply = {
           opacityactive = {
             value = 70;
-            apply = "force"; # or "initially" if you only want it set on startup
+            apply = "force";
           };
         };
       }
@@ -32,40 +46,6 @@
         apply = {
           noborder = {
             value = true;
-            apply = "force";
-          };
-        };
-      }
-      {
-        description = "Rstudio active opacity 70%";
-
-        match = {
-          window-class = {
-            value = "rstudio";
-            type = "substring";
-            match-whole = true;
-          };
-        };
-
-        apply = {
-          opacityactive = {
-            value = 70;
-            apply = "force"; # or "initially" if you only want it set on startup
-          };
-        };
-      }
-      {
-        description = "Dolphin active opacity 70%";
-        match = {
-          window-class = {
-            value = "dolphin";
-            type = "substring";
-            match-whole = true;
-          };
-        };
-        apply = {
-          opacityactive = {
-            value = 70;
             apply = "force";
           };
         };
