@@ -11,7 +11,7 @@
     # WARNING: Do _not_ set them to `/home/user/whatever`, it will not work!
     mediaDir = "/data/media";
     stateDir = "/data/media/.state/nixarr";
-
+    mediaUsers = ["sean"];
     #    vpn = {
     #     enable = true;
     # WARNING: This file must _not_ be in the config git directory
@@ -19,16 +19,17 @@
     #    wgConf = "/data/.secret/wg.conf";
     # };
 
-    jellyfin = {
-      enable = true;
-      # These options set up a nginx HTTPS reverse proxy, so you can access
-      # Jellyfin on your domain with HTTPS
-      #expose.https = {
-      # enable = true;
-      #    domainName = "your.domain.com";
-      #   acmeMail = "your@email.com"; # Required for ACME-bot
-      #};
-    };
+    #    jellyfin = {
+    #     enable = true;
+    # These options set up a nginx HTTPS reverse proxy, so you can access
+    # Jellyfin on your domain with HTTPS
+    #expose.https = {
+    # enable = true;
+    #    domainName = "your.domain.com";
+    #   acmeMail = "your@email.com"; # Required for ACME-bot
+    #};
+    #  openFirewall = true;
+    #  };
 
     #transmission = {
     # enable = true;
@@ -38,11 +39,11 @@
 
     # It is possible for this module to run the *Arrs through a VPN, but it
     # is generally not recommended, as it can cause rate-limiting issues.
-    bazarr.enable = true;
-    lidarr.enable = true;
-    prowlarr.enable = true;
-    radarr.enable = true;
-    readarr.enable = true;
-    sonarr.enable = true;
+    #    bazarr.enable = true;
+    #lidarr.enable = true;
+    #prowlarr.enable = true;
+    #radarr.enable = true;
+    #readarr.enable = true;
+    #sonarr.enable = true;
   };
 }
