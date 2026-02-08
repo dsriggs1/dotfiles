@@ -78,12 +78,20 @@
         rounding = 8;
         blur = {
           enabled = true;
-          size = 3;
-          passes = 1;
+          size = 8;
+          passes = 3;
+          new_optimizations = true;
         };
-        drop_shadow = true;
-        shadow_range = 4;
-        shadow_render_power = 3;
+
+        shadow = {
+          enabled = true;
+          range = 4;
+          render_power = 3;
+        };
+
+        # Window opacity (70% opaque = 0.7)
+        active_opacity = 0.7;
+        inactive_opacity = 0.7;
       };
 
       # Animations
@@ -106,9 +114,9 @@
       };
 
       # Gestures
-      gestures = {
-        workspace_swipe = true;
-      };
+      # gestures = {
+      #   workspace_swipe = true;
+      # };
 
       # Window rules
       windowrulev2 = [
