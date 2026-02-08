@@ -10,6 +10,7 @@
         immutable = true;
       };
       kwinrc = {
+        Windows.FocusPolicy = "FocusFollowsMouse";
         Effect-overview.BorderActivate = 9;
         Plugins = {
           krohnkiteEnabled = true;
