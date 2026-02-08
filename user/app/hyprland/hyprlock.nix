@@ -4,9 +4,6 @@
   lib,
   ...
 }: {
-  # Disable stylix for hyprlock to use custom config
-  stylix.targets.hyprlock.enable = false;
-
   programs.hyprlock = {
     enable = true;
 
@@ -18,8 +15,8 @@
         no_fade_in = false;
       };
 
-      # Background
-      background = [
+      # Background (use lib.mkForce to override stylix defaults)
+      background = lib.mkForce [
         {
           monitor = "";
           path = "screenshot"; # Uses screenshot as background
@@ -33,8 +30,8 @@
         }
       ];
 
-      # Input field
-      input-field = [
+      # Input field (use lib.mkForce to override stylix defaults)
+      input-field = lib.mkForce [
         {
           monitor = "";
           size = "300, 50";
@@ -54,8 +51,8 @@
         }
       ];
 
-      # Time
-      label = [
+      # Time (use lib.mkForce to override stylix defaults)
+      label = lib.mkForce [
         {
           monitor = "";
           text = ''cmd[update:1000] echo "$(date +'%H:%M')"'';

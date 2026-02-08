@@ -147,6 +147,7 @@
         inherit inputs userSettings keybindings pkgs-stable;
       };
       modules = [
+        stylix.homeModules.stylix
         nixvim.homeModules.nixvim
         inputs.plasma-manager.homeModules.plasma-manager
         ./home.nix
