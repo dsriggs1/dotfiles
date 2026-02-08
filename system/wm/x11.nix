@@ -1,12 +1,14 @@
 {
   pkgs,
   pkgs-stable,
+  lib,
   ...
 }:
 #xserver nix install xserver
 {
   services.xserver = {
     enable = true;
+    videoDrivers = ["displaylink" "modesetting"];
     dpi = 96;
     layout = "us";
     xkbVariant = "";
@@ -20,6 +22,8 @@
     #desktopManager.xfce.enable = true;
     desktopManager.plasma6.enable = true;
     displayManager = {
+      sessionCommands = ''
+        ${lib.getBin pkgs.xorg.xrandr}/bin/xrandr --setprovideroutputsource 2 0'';
       sddm = {
         # background = "/etc/nixos/background/default.jpg";
         enable = true;
