@@ -13,6 +13,10 @@ elif
   exit
 fi
 
+# Ensure the passwords directory exists with secure permissions
+sudo mkdir -p /persist/passwords
+sudo chmod 700 /persist/passwords
+
 sudo mkpasswd -m sha-512 "$p1" | sudo tee /persist/passwords/sean
 echo
 echo "New password written to /persist/passwords/user"
