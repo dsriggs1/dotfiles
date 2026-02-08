@@ -23,6 +23,9 @@
     ./user/app/hyprland/hyprland.nix
   ];
 
+  # Allow unfree packages (needed for VSCode, etc.)
+  nixpkgs.config.allowUnfree = true;
+
   home.username = userSettings.username;
   home.homeDirectory = userSettings.homeDir;
 
@@ -182,8 +185,93 @@
     extraConfig = {
       XDG_BOOKS_DIR = "$HOME/Books";
       XDG_GITHUB_DIR = "$HOME/Github";
+      XDG_OBSIDIAN_DIR = "$HOME/Documents/Obsidian-Vaults";
     };
   };
+
+  # Obsidian vault structure for NixOS notes
+  home.file."Documents/Obsidian-Vaults/NixOS-Notes/README.md".text = ''
+    # NixOS Configuration Notes
+
+    This vault contains notes, session logs, and documentation from Claude Code sessions and NixOS configuration work.
+
+    ## Vault Structure
+
+    - **ClaudeCode-Sessions/**: Logs and notes from Claude Code work sessions
+    - **Configurations/**: Documentation of specific configuration changes
+    - **Troubleshooting/**: Solutions to problems encountered
+    - **Packages/**: Notes on installed packages and their configurations
+    - **Modules/**: Documentation of custom modules and their options
+
+    ## Quick Links
+
+    - [Dotfiles Repository](file:///${userSettings.homeDir}/Github/dotfiles)
+    - [CLAUDE.md](file:///${userSettings.homeDir}/Github/dotfiles/CLAUDE.md)
+    - [Module Options Documentation](file:///${userSettings.homeDir}/Github/dotfiles/docs/MODULE-OPTIONS.md)
+  '';
+
+  home.file."Documents/Obsidian-Vaults/NixOS-Notes/ClaudeCode-Sessions/.gitkeep".text = "";
+  home.file."Documents/Obsidian-Vaults/NixOS-Notes/Configurations/.gitkeep".text = "";
+  home.file."Documents/Obsidian-Vaults/NixOS-Notes/Troubleshooting/.gitkeep".text = "";
+  home.file."Documents/Obsidian-Vaults/NixOS-Notes/Packages/.gitkeep".text = "";
+  home.file."Documents/Obsidian-Vaults/NixOS-Notes/Modules/.gitkeep".text = "";
+
+  home.file."Documents/Obsidian-Vaults/NixOS-Notes/ClaudeCode-Sessions/Session-Template.md".text = ''
+    # Session - YYYY-MM-DD
+
+    ## Goal
+    [What you wanted to accomplish in this session]
+
+    ## Changes Made
+    -
+    -
+    -
+
+    ## Files Modified
+    - `path/to/file.nix` - [brief description]
+
+    ## Commands Run
+    ```bash
+    # Commands used during this session
+    ```
+
+    ## Learnings
+    -
+    -
+
+    ## Follow-up Tasks
+    - [ ]
+    - [ ]
+
+    ## References
+    - [[Related Note]]
+    - [External Link]()
+  '';
+
+  home.file."Documents/Obsidian-Vaults/NixOS-Notes/Configurations/Configuration-Template.md".text = ''
+    # [Configuration Name]
+
+    ## Overview
+    [Brief description of what this configuration does]
+
+    ## Location
+    `path/to/config.nix`
+
+    ## Key Options
+    ```nix
+    # Important configuration options
+    ```
+
+    ## Related Modules
+    - [[Module Name]]
+
+    ## Documentation
+    - [Official Docs]()
+    - [[Related Configuration]]
+
+    ## Notes
+    -
+  '';
 
   # Automatically setup GitHub SSH key on first activation
   home.activation.setupGithubSSH = lib.hm.dag.entryAfter ["writeBoundary"] ''
