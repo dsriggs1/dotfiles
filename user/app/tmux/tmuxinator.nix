@@ -1,8 +1,8 @@
-{...}: {
+{userSettings, ...}: {
   home.file = {
     ".config/tmuxinator/nixos.yml".text = ''
       name: nixos
-      root: ~/Downloads/dotfiles
+      root: ${userSettings.dotfilesDir}
       windows:
         - main:
             layout: main-horizontal
@@ -15,7 +15,7 @@
   home.file = {
     ".config/tmuxinator/nixos_nvim.yml".text = ''
       name: nixos_nvim
-      root: ~/Downloads/dotfiles/neovim
+      root: ${userSettings.dotfilesDir}/neovim
       windows:
         - main:
             layout: main-horizontal

@@ -1,4 +1,4 @@
-{...}: let
+{userSettings, ...}: let
   myAliases = {
     c = "clear";
     nf = "neofetch";
@@ -7,51 +7,51 @@
     lt = "eza -a --tree --level=1 --icons";
     shutdown = "systemctl poweroff";
     v = "nvim";
-    ts = "~/dotfiles/scripts/snapshot.sh";
+    ts = "${userSettings.dotfilesDir}/scripts/snapshot.sh";
     matrix = "cmatrix";
     wifi = "nmtui";
     od = "~/private/onedrive.sh";
-    rw = "~/dotfiles/waybar/reload.sh";
+    rw = "${userSettings.dotfilesDir}/waybar/reload.sh";
     winclass = "xprop | grep 'CLASS'";
-    dot = "cd ~/dotfiles";
+    dot = "cd ${userSettings.dotfilesDir}";
     picom = "picom --config ~/.config/picom/picom.conf";
-    dotfiles = "cd ~/Downloads/dotfiles";
+    dotfiles = "cd ${userSettings.dotfilesDir}";
     vim = "nvim";
     # SCRIPTS
-    gr = "python ~/dotfiles/scripts/growthrate.py";
+    gr = "python ${userSettings.dotfilesDir}/scripts/growthrate.py";
     ChatGPT = "python ~/mychatgpt/mychatgpt.py";
     chat = "python ~/mychatgpt/mychatgpt.py";
-    ascii = "~/dotfiles/scripts/figlet.sh";
+    ascii = "${userSettings.dotfilesDir}/scripts/figlet.sh";
 
     # VIRTUAL MACHINE
     vm = "~/private/launchvm.sh";
-    lg = "~/dotfiles/scripts/looking-glass.sh";
+    lg = "${userSettings.dotfilesDir}/scripts/looking-glass.sh";
     vmstart = "virsh --connect qemu:///system start win11";
     vmstop = "virsh --connect qemu:///system destroy win11";
 
     # EDIT CONFIG FILES
     confq = "nvim ~/.config/qtile/config.py";
     confql = "nvim ~/.local/share/qtile/qtile.log";
-    confp = "nvim ~/dotfiles/picom/picom.conf";
+    confp = "nvim ${userSettings.dotfilesDir}/picom/picom.conf";
     confb = "nvim ~/.bashrc";
-    confn = "nvim ~/Downloads/dotfiles/configuration.nix";
+    confn = "nvim ${userSettings.dotfilesDir}/configuration.nix";
 
     # EDIT NOTES
     notes = "nvim ~/notes.txt";
 
     # NIX SYSTEM
-    rebuild = "sudo nixos-rebuild switch --flake /home/sean/Downloads/dotfiles#nixos";
+    rebuild = "sudo nixos-rebuild switch --flake ${userSettings.dotfilesDir}#nixos";
 
-    rebuildTest = "sudo nixos-rebuild test";
-    rebuildBoot = "sudo nixos-rebuild boot";
-    rebuildDryRun = "sudo nixos-rebuild dry-run";
-    rebuildBuild = "nixos-rebuild build";
-    rebuildUpgrade = "sudo nixos-rebuild switch --upgrade";
-    rebuildShowTrace = "sudo nixos-rebuild switch --show-trace";
-    rebuildKeepGoing = "sudo nixos-rebuild switch --keep-going";
-    rebuildFast = "sudo nixos-rebuild switch --fast";
+    rebuildTest = "sudo nixos-rebuild test --flake ${userSettings.dotfilesDir}#nixos";
+    rebuildBoot = "sudo nixos-rebuild boot --flake ${userSettings.dotfilesDir}#nixos";
+    rebuildDryRun = "sudo nixos-rebuild dry-run --flake ${userSettings.dotfilesDir}#nixos";
+    rebuildBuild = "nixos-rebuild build --flake ${userSettings.dotfilesDir}#nixos";
+    rebuildUpgrade = "sudo nixos-rebuild switch --upgrade --flake ${userSettings.dotfilesDir}#nixos";
+    rebuildShowTrace = "sudo nixos-rebuild switch --show-trace --flake ${userSettings.dotfilesDir}#nixos";
+    rebuildKeepGoing = "sudo nixos-rebuild switch --keep-going --flake ${userSettings.dotfilesDir}#nixos";
+    rebuildFast = "sudo nixos-rebuild switch --fast --flake ${userSettings.dotfilesDir}#nixos";
     rebuildRollback = "sudo nixos-rebuild switch --rollback";
-    rebuildFlake = "sudo nixos-rebuild switch --flake .#hostname";
+    rebuildFlake = "sudo nixos-rebuild switch --flake ${userSettings.dotfilesDir}#nixos";
     # rebuildChannels = "sudo nix-channel --update && sudo nixos-rebuild switch";
 
     # SCREEN RESOLUTIONS

@@ -9,9 +9,9 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    #    impermanence = {
-    #     url = "github:nix-community/impermanence";
-    #   };
+    impermanence = {
+      url = "github:nix-community/impermanence";
+    };
 
     # nur.url = "github:nix-community/NUR";
     stylix.url = "github:danth/stylix/release-25.11";
@@ -52,6 +52,7 @@
     stylix,
     nixvim,
     disko,
+    impermanence,
     plasma-manager,
     ...
   } @ inputs: let
@@ -68,7 +69,7 @@
       username = "sean"; # username
       name = "Sean"; # name/identifier
       email = "dsriggs1@gmail.com"; # email (used for certain configurations)
-      dotfilesDir = "~/.dotfiles"; # absolute path of the local repo
+      dotfilesDir = "~/Github/dotfiles"; # absolute path of the local repo
       #theme = "io"; # selcted theme from my themes directory (./themes/)
       #wm = "hyprland"; # Selected window manager or desktop environment; must select one in both ./user/wm/ and ./system/wm/
       # window manager type (hyprland or x11) translator
@@ -117,7 +118,7 @@
         inputs.disko.nixosModules.disko
         #nixarr.nixosModules.default
         stylix.nixosModules.stylix
-        # inputs.impermanence.nixosModules.impermanence
+        inputs.impermanence.nixosModules.impermanence
         home-manager.nixosModules.home-manager
         #   (import ./disko-config.nix {device = "/dev/vda";})
         {
@@ -132,8 +133,7 @@
           home-manager.backupFileExtension = "backup";
           home-manager.sharedModules = [
             nixvim.homeModules.nixvim
-            inputs.plasma-manager.homeManagerModules.plasma-manager
-            # inputs.impermanence.homeManagerModules.impermanence
+            inputs.plasma-manager.homeModules.plasma-manager
           ];
           home-manager.users.${userSettings.username} = import ./home.nix;
         }
