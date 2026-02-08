@@ -6,99 +6,40 @@
 }: {
   nixpkgs.config.allowUnfree = true;
 
-  environment.systemPackages =
-    (with pkgs; [
-      xorg.xorgserver
-      xorg.xinit
-      vim
-      wget
-      vscode
-      vscode-extensions.github.copilot
-      lightdm
-      firefox
-      git
-      neofetch
-      pfetch
-      alacritty
-      eza
-      starship
-      rofi
-      rofi-bluetooth
-      rofi-power-menu
-      rofi-screenshot
-      pywal
-      dunst
-      inotify-tools
-      xfce.xfce4-power-manager
-      xfce.thunar
-      expressvpn
-      nil
-      R
-      rstudio
-      btop
-      figlet
-      bluez
-      neovim
-      unzip
-      mpv
-      freerdp
-      xfce.mousepad
-      vlc
-      pavucontrol
-      xfce.tumbler
-      xautolock
-      papirus-icon-theme
-      polkit_gnome
-      qalculate-gtk
-      brightnessctl
-      gum
-      man-pages
-      xdg-desktop-portal
-      networkmanagerapplet
-      gvfs
-      xdg-user-dirs
-      jellyfin
-      jellyfin-web
-      jellyfin-ffmpeg
-      qbittorrent
-      kitty
-      jetbrains.pycharm-community-src
-      nitrogen
-      xclip
-      alejandra
-      black
-      google-java-format
-      prettierd
-      rustfmt
-      stylua
-      vimPlugins.plenary-nvim
-      yazi
-      zoxide
-      fzf
-      nushell
-      nextcloud-client
-      pcloud
-      deskflow
-      distrobox
-      dnsmasq
-      element-desktop
-      kodi
-      kdePackages.okular
-      kdePackages.krohnkite
-      kde-rounded-corners
-      texworks
-      claude-code
-    ])
-    ++ (with pkgs-stable; [
-      mycli
-      python3Packages.qtile-extras
-    ])
-    ++ [
-      inputs.kwin-effects-better-blur-dx.packages.${pkgs.system}.default # Wayland
-      inputs.kwin-effects-better-blur-dx.packages.${pkgs.system}.x11 # X11
-    ];
+  # Minimal system packages - essential tools and system services only
+  # User applications and CLI tools are managed in home.nix for portability
+  environment.systemPackages = with pkgs; [
+    # Display server & session management
+    xorg.xorgserver
+    xorg.xinit
+    lightdm
+
+    # System services & daemons
+    bluez # Bluetooth daemon
+    polkit_gnome # Authentication agent
+    gvfs # Virtual filesystems
+    xdg-desktop-portal # Portal for sandboxed apps
+    xdg-user-dirs # XDG user directories
+    networkmanagerapplet # Network management
+
+    # Media server (system service)
+    jellyfin
+    jellyfin-web
+    jellyfin-ffmpeg
+
+    # Emergency/bootstrap tools (available before home-manager)
+    vim # Fallback editor
+    wget # Bootstrap downloads
+    git # Clone dotfiles
+    unzip # Extract archives
+
+    # Hardware/system utilities
+    brightnessctl # Hardware brightness control
+    man-pages # System documentation
+  ];
 
   fonts.packages = with pkgs; [
     font-awesome
+    papirus-icon-theme
   ];
 }

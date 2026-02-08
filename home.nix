@@ -5,6 +5,7 @@
   userSettings,
   keybindings,
   pkgs-stable,
+  inputs,
   ...
 }: {
   imports = [
@@ -19,6 +20,7 @@
     ./user/app/terminal/starship.nix
     ./user/app/terminal/zoxide.nix
     ./user/app/plasma-manager/plasma.nix
+    ./user/app/hyprland/hyprland.nix
   ];
 
   home.username = userSettings.username;
@@ -32,19 +34,120 @@
   #stylix.base16Scheme = "${pkgs.base16-schemes}/share/themes/dracula.yaml";
   #  stylix.base16Scheme = "${pkgs.base16-schemes}/share/themes/oxocarbon-dark.yaml";
   #stylix.base16Scheme = "/home/sean/Downloads/dotfiles/themes/cyborg_girl";
-  home.packages = with pkgs; [
-    git
-    vscode
-    #    firefox
-    starship
-    tmuxinator
-    # pkgs-unstable.vimPlugins.codesnap-nvim
-    # qtile
-    nushell
-    pfetch
-    # GitHub SSH setup script
-    (writeShellScriptBin "setup-github-ssh" (builtins.readFile ./scripts/setup-github-ssh.sh))
-  ];
+  home.packages =
+    (with pkgs; [
+      # Browsers & communication
+      # firefox - installed via programs.firefox in ./user/app/browser/firefox.nix
+      element-desktop
+
+      # Editors & IDEs
+      # vscode - installed via programs.vscode in ./user/app/vscode/vscode.nix
+      # neovim - installed via nixvim module in ./neovim/nixvim.nix
+      jetbrains.pycharm-community-src
+
+      # Terminals
+      # alacritty - installed via programs.alacritty.enable in home.nix
+      kitty
+
+      # Shell & CLI tools
+      # nushell - installed via programs.nushell in ./user/app/terminal/sh.nix
+      # starship - installed via programs.starship in ./user/app/terminal/starship.nix
+      zoxide # Config only in ./user/app/terminal/zoxide.nix
+      eza
+      fzf
+      btop
+      neofetch
+      pfetch
+      figlet
+      gum
+      xclip
+
+      # File managers & utilities
+      xfce.thunar
+      xfce.mousepad
+      yazi
+
+      # Media players
+      mpv
+      vlc
+      kodi
+
+      # Document viewers
+      kdePackages.okular
+      texworks
+
+      # Note-taking & knowledge management
+      obsidian
+
+      # Development tools
+      # git - installed via programs.git in ./user/app/git/git.nix
+      alejandra # Nix formatter
+      nil # Nix LSP
+      R
+      rstudio
+      tmuxinator # Config only in ./user/app/tmux/tmuxinator.nix
+
+      # Formatters
+      black # Python
+      google-java-format # Java
+      prettierd # JavaScript/JSON/etc
+      rustfmt # Rust
+      stylua # Lua
+
+      # Rofi & plugins
+      rofi
+      rofi-bluetooth
+      rofi-power-menu
+      rofi-screenshot
+
+      # Desktop utilities
+      dunst # Notifications
+      pywal # Theming
+      inotify-tools
+      xautolock
+      xfce.xfce4-power-manager
+      xfce.tumbler
+      pavucontrol # Audio control
+      nitrogen # Wallpaper setter
+      qalculate-gtk # Calculator
+
+      # KDE/compositor effects
+      kdePackages.krohnkite
+      kde-rounded-corners
+
+      # Cloud sync
+      nextcloud-client
+      pcloud
+
+      # Networking & remote
+      expressvpn
+      freerdp # Remote desktop
+      deskflow # Input sharing
+
+      # Containers & dev tools
+      distrobox
+      dnsmasq
+
+      # Torrents
+      qbittorrent
+
+      # AI/productivity
+      claude-code
+
+      # Neovim plugins
+      vimPlugins.plenary-nvim
+
+      # GitHub SSH setup script
+      (writeShellScriptBin "setup-github-ssh" (builtins.readFile ./scripts/setup-github-ssh.sh))
+    ])
+    ++ (with pkgs-stable; [
+      mycli # MySQL client
+      python3Packages.qtile-extras
+    ])
+    ++ [
+      inputs.kwin-effects-better-blur-dx.packages.${pkgs.system}.default # Wayland
+      inputs.kwin-effects-better-blur-dx.packages.${pkgs.system}.x11 # X11
+    ];
 
   home.file.".config/stylix/wallpaper".source = config.stylix.image;
 
