@@ -21,6 +21,7 @@
     ./system/app/mysql.nix
     ./system/app/picom.nix
     ./system/wm/x11.nix
+    ./system/wm/hyprland.nix
     ./system/security/sshd.nix
     (import ./disko/btrfs-subvolumes.nix {device = systemSettings.device;})
     ./system/style/stylix.nix
