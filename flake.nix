@@ -139,5 +139,18 @@
         }
       ];
     };
+
+    # Standalone home-manager configuration (for non-NixOS systems)
+    homeConfigurations.${userSettings.username} = home-manager.lib.homeManagerConfiguration {
+      pkgs = nixpkgs.legacyPackages.${systemSettings.system};
+      extraSpecialArgs = {
+        inherit inputs userSettings keybindings pkgs-stable;
+      };
+      modules = [
+        nixvim.homeModules.nixvim
+        inputs.plasma-manager.homeModules.plasma-manager
+        ./home.nix
+      ];
+    };
   };
 }
