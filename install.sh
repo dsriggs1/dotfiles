@@ -1,11 +1,11 @@
 #!/usr/bin/env nix-shell
 #!nix-shell -i bash -p git
 
-# Auto-detect disk device
-DEVICE=$(lsblk -dpn -o NAME,TYPE | awk '$2 == "disk" {print $1; exit}')
+# Auto-detect disk device (exclude removable media like USB sticks)
+DEVICE=$(lsblk -dpn -o NAME,TYPE,RM | awk '$2 == "disk" && $3 == "0" {print $1; exit}')
 if [ -z "$DEVICE" ]; then
   echo "Error: could not auto-detect disk device"
-  lsblk -dp
+  lsblk -dp -o NAME,TYPE,RM,SIZE
   exit 1
 fi
 echo "Detected disk device: $DEVICE"
