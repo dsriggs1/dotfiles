@@ -2,9 +2,9 @@
   fileSystems."/persist".neededForBoot = true;
 
   # Rotate btrfs root subvolume on each boot; old roots are kept for 30 days
-  boot.initrd.postDeviceCommands = lib.mkAfter ''
+  boot.initrd.postDeviceCommands = lib.mkBefore ''
     mkdir /btrfs_tmp
-    mount /dev/root_vg/root /btrfs_tmp
+    mount -o subvol=/ /dev/mapper/root_vg-root /btrfs_tmp
     if [[ -e /btrfs_tmp/root ]]; then
       mkdir -p /btrfs_tmp/old_roots
       timestamp=$(date --date="@$(stat -c %Y /btrfs_tmp/root)" "+%Y-%m-%-d_%H:%M:%S")
@@ -45,7 +45,7 @@
 
       {
         directory = "/var/lib/colord";
-        user = "color";
+        user = "colord";
         group = "colord";
         mode = "u=rwX,g=rX,o=";
       }
