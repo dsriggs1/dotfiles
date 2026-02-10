@@ -7,6 +7,7 @@
     ./window-rules.nix
     ./config-files.nix
     ./battery.nix
+    ./kwallet.nix
   ];
   programs.plasma = {
     enable = true;
