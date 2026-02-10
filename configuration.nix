@@ -16,10 +16,12 @@
     ./system/security/firewall.nix
     ./system/security/vpn.nix
     ./system/security/blocky.nix
+    ./system/security/pam.nix
     ./system/app/jellyfin.nix
     ./system/hardware/bluetooth.nix
     ./system/app/mysql.nix
     ./system/app/picom.nix
+    ./system/app/btrbk.nix
     ./system/wm/x11.nix
     ./system/wm/hyprland.nix
     ./system/security/sshd.nix
