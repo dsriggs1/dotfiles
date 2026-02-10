@@ -99,7 +99,7 @@
     nixosConfigurations.${systemSettings.hostname} = nixpkgs.lib.nixosSystem {
       system = systemSettings.system;
       specialArgs = {
-        inherit systemSettings keybindings pkgs-stable inputs;
+        inherit systemSettings userSettings keybindings pkgs-stable inputs;
         #nur = import nur {
         #system = systemSettings.system;
         #config.allowUnfree = true;
