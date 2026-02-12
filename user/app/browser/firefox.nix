@@ -7,9 +7,13 @@
     enable = true;
     profiles = {
       default = {
-        #        extensions = with inputs.firefox-addons.packages.${pkgs.system}; [
-        #         ublock-origin
-        #      ];
+        extensions = with inputs.firefox-addons.packages.${pkgs.system}; [
+          ublock-origin
+          istilldontcareaboutcookies
+        ];
+        settings = {
+          "browser.toolbars.bookmarks.visibility" = "always";
+        };
         bookmarks = {
           force = true;
           settings = [
