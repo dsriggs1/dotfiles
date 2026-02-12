@@ -64,6 +64,7 @@
       figlet
       gum
       xclip
+      wl-clipboard # Wayland clipboard tool
 
       # File managers & utilities
       xfce.thunar
@@ -86,6 +87,7 @@
       # git - installed via programs.git in ./user/app/git/git.nix
       alejandra # Nix formatter
       nil # Nix LSP
+      opencode # AI coding agent
       R
       rstudio
       tmuxinator # Config only in ./user/app/tmux/tmuxinator.nix
