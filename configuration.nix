@@ -22,6 +22,7 @@
     ./system/app/mysql.nix
     ./system/app/picom.nix
     ./system/app/btrbk.nix
+    ./system/app/ollama.nix
     ./system/wm/x11.nix
     ./system/wm/hyprland.nix
     ./system/security/sshd.nix
@@ -31,6 +32,7 @@
     ./system/users.nix
     ./impermanence.nix
     ./system/hardware/power.nix
+    ./system/hardware/auto-brightness.nix
     ./system/app/virt-manager.nix
     ./system/app/distrobox.nix
   ];
