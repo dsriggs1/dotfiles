@@ -36,6 +36,9 @@
     # Hardware/system utilities
     brightnessctl # Hardware brightness control
     man-pages # System documentation
+
+    # Compatibility layers
+    wine # Windows compatibility layer
   ];
 
   fonts.packages = with pkgs; [
