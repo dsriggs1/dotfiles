@@ -1,0 +1,21 @@
+{
+  "instructions": [
+    "CLAUDE.md"
+  ],
+  "plugins": [
+    "opencode-model-fallback"
+  ],
+  "opencode-model-fallback": {
+    "enabled": true,
+    "primaryModel": "anthropic/claude-sonnet-4-5",
+    "fallbackModel": "ollama/qwen2.5-coder:7b",
+    "cooldownMs": 300000,
+    "patterns": [
+      "rate limit",
+      "usage limit",
+      "too many requests",
+      "quota exceeded",
+      "overloaded"
+    ]
+  }
+}
