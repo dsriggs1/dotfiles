@@ -19,6 +19,7 @@
     ./codesnap.nix
     ./vimtex.nix
     ./avante.nix
+    ./opencode.nix
   ];
   programs.nixvim = {
     enable = true;
