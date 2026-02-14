@@ -29,6 +29,8 @@
     plugins = with pkgs; [
       tmuxPlugins.better-mouse-mode
       tmuxPlugins.cpu
+      tmuxPlugins.resurrect
+      tmuxPlugins.continuum
     ];
     extraConfig = ''
       # Stylix-aware pane borders
@@ -111,13 +113,19 @@
       set -g window-status-current-format "#[bg=#${config.lib.stylix.colors.base0C},fg=#${config.lib.stylix.colors.base00}]#[bg=#${config.lib.stylix.colors.base0C},fg=#${config.lib.stylix.colors.base00},bold] #I:#W #[bg=#${config.lib.stylix.colors.base00},fg=#${config.lib.stylix.colors.base0C}]"
       set -g window-status-separator ""
 
-      # Right: Pane index | Current path | CPU & RAM
-      set -g status-right "#[fg=#${config.lib.stylix.colors.base03}]#[bg=#${config.lib.stylix.colors.base03},fg=#${config.lib.stylix.colors.base05}] Pane #{pane_index} #[fg=#${config.lib.stylix.colors.base0B}]#[bg=#${config.lib.stylix.colors.base0B},fg=#${config.lib.stylix.colors.base00}]  #{b:pane_current_path} #[fg=#${config.lib.stylix.colors.base0E}]#[bg=#${config.lib.stylix.colors.base0E},fg=#${config.lib.stylix.colors.base00},bold]  #{cpu_percentage}  #{ram_percentage} "
+      # Right: Pane index | Current path | Git branch | CPU & RAM
+      set -g status-right "#[fg=#${config.lib.stylix.colors.base03}]#[bg=#${config.lib.stylix.colors.base03},fg=#${config.lib.stylix.colors.base05}] Pane #{pane_index} #[fg=#${config.lib.stylix.colors.base0B}]#[bg=#${config.lib.stylix.colors.base0B},fg=#${config.lib.stylix.colors.base00}]  #{b:pane_current_path} #(cd #{pane_current_path}; git rev-parse --abbrev-ref HEAD 2>/dev/null | sed 's/.*/  &/') #[fg=#${config.lib.stylix.colors.base0E}]#[bg=#${config.lib.stylix.colors.base0E},fg=#${config.lib.stylix.colors.base00},bold]  #{cpu_percentage}  #{ram_percentage} "
 
       # Update status bar every 2 seconds
       set -g status-interval 2
 
-      set -g @plugin 'tmux-plugins/tpm'
+      # tmux-resurrect settings
+      set -g @resurrect-strategy-nvim 'session'
+      set -g @resurrect-capture-pane-contents 'on'
+
+      # tmux-continuum settings - auto-save and auto-restore
+      set -g @continuum-restore 'on'
+      set -g @continuum-save-interval '15'
     '';
   };
 }
