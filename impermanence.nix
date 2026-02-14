@@ -37,6 +37,7 @@
       "/var/lib/expressvpn"
       "/var/lib/jellyfin"
       "/var/lib/libvirt"
+      "/var/lib/mysql"
       "/etc/NetworkManager/system-connections"
       "/data/media/.state"
       "/data/media/library"
