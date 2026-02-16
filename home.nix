@@ -5,6 +5,7 @@
   userSettings,
   keybindings,
   pkgs-stable,
+  pkgs-unstable,
   inputs,
   ...
 }: {
@@ -12,6 +13,7 @@
     ./user/app/terminal/sh.nix
     # ./firefox.nix
     ./user/app/git/git.nix
+    ./user/app/ssh/ssh.nix
     ./user/app/vscode/vscode.nix
     ./user/app/browser/firefox.nix
     ./neovim/nixvim.nix
@@ -21,6 +23,7 @@
     ./user/app/terminal/zoxide.nix
     ./user/app/plasma-manager/plasma.nix
     ./user/app/hyprland/hyprland.nix
+    ./user/app/rstudio/rstudio.nix
   ];
 
   # Allow unfree packages (needed for VSCode, etc.)

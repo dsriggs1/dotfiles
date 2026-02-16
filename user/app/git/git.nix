@@ -44,16 +44,4 @@
       url."git@github.com:".insteadOf = "https://github.com/";
     };
   };
-
-  # Configure SSH for GitHub
-  programs.ssh = {
-    enable = true;
-    matchBlocks = {
-      "github.com" = {
-        host = "github.com";
-        identityFile = "~/.ssh/github";
-        identitiesOnly = true;
-      };
-    };
-  };
 }
