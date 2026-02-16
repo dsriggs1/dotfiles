@@ -3,7 +3,8 @@
     enable = true;
     configFile = {
       "baloofilerc"."Basic Settings"."Indexing-Enabled" = false;
-      "kwinrc"."org.kde.kdecoration2"."ButtonsOnLeft" = "SF";
+      "kwinrc"."org.kde.kdecoration2"."ButtonsOnLeft" = "XIA";
+      "kwinrc"."org.kde.kdecoration2"."ButtonsOnRight" = "";
       "kwinrc"."Desktops"."Number" = {
         value = 5;
         # Forces kde to not change this value (even through the settings app).
