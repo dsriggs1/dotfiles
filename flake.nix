@@ -2,8 +2,8 @@
   description = "NixOS configuration for my personal laptop";
 
   inputs = {
-    #nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     nixpkgs.url = "github:NixOS/nixpkgs/release-25.11";
+    nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
     disko = {
       url = "github:nix-community/disko";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -45,6 +45,7 @@
   outputs = {
     self,
     nixpkgs,
+    nixpkgs-unstable,
     #nur,
     home-manager,
     firefox-addons,
@@ -92,6 +93,12 @@
       system = systemSettings.system;
       config.allowUnfree = true;
     };
+
+    # Define pkgs-unstable for packages not available in stable
+    pkgs-unstable = import nixpkgs-unstable {
+      system = systemSettings.system;
+      config.allowUnfree = true;
+    };
   in {
     #apps.x86_64-linux = {
     # disko = disko.defaultApp.x86_64-linux;
@@ -99,7 +106,7 @@
     nixosConfigurations.${systemSettings.hostname} = nixpkgs.lib.nixosSystem {
       system = systemSettings.system;
       specialArgs = {
-        inherit systemSettings userSettings keybindings pkgs-stable inputs;
+        inherit systemSettings userSettings keybindings pkgs-stable pkgs-unstable inputs;
         #nur = import nur {
         #system = systemSettings.system;
         #config.allowUnfree = true;
@@ -125,7 +132,7 @@
           #   home-manager.extraSpecialArgs = specialArgs;
 
           home-manager.extraSpecialArgs = {
-            inherit inputs userSettings keybindings pkgs-stable;
+            inherit inputs userSettings keybindings pkgs-stable pkgs-unstable;
           };
 
           home-manager.useGlobalPkgs = true;
@@ -144,7 +151,7 @@
     homeConfigurations.${userSettings.username} = home-manager.lib.homeManagerConfiguration {
       pkgs = nixpkgs.legacyPackages.${systemSettings.system};
       extraSpecialArgs = {
-        inherit inputs userSettings keybindings pkgs-stable;
+        inherit inputs userSettings keybindings pkgs-stable pkgs-unstable;
       };
       modules = [
         stylix.homeModules.stylix
