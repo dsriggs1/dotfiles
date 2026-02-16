@@ -9,7 +9,8 @@
     #
 
     # Initialize hook to add new entries to the database.
-    if (not ($env | default false __zoxide_hooked | get __zoxide_hooked)) {
+    let hooked = try { $env.__zoxide_hooked | into bool } catch { false }
+    if (not $hooked) {
       $env.__zoxide_hooked = true
       $env.config = ($env | default {} config).config
       $env.config = ($env.config | default {} hooks)
