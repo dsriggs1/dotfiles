@@ -186,6 +186,37 @@
         action = ":G <CR>";
         options.desc = "Git Status";
       }
+
+      # Yank visual selections to both clipboard and PRIMARY
+      {
+        mode = "v";
+        key = "y";
+        action = "\"+y:call setreg('*', getreg('+'))<CR>";
+        options = {
+          desc = "Yank to clipboard and PRIMARY";
+          silent = true;
+        };
+      }
+      # Auto-yank when exiting visual mode with Escape
+      {
+        mode = "v";
+        key = "<Esc>";
+        action = "\"+y<Esc>:call setreg('*', getreg('+'))<CR>";
+        options = {
+          desc = "Yank and exit visual mode";
+          silent = true;
+        };
+      }
+      # Auto-yank on visual mode mouse release
+      {
+        mode = "v";
+        key = "<LeftMouse>";
+        action = "<LeftMouse>\"+y:call setreg('*', getreg('+'))<CR>";
+        options = {
+          desc = "Auto-yank on mouse click";
+          silent = true;
+        };
+      }
     ];
   };
 }
