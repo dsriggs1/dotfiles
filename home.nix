@@ -23,7 +23,6 @@
     ./user/app/terminal/zoxide.nix
     ./user/app/plasma-manager/plasma.nix
     ./user/app/hyprland/hyprland.nix
-    ./user/app/rstudio/rstudio.nix
   ];
 
   # Allow unfree packages (needed for VSCode, etc.)
@@ -36,7 +35,17 @@
   # Some example color schemes that can be turned on/off
   stylix.image = ./wallpapers/Fantasy-Autumn.png;
   stylix.targets.gnome.enable = false;
-  programs.alacritty.enable = true;
+  programs.alacritty = {
+    enable = true;
+    package =
+      if builtins.pathExists "/etc/NIXOS"
+      then pkgs.alacritty
+      else
+        pkgs.writeShellScriptBin "alacritty" ''
+          exec ${inputs.nixgl.packages.${pkgs.system}.nixGLIntel}/bin/nixGLIntel \
+            ${pkgs.alacritty}/bin/alacritty "$@"
+        '';
+  };
   #stylix.base16Scheme = "${pkgs.base16-schemes}/share/themes/dracula.yaml";
   #  stylix.base16Scheme = "${pkgs.base16-schemes}/share/themes/oxocarbon-dark.yaml";
   #stylix.base16Scheme = "/home/sean/Downloads/dotfiles/themes/cyborg_girl";
