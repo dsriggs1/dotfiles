@@ -41,6 +41,7 @@
 
     # NIX SYSTEM
     rebuild = "sudo nixos-rebuild switch --flake ${userSettings.dotfilesDir}#nixos";
+    hs = "home-manager switch --flake ${userSettings.dotfilesDir}#${userSettings.username}";
 
     rebuildTest = "sudo nixos-rebuild test --flake ${userSettings.dotfilesDir}#nixos";
     rebuildBoot = "sudo nixos-rebuild boot --flake ${userSettings.dotfilesDir}#nixos";
