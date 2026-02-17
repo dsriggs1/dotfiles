@@ -131,6 +131,7 @@
       # KDE/compositor effects
       kdePackages.krohnkite
       kde-rounded-corners
+      kara
 
       # Cloud sync
       nextcloud-client
