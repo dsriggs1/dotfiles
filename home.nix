@@ -7,6 +7,7 @@
   pkgs-stable,
   pkgs-unstable,
   inputs,
+  isNixOS,
   ...
 }: {
   imports = [
@@ -23,6 +24,7 @@
     ./user/app/terminal/zoxide.nix
     ./user/app/plasma-manager/plasma.nix
     ./user/app/hyprland/hyprland.nix
+    ./user/app/backup/rsync.nix
   ];
 
   # Allow unfree packages (needed for VSCode, etc.)
@@ -38,7 +40,7 @@
   programs.alacritty = {
     enable = true;
     package =
-      if builtins.pathExists "/etc/NIXOS"
+      if isNixOS
       then pkgs.alacritty
       else
         pkgs.writeShellScriptBin "alacritty" ''

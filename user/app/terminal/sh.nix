@@ -39,6 +39,10 @@
     # EDIT NOTES
     notes = "nvim ~/notes.txt";
 
+    # BACKUP
+    backup = "systemctl --user start rsync-backup";
+    restore = "rsync-restore";
+
     # NIX SYSTEM
     rebuild = "sudo nixos-rebuild switch --flake ${userSettings.dotfilesDir}#nixos";
     hs = "home-manager switch --flake ${userSettings.dotfilesDir}#${userSettings.username}";

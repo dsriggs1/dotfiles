@@ -137,6 +137,7 @@
 
           home-manager.extraSpecialArgs = {
             inherit inputs userSettings keybindings pkgs-stable pkgs-unstable;
+            isNixOS = true;
           };
 
           home-manager.useGlobalPkgs = true;
@@ -156,6 +157,7 @@
       pkgs = nixpkgs.legacyPackages.${systemSettings.system};
       extraSpecialArgs = {
         inherit inputs userSettings keybindings pkgs-stable pkgs-unstable;
+        isNixOS = false;
       };
       modules = [
         stylix.homeModules.stylix
