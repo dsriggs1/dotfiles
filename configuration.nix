@@ -30,7 +30,7 @@
     ./system/style/stylix.nix
     ./system/packages.nix
     ./system/users.nix
-    ./impermanence.nix
+    #./impermanence.nix
     ./system/hardware/power.nix
     ./system/hardware/auto-brightness.nix
     ./system/app/virt-manager.nix
