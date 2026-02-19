@@ -26,7 +26,7 @@
           idleTimeoutWhenLocked = null;
         };
 
-        displayBrightness = 70; # keep full brightness on AC
+        displayBrightness = 100; # keep full brightness on AC
         powerProfile = "balanced"; # "performance" | "balanced" | "powerSaving"
       };
 
