@@ -17,7 +17,7 @@
 
       # Sean's work machine
       "sean-work" = {
-        hostname = "192.168.1.208";
+        hostname = "192.168.1.146";
         user = "sean";
         identityFile = "~/.ssh/id_ed25519";
       };
