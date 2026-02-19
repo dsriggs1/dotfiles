@@ -35,6 +35,7 @@
 
     # Hardware/system utilities
     brightnessctl # Hardware brightness control
+    gnome-disk-utility # Disk image writer and partition manager
     man-pages # System documentation
 
     # Compatibility layers
