@@ -38,6 +38,12 @@
       "/var/lib/jellyfin"
       "/var/lib/libvirt"
       "/var/lib/mysql"
+      {
+        directory = "/srv/media";
+        user = "sean";
+        group = "media";
+        mode = "0775";
+      }
       "/etc/NetworkManager/system-connections"
       "/data/media/.state"
       "/data/media/library"
