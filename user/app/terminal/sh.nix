@@ -42,6 +42,7 @@
     # BACKUP
     backup = "systemctl --user start rsync-backup";
     restore = "rsync-restore";
+    db-restore = "db-restore";
 
     # NIX SYSTEM
     rebuild = "sudo nixos-rebuild switch --flake ${userSettings.dotfilesDir}#nixos";

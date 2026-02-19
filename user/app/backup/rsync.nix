@@ -9,6 +9,7 @@
   backupHost = "sean-work";
 
   backupDirs = [
+    "Backups"
     "Books"
     "Desktop"
     "Documents"
@@ -16,6 +17,22 @@
     "Pictures"
     "Videos"
   ];
+
+  dbRestoreScript = pkgs.writeShellScriptBin "db-restore" ''
+    set -euo pipefail
+
+    DUMP="$HOME/Backups/mysql/retrosheet.sql.gz"
+
+    if [ ! -f "$DUMP" ]; then
+      echo "[db-restore] No dump file found at $DUMP" >&2
+      echo "[db-restore] Run 'restore' first to pull the backup from ${backupHost}." >&2
+      exit 1
+    fi
+
+    echo "[db-restore] Importing retrosheet database from $DUMP..."
+    /run/current-system/sw/bin/gunzip -c "$DUMP" | /run/current-system/sw/bin/mariadb
+    echo "[db-restore] Import complete."
+  '';
 
   restoreScript = pkgs.writeShellScriptBin "rsync-restore" ''
     set -euo pipefail
@@ -46,6 +63,15 @@
 
     run_backup() {
       FAILED=0
+
+      echo "[rsync-backup] Dumping retrosheet database..."
+      mkdir -p "$HOME/Backups/mysql"
+      /run/current-system/sw/bin/mariadb-dump \
+        --single-transaction \
+        --databases retrosheet \
+        | /run/current-system/sw/bin/gzip \
+        > "$HOME/Backups/mysql/retrosheet.sql.gz" \
+        || { echo "[rsync-backup] WARNING: database dump failed"; FAILED=1; }
 
       ${lib.concatMapStrings (dir: ''
         if [ -d "$HOME/${dir}" ]; then
@@ -82,7 +108,7 @@
   '';
 in
   lib.mkIf isNixOS {
-    home.packages = [restoreScript];
+    home.packages = [restoreScript dbRestoreScript];
 
     systemd.user.services.rsync-backup = {
       Unit = {
