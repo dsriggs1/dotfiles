@@ -15,6 +15,7 @@
           require("luasnip.loaders.from_lua").load({ paths = "${./.}/snippets" })
         '';
       };
+      cmp_luasnip.enable = true;
       copilot-cmp.enable = true;
       #      copilot-lua.enable = true;
       lspkind = {
@@ -32,6 +33,7 @@
             cmp_tabby = "[Tabby]";
             # codeium = "[Codeium]";
             copilot = "[Copilot]";
+            vim-dadbod-completion = "[DB]";
           };
         };
       };
@@ -81,6 +83,7 @@
           sources = [
             {name = "path";}
             {name = "nvim_lsp";}
+            {name = "vim-dadbod-completion";}  # SQL tables/columns from dadbod
             {name = "cmp_tabby";}
             {name = "luasnip";}
             #{name = "codeium";}

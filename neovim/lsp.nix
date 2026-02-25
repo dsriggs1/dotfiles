@@ -31,6 +31,18 @@
 
           sqls = {
             enable = true;
+            extraOptions = {
+              settings = {
+                sqls = {
+                  connections = [
+                    {
+                      driver = "mysql";
+                      dataSourceName = "sean@tcp(127.0.0.1:3306)/retrosheet";
+                    }
+                  ];
+                };
+              };
+            };
           };
 
           bashls = {
