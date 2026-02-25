@@ -40,6 +40,7 @@
 
     # Compatibility layers
     wine # Windows compatibility layer
+    teams-for-linux
   ];
 
   fonts.packages = with pkgs; [
