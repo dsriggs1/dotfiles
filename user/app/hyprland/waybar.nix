@@ -54,7 +54,9 @@
             default = "";
           };
           persistent-workspaces = {
-            "*" = 5; # 5 workspaces on all monitors
+            "DVI-I-1" = [1 2 3];  # Primary monitor - left external
+            "DVI-I-2" = [4 5 6];  # Middle monitor - right external
+            "eDP-1" = [7 8 9];    # Laptop screen
           };
         };
 

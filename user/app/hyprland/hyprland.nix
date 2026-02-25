@@ -45,7 +45,30 @@
     in {
       # Monitor configuration
       monitor = [
+        # Left external monitor (primary)
+        "DVI-I-1,1920x1080@60,0x0,1"
+        # Right external monitor
+        "DVI-I-2,1920x1080@60,1920x0,1"
+        # Laptop screen (rightmost when docked)
+        "eDP-1,2256x1504@60,3840x0,1"
+        # Fallback for any other monitors
         ",preferred,auto,1"
+      ];
+
+      # Workspace to monitor binding
+      workspace = [
+        # Left external (DVI-I-1) - primary monitor
+        "1, monitor:DVI-I-1, default:true"
+        "2, monitor:DVI-I-1"
+        "3, monitor:DVI-I-1"
+        # Right external (DVI-I-2)
+        "4, monitor:DVI-I-2, default:true"
+        "5, monitor:DVI-I-2"
+        "6, monitor:DVI-I-2"
+        # Laptop screen (eDP-1)
+        "7, monitor:eDP-1, default:true"
+        "8, monitor:eDP-1"
+        "9, monitor:eDP-1"
       ];
 
       # Autostart
