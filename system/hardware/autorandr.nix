@@ -1,35 +1,14 @@
 {pkgs, ...}: {
   # Display Configuration - Supports both X11 and Wayland
-  # X11: autorandr - Automatic display configuration using xrandr
-  # Wayland: kanshi - Automatic display configuration for Wayland compositors
+  # X11: autorandr - System-level service (profiles configured in home-manager)
+  # Wayland: kanshi - Configured in home-manager (user/app/kanshi/kanshi.nix)
 
   # ============================================================
-  # X11 Support - autorandr
+  # X11 Support - autorandr (system-level service only)
   # ============================================================
+  # Note: Profiles and hooks are configured in user/app/autorandr/autorandr.nix
   services.autorandr = {
     enable = true;
-
-    # Hooks to run after profile switch
-    hooks = {
-      postswitch = {
-        "notify-user" = ''
-          ${pkgs.libnotify}/bin/notify-send -u low "Display" "Switched to profile $AUTORANDR_CURRENT_PROFILE"
-        '';
-        # Restart compositor if running (for qtile/i3/etc)
-        "restart-compositor" = ''
-          if ${pkgs.procps}/bin/pgrep -x picom > /dev/null; then
-            ${pkgs.procps}/bin/pkill picom
-            ${pkgs.picom}/bin/picom -b &
-          fi
-        '';
-        # Fix wallpaper after display change
-        "fix-wallpaper" = ''
-          if [ -f ~/.config/stylix/wallpaper ]; then
-            ${pkgs.feh}/bin/feh --bg-scale ~/.config/stylix/wallpaper 2>/dev/null || true
-          fi
-        '';
-      };
-    };
   };
 
   # Enable X11 display manager session commands for DisplayLink support

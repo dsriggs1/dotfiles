@@ -31,7 +31,7 @@
         # Reload qtile to detect new screens
         "reload-qtile" = ''
           if ${pkgs.procps}/bin/pgrep -x qtile > /dev/null; then
-            ${pkgs.qtile-unwrapped}/bin/qtile cmd-obj -o cmd -f reload_config || true
+            ${pkgs.python3Packages.qtile}/bin/qtile cmd-obj -o cmd -f reload_config || true
           fi
         '';
       };

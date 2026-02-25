@@ -19,6 +19,7 @@
     ./system/security/pam.nix
     ./system/app/jellyfin.nix
     ./system/hardware/bluetooth.nix
+    ./system/hardware/autorandr.nix
     ./system/app/mysql.nix
     ./system/app/picom.nix
     ./system/app/btrbk.nix

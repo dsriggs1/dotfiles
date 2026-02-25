@@ -22,8 +22,8 @@
     #desktopManager.xfce.enable = true;
     desktopManager.plasma6.enable = true;
     displayManager = {
-      sessionCommands = ''
-        ${lib.getBin pkgs.xorg.xrandr}/bin/xrandr --setprovideroutputsource 2 0'';
+      # sessionCommands moved to system/hardware/autorandr.nix
+      # This allows autorandr to handle display configuration across all WMs/DEs
       sddm = {
         # background = "/etc/nixos/background/default.jpg";
         enable = true;
