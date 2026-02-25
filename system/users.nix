@@ -7,7 +7,7 @@
         #initialPassword = "1";
         hashedPasswordFile = "/persist/passwords/sean";
         description = "sean";
-        extraGroups = ["networkmanager" "wheel" "libvirtd" "kvm"];
+        extraGroups = ["networkmanager" "wheel" "libvirtd" "kvm" "video"];
         packages = with pkgs; [];
         shell = pkgs.nushell;
       };
