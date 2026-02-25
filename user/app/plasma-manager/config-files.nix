@@ -24,7 +24,7 @@
           BlurMatching = true;
           BlurNonMatching = true;
           BlurDecorations = true;
-          WindowClasses = "firefox\nthunar\nalacritty\nkitty\ndolphin";
+          WindowClasses = "firefox\nzen-beta\nthunar\nalacritty\nkitty\ndolphin";
         };
         "Round-Corners" = {
           ActiveOutlineAlpha = 255;

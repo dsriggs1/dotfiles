@@ -17,6 +17,7 @@
     ./user/app/ssh/ssh.nix
     ./user/app/vscode/vscode.nix
     ./user/app/browser/firefox.nix
+    ./user/app/browser/zen-browser.nix
     ./neovim/nixvim.nix
     ./user/app/tmux/tmux.nix
     ./user/app/tmux/tmuxinator.nix
