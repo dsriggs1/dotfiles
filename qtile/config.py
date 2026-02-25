@@ -529,7 +529,39 @@ for i in groups:
 # Screens
 # --------------------------------------------------------
 
+# Helper function to create secondary screen bar
+def create_secondary_bar():
+    """Create a minimal bar for secondary monitors"""
+    return bar.Bar(
+        [
+            widget.GroupBox(
+                background="#ffffff.7",
+                highlight_method='block',
+                foreground=widget_color,
+            ),
+            widget.WindowName(
+                background=Color2+".4",
+                foreground=widget_color,
+            ),
+            widget.Clock(
+                background=Color4+".4",
+                foreground=widget_color,
+                padding=10,
+                format="%I:%M %p",
+            ),
+        ],
+        30,
+        padding=20,
+        opacity=1,
+        border_width=[0, 0, 0, 0],
+        margin=[0,0,0,0],
+        background="#000000.3"
+    )
+
+# Define screens statically for multi-monitor support
+# With reconfigure_screens=True, qtile automatically handles connected/disconnected monitors
 screens = [
+    # Primary screen with full widget bar
     Screen(
         top=bar.Bar(
             widget_list,
@@ -538,9 +570,15 @@ screens = [
             opacity=1,
             border_width=[0, 0, 0, 0],
             margin=[0,0,0,0],
-            background="#000000.3" 
+            background="#000000.3"
         ),
     ),
+    # Secondary screen 1
+    Screen(top=create_secondary_bar()),
+    # Secondary screen 2
+    Screen(top=create_secondary_bar()),
+    # Secondary screen 3 (for triple monitor setups)
+    Screen(top=create_secondary_bar()),
 ]
 
 # Drag floating layouts.
