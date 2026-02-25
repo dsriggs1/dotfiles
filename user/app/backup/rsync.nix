@@ -5,7 +5,6 @@
   isNixOS,
   ...
 }: let
-
   backupHost = "sean-work";
 
   backupDirs = [
@@ -42,14 +41,15 @@
     echo "[rsync-restore] Restoring from $HOST..."
 
     ${lib.concatMapStrings (dir: ''
-      echo "[rsync-restore] Restoring ${dir}..."
-      ${pkgs.rsync}/bin/rsync -avz \
-        -e "${pkgs.openssh}/bin/ssh -o ConnectTimeout=10" \
-        --mkpath \
-        "$HOST:${userSettings.homeDir}/${dir}/" \
-        "$HOME/${dir}/" \
-        || { echo "[rsync-restore] WARNING: ${dir} restore failed"; }
-    '') backupDirs}
+        echo "[rsync-restore] Restoring ${dir}..."
+        ${pkgs.rsync}/bin/rsync -avz \
+          -e "${pkgs.openssh}/bin/ssh -o ConnectTimeout=10" \
+          --mkpath \
+          "$HOST:${userSettings.homeDir}/${dir}/" \
+          "$HOME/${dir}/" \
+          || { echo "[rsync-restore] WARNING: ${dir} restore failed"; }
+      '')
+      backupDirs}
 
     echo "[rsync-restore] Restore complete."
   '';
@@ -85,7 +85,8 @@
         else
           echo "[rsync-backup] Skipping ${dir} (directory does not exist)"
         fi
-      '') backupDirs}
+      '')
+      backupDirs}
 
       return $FAILED
     }
