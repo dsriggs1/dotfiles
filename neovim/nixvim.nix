@@ -20,6 +20,7 @@
     ./vimtex.nix
     ./avante.nix
     ./opencode.nix
+    ./dadbod.nix
   ];
   programs.nixvim = {
     enable = true;

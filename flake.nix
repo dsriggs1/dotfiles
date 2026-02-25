@@ -44,6 +44,11 @@
       url = "github:nix-community/nixGL";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    zen-browser = {
+      url = "github:0xc000022070/zen-browser-flake";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+      inputs.home-manager.follows = "home-manager";
+    };
   };
 
   outputs = {
@@ -146,6 +151,7 @@
           home-manager.sharedModules = [
             nixvim.homeModules.nixvim
             inputs.plasma-manager.homeModules.plasma-manager
+            inputs.zen-browser.homeModules.beta
           ];
           home-manager.users.${userSettings.username} = import ./home.nix;
         }
