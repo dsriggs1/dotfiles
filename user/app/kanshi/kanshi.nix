@@ -22,21 +22,50 @@
         ];
       }
 
-      # Profile: dual external monitors (docked, no laptop)
+      # Profile: triple monitors (docked with laptop screen)
       {
         profile.name = "docked";
         profile.outputs = [
           {
-            criteria = "DVI-I-1-1";
+            criteria = "DVI-I-1";
             mode = "1920x1080@60";
             position = "0,0";
             scale = 1.0;
           }
           {
-            criteria = "DVI-I-2-2";
+            criteria = "DVI-I-2";
             mode = "1920x1080@60";
             position = "1920,0";
             scale = 1.0;
+          }
+          {
+            criteria = "eDP-1";
+            mode = "2256x1504@60";
+            position = "3840,0";
+            scale = 1.0;
+          }
+        ];
+      }
+
+      # Profile: dual external monitors only (laptop closed/disabled)
+      {
+        profile.name = "docked-no-laptop";
+        profile.outputs = [
+          {
+            criteria = "DVI-I-1";
+            mode = "1920x1080@60";
+            position = "0,0";
+            scale = 1.0;
+          }
+          {
+            criteria = "DVI-I-2";
+            mode = "1920x1080@60";
+            position = "1920,0";
+            scale = 1.0;
+          }
+          {
+            criteria = "eDP-1";
+            status = "disable";
           }
         ];
       }
@@ -46,13 +75,13 @@
         profile.name = "triple";
         profile.outputs = [
           {
-            criteria = "DVI-I-1-1";
+            criteria = "DVI-I-1";
             mode = "1920x1080@60";
             position = "0,0";
             scale = 1.0;
           }
           {
-            criteria = "DVI-I-2-2";
+            criteria = "DVI-I-2";
             mode = "1920x1080@60";
             position = "1920,0";
             scale = 1.0;
@@ -71,7 +100,7 @@
         profile.name = "external-left";
         profile.outputs = [
           {
-            criteria = "DVI-I-1-1";
+            criteria = "DVI-I-1";
             mode = "1920x1080@60";
             position = "0,0";
             scale = 1.0;
@@ -89,7 +118,7 @@
         profile.name = "external-right";
         profile.outputs = [
           {
-            criteria = "DVI-I-2-2";
+            criteria = "DVI-I-2";
             mode = "1920x1080@60";
             position = "0,0";
             scale = 1.0;
