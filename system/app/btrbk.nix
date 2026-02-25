@@ -1,13 +1,17 @@
-{ config, lib, pkgs, userSettings, ... }:
-
 {
-  environment.systemPackages = with pkgs; [ btrbk ];
+  config,
+  lib,
+  pkgs,
+  userSettings,
+  ...
+}: {
+  environment.systemPackages = with pkgs; [btrbk];
 
   # Auto-generate SSH key for btrbk if it doesn't exist
   systemd.services.btrbk-ssh-keygen = {
     description = "Generate SSH key for btrbk backups";
-    wantedBy = [ "multi-user.target" ];
-    before = [ "btrbk-home-backup.service" ];
+    wantedBy = ["multi-user.target"];
+    before = ["btrbk-home-backup.service"];
 
     serviceConfig = {
       Type = "oneshot";
@@ -64,11 +68,11 @@
 
           # Retention on SOURCE (main computer)
           snapshot_preserve_min = "2d";
-          snapshot_preserve = "7d 4w";  # 7 daily, 4 weekly
+          snapshot_preserve = "7d 4w"; # 7 daily, 4 weekly
 
           # Retention on DESTINATION (backup server)
           target_preserve_min = "no";
-          target_preserve = "14d 8w 12m 5y";  # Keep more on backup
+          target_preserve = "14d 8w 12m 5y"; # Keep more on backup
 
           # SSH settings
           ssh_identity = "/root/.ssh/btrbk_backup_key";
@@ -96,11 +100,11 @@
   # Allow btrbk to run btrfs commands without password
   security.sudo.extraRules = [
     {
-      users = [ "btrbk" ];
+      users = ["btrbk"];
       commands = [
         {
           command = "${pkgs.btrfs-progs}/bin/btrfs";
-          options = [ "NOPASSWD" ];
+          options = ["NOPASSWD"];
         }
       ];
     }
