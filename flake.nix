@@ -53,6 +53,24 @@
       url = "github:AvengeMedia/DankMaterialShell/stable";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
+    dgop = {
+      url = "github:AvengeMedia/dgop";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+    };
+    niri = {
+      url = "github:sodiboo/niri-flake";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+    };
+  };
+
+  # Configure binary caches for faster builds
+  nixConfig = {
+    extra-substituters = [
+      "https://niri.cachix.org"
+    ];
+    extra-trusted-public-keys = [
+      "niri.cachix.org-1:Wv0OmO7PsuocRKzfDoJ3mulSl7Z6oezYhGhR+3W2964="
+    ];
   };
 
   outputs = {
@@ -157,6 +175,7 @@
             inputs.plasma-manager.homeModules.plasma-manager
             inputs.zen-browser.homeModules.beta
             inputs.dms.homeModules.dank-material-shell
+            inputs.niri.homeModules.niri
           ];
           home-manager.users.${userSettings.username} = import ./home.nix;
         }
@@ -174,6 +193,9 @@
         stylix.homeModules.stylix
         nixvim.homeModules.nixvim
         inputs.plasma-manager.homeModules.plasma-manager
+        inputs.dms.homeModules.dank-material-shell
+        inputs.zen-browser.homeModules.beta
+        inputs.niri.homeModules.niri
         ./home.nix
       ];
     };
