@@ -19,6 +19,12 @@
     xwayland.enable = true;
     systemd.enable = true;
 
+    # Environment variables for proper Wayland/Hyprland integration
+    extraConfig = ''
+      # Ensure DMS can connect to Hyprland
+      env = HYPRLAND_INSTANCE_SIGNATURE,$HYPRLAND_INSTANCE_SIGNATURE
+    '';
+
     settings = let
       # Helper function to convert keybinding strings to Hyprland format
       # Input: "Meta+Shift+S" -> Output: "SUPER SHIFT, S"
@@ -58,25 +64,26 @@
       # Workspace to monitor binding
       workspace = [
         # Left external (DVI-I-1) - primary monitor
-        "1, monitor:DVI-I-1, default:true"
-        "2, monitor:DVI-I-1"
-        "3, monitor:DVI-I-1"
+        "1, monitor:DVI-I-1, default:true, name:1"
+        "2, monitor:DVI-I-1, name:2"
+        "3, monitor:DVI-I-1, name:3"
         # Right external (DVI-I-2)
-        "4, monitor:DVI-I-2, default:true"
-        "5, monitor:DVI-I-2"
-        "6, monitor:DVI-I-2"
+        "4, monitor:DVI-I-2, default:true, name:4"
+        "5, monitor:DVI-I-2, name:5"
+        "6, monitor:DVI-I-2, name:6"
         # Laptop screen (eDP-1)
-        "7, monitor:eDP-1, default:true"
-        "8, monitor:eDP-1"
-        "9, monitor:eDP-1"
+        "7, monitor:eDP-1, default:true, name:7"
+        "8, monitor:eDP-1, name:8"
+        "9, monitor:eDP-1, name:9"
       ];
 
       # Autostart
       exec-once = [
         # "waybar"  # Disabled in favor of DankMaterialShell
-        "dms"  # DankMaterialShell - complete desktop shell
-        "hyprpaper"
+        "hyprpaper" # Load wallpaper first
         "hypridle"
+        "dms run" # DankMaterialShell - complete desktop shell (after wallpaper)
+        "sleep 3 && dms ipc call wallpaper set ${config.stylix.image}" # Set DMS wallpaper to match stylix
       ];
 
       # Input configuration
@@ -215,6 +222,12 @@
       bindm = [
         "$mod, mouse:272, movewindow"
         "$mod, mouse:273, resizewindow"
+      ];
+
+      # Special binding: Meta key alone opens DMS launcher
+      # bindr = trigger on key release (so Meta+other combos still work)
+      bindr = [
+        ", Super_L, exec, dms ipc launcher toggle"
       ];
     };
   };
