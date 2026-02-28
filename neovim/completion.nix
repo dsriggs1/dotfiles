@@ -83,7 +83,7 @@
           sources = [
             {name = "path";}
             {name = "nvim_lsp";}
-            {name = "vim-dadbod-completion";}  # SQL tables/columns from dadbod
+            {name = "vim-dadbod-completion";} # SQL tables/columns from dadbod
             {name = "cmp_tabby";}
             {name = "luasnip";}
             #{name = "codeium";}
