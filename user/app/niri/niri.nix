@@ -228,6 +228,11 @@
         };
         clip-to-geometry = true;
       }
+      # Terminal transparency
+      {
+        matches = [{app-id = "^Alacritty$";}];
+        opacity = 0.9;
+      }
       {
         matches = [{app-id = "^pavucontrol$";}];
         default-column-width = {proportion = 0.33333;};
