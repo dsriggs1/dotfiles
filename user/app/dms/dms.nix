@@ -3,6 +3,7 @@
   pkgs-unstable,
   config,
   userSettings,
+  inputs,
   ...
 }: {
   # DankMaterialShell - Complete desktop shell for Wayland compositors
@@ -10,13 +11,22 @@
   programs.dank-material-shell = {
     enable = true;
 
+    # Systemd integration
+    # DISABLED: We only want DMS in window managers (Hyprland), not in KDE Plasma
+    # DMS will be started via compositor autostart (exec-once in Hyprland)
+    systemd.enable = false;
+    systemd.restartIfChanged = false;
+
+    # System monitoring backend package
+    dgop.package = inputs.dgop.packages.${pkgs.system}.default;
+
     # Core features
     enableSystemMonitoring = true; # CPU, Memory, Temperature monitoring
-    enableVpn = true; # VPN management widget
-    enableDynamicTheming = true; # Wallpaper-based color schemes via matugen
-    enableAudioVisualization = true; # Audio visualizer (CAVA)
-    enableCalendar = true; # Calendar integration
-    enableClipboard = true; # Clipboard manager
+    enableVPN = true; # VPN management widget
+    enableDynamicTheming = false; # Disabled - stylix handles theming
+    enableAudioWavelength = true; # Audio wavelength visualization (CAVA)
+    enableCalendarEvents = true; # Calendar event integration via khal
+    enableClipboardPaste = true; # Clipboard history with direct paste support
 
     # Compositor-specific settings
     # DMS automatically detects Hyprland and configures appropriately
@@ -25,7 +35,7 @@
   # Environment variables for DMS customization
   home.sessionVariables = {
     # Display & Rendering
-    # DMS_DISABLE_MATUGEN = "false"; # Keep dynamic theming enabled
+    DMS_DISABLE_MATUGEN = "1"; # Completely disable matugen (wallpaper-based theming)
     # DMS_DISABLE_CAVA = "false"; # Keep audio visualizer enabled
     # DMS_DISABLE_LAYER = "false"; # Keep layer effects for visual quality
 
@@ -45,62 +55,161 @@
   };
 
   # Additional packages for DMS functionality
+  # Note: DMS automatically includes required packages based on enabled features:
+  # - matugen (from enableDynamicTheming)
+  # - cava (from enableAudioWavelength)
+  # - khal (from enableCalendarEvents)
+  # - wl-clipboard (from enableClipboardPaste)
   home.packages = with pkgs; [
-    # Required for dynamic theming
-    pkgs-unstable.matugen # Wallpaper-based color scheme generator
-
-    # Audio visualization
-    cava # Console-based audio visualizer
-
     # System monitoring
     lm_sensors # Hardware sensors for temperature monitoring
     psmisc # System monitoring utilities
 
-    # Clipboard management
-    wl-clipboard # Wayland clipboard utilities
+    # Optional: GUI calendar application
+    gnome-calendar # Calendar application for viewing events
 
-    # Network management
-    networkmanager # For wifi widget
-    bluez # For bluetooth widget
-    bluez-tools # Additional bluetooth utilities
-
-    # Optional: Calendar integration
-    gnome-calendar # Calendar application for calendar widget
-
-    # Launcher dependencies (DMS has built-in launcher)
-    # No additional packages needed - DMS launcher is built-in
+    # Note: NetworkManager and Bluez are system-level packages,
+    # configured in system/packages.nix
   ];
 
   # XDG configuration for DMS
   xdg.configFile = {
-    # DMS will create its config directory at ~/.config/DankMaterialShell/
-    # After first run, you can customize:
-    # - Bar layout and widget positioning
-    # - App launcher appearance
-    # - Theme overrides
-    # - Plugin configuration
+    # DMS settings configuration
+    "DankMaterialShell/settings.json".text = builtins.toJSON {
+      # Configuration version (DMS uses this for migrations)
+      configVersion = 5;
 
-    # Example: Custom DMS configuration (uncomment to use)
-    # "DankMaterialShell/config.json".text = builtins.toJSON {
-    #   bar = {
-    #     layout = "left-workspaces-center-clock-right-widgets";
-    #     widgets = {
-    #       left = [ "launcher" "workspaces" ];
-    #       center = [ "clock" ];
-    #       right = [ "volume" "bluetooth" "wifi" "battery" "system-monitor" ];
-    #     };
-    #   };
-    # };
+      # Location settings for weather
+      location = {
+        city = "Charlotte";
+        state = "NC";
+        country = "US";
+        latitude = 35.2271;
+        longitude = -80.8431;
+      };
+
+      # Weather settings
+      weather = {
+        units = "imperial";
+        temperatureUnit = "fahrenheit";
+      };
+
+      # Clock settings
+      clock = {
+        use24Hour = false; # Use 12-hour format (AM/PM)
+      };
+
+      # UI behavior
+      ui = {
+        closePopupsOnClickOutside = true;
+        escapeKeyClosesPopups = true;
+      };
+
+      # Wallpaper management
+      wallpaper = {
+        managedByDMS = false; # Let hyprpaper manage wallpaper (stylix integration)
+      };
+
+      # Bar configuration
+      barConfigs = [
+        {
+          id = "default";
+          name = "Main Bar";
+          enabled = true;
+          position = 0; # 0 = top, 1 = bottom
+          screenPreferences = ["all"]; # Show on all monitors
+          showOnLastDisplay = true;
+
+          # Left section: launcher, workspaces, focused window
+          leftWidgets = [
+            "launcherButton"
+            "workspaceSwitcher" # Shows workspace numbers 1-9
+            "focusedWindow"
+          ];
+
+          # Center section: music, clock, weather
+          centerWidgets = [
+            "music"
+            "clock"
+            "weather" # Uses Charlotte location
+          ];
+
+          # Right section: system tray and controls
+          rightWidgets = [
+            "systemTray"
+            "clipboard"
+            "cpuUsage"
+            "memUsage"
+            "notificationButton"
+            "battery"
+            "controlCenterButton"
+          ];
+
+          # Styling
+          spacing = 4;
+          innerPadding = 4;
+          bottomGap = 0;
+          transparency = 1;
+          widgetTransparency = 1;
+          squareCorners = false;
+          noBackground = false;
+          gothCornersEnabled = false;
+          gothCornerRadiusOverride = false;
+          gothCornerRadiusValue = 12;
+          borderEnabled = false;
+          borderColor = "surfaceText";
+          borderOpacity = 1;
+          borderThickness = 1;
+          fontScale = 1;
+
+          # Behavior
+          autoHide = false;
+          autoHideDelay = 250;
+          openOnOverview = false;
+          visible = true;
+          popupGapsAuto = true;
+          popupGapsManual = 4;
+        }
+      ];
+
+      # Desktop widget instances (empty for now)
+      desktopWidgetInstances = [];
+    };
+
+    # DMS session state configuration (wallpaper settings)
+    # This file is located in ~/.local/state/DankMaterialShell/session.json
+    # We create it via XDG state home to pre-configure wallpaper
+    "../.local/state/DankMaterialShell/session.json".text = builtins.toJSON {
+      # Wallpaper configuration
+      wallpaperPath = "${config.stylix.image}";
+      wallpaperFillMode = "PreserveAspectCrop";
+
+      # For multi-monitor setups, you can add per-monitor wallpapers:
+      # monitorWallpapers = {
+      #   "DVI-I-1" = "/path/to/wallpaper1.png";
+      #   "DVI-I-2" = "/path/to/wallpaper2.png";
+      #   "eDP-1" = "/path/to/wallpaper3.png";
+      # };
+    };
   };
 
-  # Note about Hyprland integration:
+  # Note about Desktop Environment Integration:
+  # DMS is configured to run ONLY in window managers (Hyprland, niri, etc.)
+  # It will NOT run in KDE Plasma, which has its own panels.
+  #
+  # How it works:
+  # - systemd.enable = false prevents DMS from auto-starting in all sessions
+  # - DMS is started via compositor autostart (exec-once in Hyprland)
+  # - When you log into KDE: No DMS (uses Plasma panels)
+  # - When you log into Hyprland: DMS starts automatically
+  #
   # DMS will automatically integrate with Hyprland when it detects it.
   # The bar will appear on all monitors with appropriate workspace assignments.
   #
-  # After enabling DMS, you should:
-  # 1. Disable waybar in hyprland.nix (comment out "waybar" in exec-once)
-  # 2. Run: dms setup
-  # 3. Customize bar layout in ~/.config/DankMaterialShell/
+  # After first boot into Hyprland:
+  # 1. Run: dms setup (to generate Hyprland-specific configs)
+  # 2. Customize bar layout in ~/.config/DankMaterialShell/
+  # 3. Restart DMS: dms restart (or logout/login)
   #
   # DMS Features included by default:
   # - App launcher (far left of bar) - Spotlight-style search
