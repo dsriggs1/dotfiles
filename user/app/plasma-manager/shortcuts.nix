@@ -16,6 +16,7 @@
         "activate task manager entry 3" = "";
         "activate task manager entry 4" = "";
         "activate task manager entry 5" = "";
+        "activate application launcher" = [keybindings.appRunnerMetaKey "Meta+F1"];
       };
 
       kwin = {
