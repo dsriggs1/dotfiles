@@ -25,6 +25,7 @@
     ./user/app/terminal/zoxide.nix
     ./user/app/plasma-manager/plasma.nix
     ./user/app/hyprland/hyprland.nix
+    ./user/app/niri/niri.nix
     ./user/app/autorandr/autorandr.nix
     ./user/app/kanshi/kanshi.nix
     ./user/app/backup/rsync.nix
