@@ -26,6 +26,7 @@
     ./system/app/ollama.nix
     ./system/wm/x11.nix
     ./system/wm/hyprland.nix
+    ./system/wm/niri.nix
     ./system/security/sshd.nix
     (import ./disko/btrfs-subvolumes.nix {device = systemSettings.device;})
     ./system/style/stylix.nix
@@ -47,6 +48,12 @@
 
   #Auto update nix-store at each build
   nix.settings.auto-optimise-store = true;
+
+  # Accept flake configurations automatically (for cachix and other flake-provided settings)
+  nix.settings.accept-flake-config = true;
+
+  # Allow your user to use binary caches configured in flakes
+  nix.settings.trusted-users = [ "root" "sean" ];
 
   # Set the interval for automatic garbage collection (e.g., weekly)
   nix.gc.automatic = true;
