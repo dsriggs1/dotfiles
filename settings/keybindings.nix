@@ -22,6 +22,7 @@
   launchVscode = "Meta+Shift+C";
   launchSystemMonitor = "Meta+Shift+Escape";
   appRunner = "Meta+Space"; # plasma default; qtile layout.next() on this key removed
+  appRunnerMetaKey = "Meta"; # Meta key alone - opens launcher (KRunner in KDE, DMS in Hyprland)
 
   # --- Media ---
   volumeUp = "Meta+Up";
