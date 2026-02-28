@@ -156,6 +156,7 @@
             nixvim.homeModules.nixvim
             inputs.plasma-manager.homeModules.plasma-manager
             inputs.zen-browser.homeModules.beta
+            inputs.dms.homeModules.dank-material-shell
           ];
           home-manager.users.${userSettings.username} = import ./home.nix;
         }

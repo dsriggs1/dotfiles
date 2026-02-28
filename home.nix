@@ -28,6 +28,7 @@
     ./user/app/autorandr/autorandr.nix
     ./user/app/kanshi/kanshi.nix
     ./user/app/backup/rsync.nix
+    ./user/app/dms/dms.nix
   ];
 
   # Allow unfree packages (needed for VSCode, etc.)

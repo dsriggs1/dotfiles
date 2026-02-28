@@ -1,6 +1,6 @@
 {pkgs, ...}: {
   stylix.enable = true;
-  stylix.image = ../../wallpapers/Fantasy-Autumn.png;
+  stylix.image = ../../wallpapers/cyborg_girl_clean.png;
   stylix.polarity = "dark";
   stylix.cursor.size = 24;
   stylix.fonts.sizes.applications = 12;

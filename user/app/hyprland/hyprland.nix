@@ -11,7 +11,7 @@
     ./hyprpaper.nix
     ./hyprpicker.nix
     ./hyprshot.nix
-    ./waybar.nix
+    # ./waybar.nix  # Disabled in favor of DankMaterialShell
   ];
 
   wayland.windowManager.hyprland = {
@@ -73,7 +73,8 @@
 
       # Autostart
       exec-once = [
-        "waybar"
+        # "waybar"  # Disabled in favor of DankMaterialShell
+        "dms"  # DankMaterialShell - complete desktop shell
         "hyprpaper"
         "hypridle"
       ];
