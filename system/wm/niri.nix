@@ -1,17 +1,14 @@
 {
   pkgs,
+  lib,
   inputs,
   ...
 }: {
-  # Import niri home-manager module
-  imports = [
-    inputs.niri.nixosModules.niri
-  ];
-
-  # Enable niri at system level
+  # Enable niri at system level via nixpkgs
+  # Trying unstable version to avoid build failures in stable
   programs.niri = {
     enable = true;
-    package = pkgs.niri-unstable;
+    package = inputs.niri.packages.${pkgs.system}.niri-unstable;
   };
 
   # Enable required services for niri
