@@ -17,6 +17,12 @@
     picom = "picom --config ~/.config/picom/picom.conf";
     dotfiles = "cd ${userSettings.dotfilesDir}";
     vim = "nvim";
+
+    # GITHUB PROJECTS
+    baseball = "cd ~/Github/Baseball_Project";
+    rcpp = "cd ~/Github/Rcpp-Library";
+    resume = "cd ~/Github/Resume";
+    retro = "cd ~/Github/retrosheet";
     # SCRIPTS
     gr = "python ${userSettings.dotfilesDir}/scripts/growthrate.py";
     ChatGPT = "python ~/mychatgpt/mychatgpt.py";
@@ -43,6 +49,9 @@
     backup = "systemctl --user start rsync-backup";
     restore = "rsync-restore";
     db-restore = "db-restore";
+
+    # DATABASE
+    mdb = "sudo mariadb -u root -p retrosheet";
 
     # NIX SYSTEM
     rebuild = "sudo nixos-rebuild switch --flake ${userSettings.dotfilesDir}#nixos";
