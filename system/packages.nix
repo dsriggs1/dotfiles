@@ -41,6 +41,11 @@
     # Compatibility layers
     wine # Windows compatibility layer
     teams-for-linux
+    tor-browser
+    libreoffice
+
+    # Database tools
+    dbeaver-bin # MariaDB/MySQL GUI client
   ];
 
   fonts.packages = with pkgs; [
