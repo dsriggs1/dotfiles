@@ -160,7 +160,7 @@
           borderColor = "surfaceText";
           borderOpacity = 1;
           borderThickness = 1;
-          fontScale = 1;
+          fontScale = 1.5;
 
           # Behavior
           autoHide = false;
