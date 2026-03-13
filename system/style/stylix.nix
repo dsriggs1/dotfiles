@@ -3,9 +3,9 @@
   stylix.image = ../../wallpapers/Fantasy-Autumn.png;
   stylix.polarity = "dark";
   stylix.cursor.size = 24;
-  stylix.fonts.sizes.applications = 12;
-  stylix.fonts.sizes.desktop = 12;
-  stylix.fonts.sizes.terminal = 12;
+  stylix.fonts.sizes.applications = 16;
+  stylix.fonts.sizes.desktop = 16;
+  stylix.fonts.sizes.terminal = 16;
 
   stylix.cursor.package = pkgs.bibata-cursors;
   stylix.cursor.name = "Bibata-Modern-Ice";
