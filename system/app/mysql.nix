@@ -17,6 +17,31 @@
     ];
   };
 
+  # Allow user to run mariadb commands without password
+  security.sudo.extraRules = [
+    {
+      users = [userSettings.username];
+      commands = [
+        {
+          command = "${pkgs.mariadb}/bin/mariadb";
+          options = ["NOPASSWD"];
+        }
+        {
+          command = "${pkgs.mariadb}/bin/mysql";
+          options = ["NOPASSWD"];
+        }
+        {
+          command = "${pkgs.mariadb}/bin/mariadb-dump";
+          options = ["NOPASSWD"];
+        }
+        {
+          command = "${pkgs.mariadb}/bin/mysqldump";
+          options = ["NOPASSWD"];
+        }
+      ];
+    }
+  ];
+
   # Systemd service to automatically load retrosheet schema if tables don't exist
   systemd.services.retrosheet-schema-init = {
     description = "Initialize Retrosheet Database Schema";
